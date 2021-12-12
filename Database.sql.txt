@@ -1,0 +1,220 @@
+sekwencja kasowania
+
+Table dropped.
+
+
+Table dropped.
+
+
+Table dropped.
+
+
+Table dropped.
+
+
+Table dropped.
+
+
+Table dropped.
+
+
+Table dropped.
+
+
+Table dropped.
+
+
+Table dropped.
+
+
+Table dropped.
+
+
+Table dropped.
+
+
+Table dropped.
+
+
+Table dropped.
+
+
+Table dropped.
+
+
+Table dropped.
+
+DDL create table
+table bd1_STANOWISKO
+
+Table created.
+
+
+Table altered.
+
+table bd1_INSTYTUTY
+
+Table created.
+
+
+Table altered.
+
+table bd1_OSOBY
+
+Table created.
+
+
+Table altered.
+
+table bd1_PRACOWNICY
+
+Table created.
+
+
+Table altered.
+
+
+Table altered.
+
+table bd1_HISTORIA_ZATRUDNIENIA
+
+Table created.
+
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+table bd1_KLIENCI
+
+Table created.
+
+
+Table altered.
+
+
+Table altered.
+
+table bd1_USLUGI
+
+Table created.
+
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+table bd1_OSKARZENIA
+
+Table created.
+
+
+Table altered.
+
+table bd1_KARY
+
+Table created.
+
+
+Table altered.
+
+
+Table altered.
+
+table bd1_PRZESTEPSTWA
+
+Table created.
+
+
+Table altered.
+
+table bd1_SLEDZTWA
+
+Table created.
+
+
+Table altered.
+
+
+Table altered.
+
+table bd1_DOWODY
+
+Table created.
+
+
+Table altered.
+
+
+Table altered.
+
+table bd1_STANOWISKO_SWIADKA
+
+Table created.
+
+
+Table altered.
+
+table bd1_ZEZNANIA
+
+Table created.
+
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+table bd1_SPRAWY_SADOWE
+
+Table created.
+
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+PODSUMOWANIA
+Lista utworzonych tabel:
+
+NAME                                                                                                                                                                                                                                                                                                                                                          
+--------------------------------                                                                                                                                                                                                                                                                                                                              
+BD1_DOWODY                                                                                                                                                                                                                                                                                                                                                    
+BD1_HISTORIA_ZATRUDNIENIA                                                                                                                                                                                                                                                                                                                                     
+BD1_INSTYTUTY                                                                                                                                                                                                                                                                                                                                                 
+BD1_KARY                                                                                                                                                                                                                                                                                                                                                      
+BD1_KLIENCI                                                                                                                                                                                                                                                                                                                                                   
+BD1_OSKARZENIA                                                                                                                                                                                                                                                                                                                                                
+BD1_OSOBY                                                                                                                                                                                                                                                                                                                                                     
+BD1_PRACOWNICY                                                                                                                                                                                                                                                                                                                                                
+BD1_PRZESTEPSTWA                                                                                                                                                                                                                                                                                                                                              
+BD1_SLEDZTWA                                                                                                                                                                                                                                                                                                                                                  
+BD1_SPRAWY_SADOWE                                                                                                                                                                                                                                                                                                                                             
+BD1_STANOWISKO                                                                                                                                                                                                                                                                                                                                                
+BD1_STANOWISKO_SWIADKA                                                                                                                                                                                                                                                                                                                                        
+BD1_USLUGI                                                                                                                                                                                                                                                                                                                                                    
+BD1_ZEZNANIA                                                                                                                                                                                                                                                                                                                                                  
+
+15 rows selected.
+
