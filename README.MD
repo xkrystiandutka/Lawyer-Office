@@ -1,4 +1,4 @@
-# Oracle Datebase
+# Oracle Database
 #### Database project for a law office created using Oracle  
 
 ![](datebase.png)
