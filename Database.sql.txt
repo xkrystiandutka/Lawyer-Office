@@ -69,21 +69,21 @@ Dodano nowy wiersz do bd1_STANOWISKO - STA_ID=2
 
 1 row created.
 
+Dodano nowy wiersz do bd1_STANOWISKO - STA_ID=3                                                                                                                                                                                                                                                                                                               
 
-  COUNT(*)                                                                                                                                                                                                                                                                                                                                                    
-----------                                                                                                                                                                                                                                                                                                                                                    
-         2                                                                                                                                                                                                                                                                                                                                                    
+1 row created.
 
+Dodano nowy wiersz do bd1_STANOWISKO - STA_ID=4                                                                                                                                                                                                                                                                                                               
 
-COUNT(STA_ID)                                                                                                                                                                                                                                                                                                                                                 
--------------                                                                                                                                                                                                                                                                                                                                                 
-            2                                                                                                                                                                                                                                                                                                                                                 
+1 row created.
 
 
      ID Rodzaj stanowiska    Opis stanowiska                                                                                                                                                                                                                                                                                                                  
 ------- -------------------- --------------------                                                                                                                                                                                                                                                                                                             
       1 Prawnik              Obrona klienta                                                                                                                                                                                                                                                                                                                   
       2 Prokurator           Oskazanie oskazonego                                                                                                                                                                                                                                                                                                             
+      3 Sedzia Sadowy        Prowadzenie rozpraw                                                                                                                                                                                                                                                                                                              
+      4 Komornik                                                                                                                                                                                                                                                                                                                                              
 
 table bd1_INSTYTUTY
 
@@ -113,15 +113,17 @@ Dodano nowy wiersz do bd1_INSTYTUTY - INS_ID=3
 
 1 row created.
 
+Dodano nowy wiersz do bd1_INSTYTUTY - INS_ID=4                                                                                                                                                                                                                                                                                                                
 
-  COUNT(*)                                                                                                                                                                                                                                                                                                                                                    
-----------                                                                                                                                                                                                                                                                                                                                                    
-         3                                                                                                                                                                                                                                                                                                                                                    
+1 row created.
 
+Dodano nowy wiersz do bd1_INSTYTUTY - INS_ID=5                                                                                                                                                                                                                                                                                                                
 
-COUNT(INS_ID)                                                                                                                                                                                                                                                                                                                                                 
--------------                                                                                                                                                                                                                                                                                                                                                 
-            3                                                                                                                                                                                                                                                                                                                                                 
+1 row created.
+
+Dodano nowy wiersz do bd1_INSTYTUTY - INS_ID=6                                                                                                                                                                                                                                                                                                                
+
+1 row created.
 
 
      ID Lokalizacja instytut                                                                                                                                                                                                                                                                                                                                  
@@ -129,6 +131,11 @@ COUNT(INS_ID)
       1 Krakow                                                                                                                                                                                                                                                                                                                                                
       2 Warszawa                                                                                                                                                                                                                                                                                                                                              
       3 Bochnia                                                                                                                                                                                                                                                                                                                                               
+      4 Nowy Sacz                                                                                                                                                                                                                                                                                                                                             
+      5 Limanowa                                                                                                                                                                                                                                                                                                                                              
+      6 Mszalnica                                                                                                                                                                                                                                                                                                                                             
+
+6 rows selected.
 
 table bd1_OSOBY
 
@@ -162,15 +169,21 @@ Dodano nowy wiersz do bd1_OSOBY - OSO_ID=4
 
 1 row created.
 
+Dodano nowy wiersz do bd1_OSOBY - OSO_ID=5                                                                                                                                                                                                                                                                                                                    
 
-  COUNT(*)                                                                                                                                                                                                                                                                                                                                                    
-----------                                                                                                                                                                                                                                                                                                                                                    
-         4                                                                                                                                                                                                                                                                                                                                                    
+1 row created.
 
+Dodano nowy wiersz do bd1_OSOBY - OSO_ID=6                                                                                                                                                                                                                                                                                                                    
 
-COUNT(OSO_ID)                                                                                                                                                                                                                                                                                                                                                 
--------------                                                                                                                                                                                                                                                                                                                                                 
-            4                                                                                                                                                                                                                                                                                                                                                 
+1 row created.
+
+Dodano nowy wiersz do bd1_OSOBY - OSO_ID=7                                                                                                                                                                                                                                                                                                                    
+
+1 row created.
+
+Dodano nowy wiersz do bd1_OSOBY - OSO_ID=8                                                                                                                                                                                                                                                                                                                    
+
+1 row created.
 
 
      ID Imie                 Nazwisko             Plec                 Adres Zamieszkania   Kod Pocztowy         Numer Telefonu                                                                                                                                                                                                                               
@@ -179,6 +192,12 @@ COUNT(OSO_ID)
       2 Kamil                Nowak                Mezczyzna            Limanowa             34-600               987-654-321                                                                                                                                                                                                                                  
       3 Dominik              Filipek              Mezczyzna            Bochnia              33-500               123-987-456                                                                                                                                                                                                                                  
       4 Natalia              Nowak                Kobieta              Krakow               33-661               987-654-321                                                                                                                                                                                                                                  
+      5 Artur                Nowak                Mezczyzna            Krakow               33-661                                                                                                                                                                                                                                                            
+      6 Julia                Czesak               Kobieta              Nowy Sacz            33-300                                                                                                                                                                                                                                                            
+      7 Pawel                Ciula                Mezczyzna            Mszalnica                                                                                                                                                                                                                                                                              
+      8 Kamila               Kowalska             Kobieta              Limanowa                                                                                                                                                                                                                                                                               
+
+8 rows selected.
 
 table bd1_PRACOWNICY
 
@@ -206,16 +225,6 @@ Dodano nowy wiersz do bd1_PRACOWNICY - PRA_ID=1
 Dodano nowy wiersz do bd1_PRACOWNICY - PRA_ID=2                                                                                                                                                                                                                                                                                                               
 
 1 row created.
-
-
-  COUNT(*)                                                                                                                                                                                                                                                                                                                                                    
-----------                                                                                                                                                                                                                                                                                                                                                    
-         2                                                                                                                                                                                                                                                                                                                                                    
-
-
-COUNT(PRA_ID)                                                                                                                                                                                                                                                                                                                                                 
--------------                                                                                                                                                                                                                                                                                                                                                 
-            2                                                                                                                                                                                                                                                                                                                                                 
 
 
 ID_Pracownika ID_Osoby                                                                                                                                                                                                                                                                                                                                        
@@ -257,20 +266,10 @@ Dodano nowy wiersz do bd1_HISTORIA_ZATRUDNIENIA - HIS_Pracownika_ID=2
 1 row created.
 
 
-  COUNT(*)                                                                                                                                                                                                                                                                                                                                                    
-----------                                                                                                                                                                                                                                                                                                                                                    
-         2                                                                                                                                                                                                                                                                                                                                                    
-
-
-COUNT(HIS_PRACOWNIKA_ID)                                                                                                                                                                                                                                                                                                                                      
-------------------------                                                                                                                                                                                                                                                                                                                                      
-                       2                                                                                                                                                                                                                                                                                                                                      
-
-
 ID Histori Pracownika Data Zatrudnienia    Data Zwolnienia      Stanowisko ID Instytut ID Pracownik ID                                                                                                                                                                                                                                                        
 --------------------- -------------------- -------------------- ------------- ----------- ------------                                                                                                                                                                                                                                                        
-                    1 2021-08-21           2021-11-10                       1           3            1                                                                                                                                                                                                                                                        
-                    2 2019-08-21           2020-11-10                       2           3            2                                                                                                                                                                                                                                                        
+                    1 2021-08-21                                            1           3            1                                                                                                                                                                                                                                                        
+                    2 2019-08-21                                            2           3            2                                                                                                                                                                                                                                                        
 
 table bd1_KLIENCI
 
@@ -298,16 +297,6 @@ Dodano nowy wiersz do bd1_KLIENCI - KLI_ID=1
 Dodano nowy wiersz do bd1_KLIENCI - KLI_ID=2                                                                                                                                                                                                                                                                                                                  
 
 1 row created.
-
-
-  COUNT(*)                                                                                                                                                                                                                                                                                                                                                    
-----------                                                                                                                                                                                                                                                                                                                                                    
-         2                                                                                                                                                                                                                                                                                                                                                    
-
-
-COUNT(KLI_ID)                                                                                                                                                                                                                                                                                                                                                 
--------------                                                                                                                                                                                                                                                                                                                                                 
-            2                                                                                                                                                                                                                                                                                                                                                 
 
 
 ID_Klienta ID_Osoby                                                                                                                                                                                                                                                                                                                                           
@@ -346,16 +335,6 @@ Dodano nowy wiersz do bd1_USLUGI - USL_ID=2
 1 row created.
 
 
-  COUNT(*)                                                                                                                                                                                                                                                                                                                                                    
-----------                                                                                                                                                                                                                                                                                                                                                    
-         2                                                                                                                                                                                                                                                                                                                                                    
-
-
-COUNT(USL_ID)                                                                                                                                                                                                                                                                                                                                                 
--------------                                                                                                                                                                                                                                                                                                                                                 
-            2                                                                                                                                                                                                                                                                                                                                                 
-
-
 ID_Uslugi ID_Pracownika ID_Klienta                                                                                                                                                                                                                                                                                                                            
 --------- ------------- ----------                                                                                                                                                                                                                                                                                                                            
         1             2          1                                                                                                                                                                                                                                                                                                                            
@@ -390,21 +369,11 @@ Dodano nowy wiersz do bd1_OSKARZENIA - OSK_ID=3
 1 row created.
 
 
-  COUNT(*)                                                                                                                                                                                                                                                                                                                                                    
-----------                                                                                                                                                                                                                                                                                                                                                    
-         3                                                                                                                                                                                                                                                                                                                                                    
-
-
-COUNT(OSK_ID)                                                                                                                                                                                                                                                                                                                                                 
--------------                                                                                                                                                                                                                                                                                                                                                 
-            3                                                                                                                                                                                                                                                                                                                                                 
-
-
 ID_Oskarzenia Data oskarzenia      Rodzaj oskarzenia                                                                                                                                                                                                                                                                                                          
 ------------- -------------------- --------------------                                                                                                                                                                                                                                                                                                       
-            1 2021-10-02 00:00     Przestepstwo drogowe                                                                                                                                                                                                                                                                                                       
-            2 2020-05-11 00:00     Oszustwo                                                                                                                                                                                                                                                                                                                   
-            3 2019-10-03 00:00     Kradziez                                                                                                                                                                                                                                                                                                                   
+            1 2021-10-02           Przestepstwo drogowe                                                                                                                                                                                                                                                                                                       
+            2 2020-05-11           Oszustwo                                                                                                                                                                                                                                                                                                                   
+            3 2019-10-03           Kradziez                                                                                                                                                                                                                                                                                                                   
 
 table bd1_KARY
 
@@ -434,20 +403,10 @@ Dodano nowy wiersz do bd1_KARY - KAR_ID=2
 1 row created.
 
 
-  COUNT(*)                                                                                                                                                                                                                                                                                                                                                    
-----------                                                                                                                                                                                                                                                                                                                                                    
-         2                                                                                                                                                                                                                                                                                                                                                    
-
-
-COUNT(KAR_ID)                                                                                                                                                                                                                                                                                                                                                 
--------------                                                                                                                                                                                                                                                                                                                                                 
-            2                                                                                                                                                                                                                                                                                                                                                 
-
-
-ID_Kary Wyrok                                                            Data rozpoczecia Data zakonczenia ID_Oskarzenia                                                                                                                                                                                                                                      
-------- ---------------------------------------------------------------- ---------------- ---------------- -------------                                                                                                                                                                                                                                      
-      1 Wiezienie                                                        2021-11-29 00:00 2025-11-21 00:00             2                                                                                                                                                                                                                                      
-      2 Wyrok w zawieszeniu                                              2021-10-15 00:00 2021-11-15 00:00             1                                                                                                                                                                                                                                      
+ID_Kary Wyrok                                                            Data rozpo Data zakon ID_Oskarzenia                                                                                                                                                                                                                                                  
+------- ---------------------------------------------------------------- ---------- ---------- -------------                                                                                                                                                                                                                                                  
+      1 Wiezienie                                                        2021-11-29 2025-11-21             2                                                                                                                                                                                                                                                  
+      2 Wyrok w zawieszeniu                                              2021-10-15 2022-11-15             1                                                                                                                                                                                                                                                  
 
 table bd1_PRZESTEPSTWA
 
@@ -474,20 +433,10 @@ Dodano nowy wiersz do bd1_PRZESTEPSTWA - PRZ_ID=2
 1 row created.
 
 
-  COUNT(*)                                                                                                                                                                                                                                                                                                                                                    
-----------                                                                                                                                                                                                                                                                                                                                                    
-         2                                                                                                                                                                                                                                                                                                                                                    
-
-
-COUNT(PRZ_ID)                                                                                                                                                                                                                                                                                                                                                 
--------------                                                                                                                                                                                                                                                                                                                                                 
-            2                                                                                                                                                                                                                                                                                                                                                 
-
-
 ID_Przestepstwa Data przestepstwa    Rodzaj przestepstwa                                                                                                                                                                                                                                                                                                      
 --------------- -------------------- --------------------                                                                                                                                                                                                                                                                                                     
-              1 2021-11-27 00:00     Drogowe                                                                                                                                                                                                                                                                                                                  
-              2 2021-10-21 00:00     Bezprawne zbieranie                                                                                                                                                                                                                                                                                                      
+              1 2021-11-27           Drogowe                                                                                                                                                                                                                                                                                                                  
+              2 2021-10-21           Bezprawne zbieranie                                                                                                                                                                                                                                                                                                      
                                      danych o ??yciu pryw                                                                                                                                                                                                                                                                                                     
                                      atnym                                                                                                                                                                                                                                                                                                                    
                                                                                                                                                                                                                                                                                                                                                               
@@ -520,20 +469,10 @@ Dodano nowy wiersz do bd1_SLEDZTWA - SLE_ID=2
 1 row created.
 
 
-  COUNT(*)                                                                                                                                                                                                                                                                                                                                                    
-----------                                                                                                                                                                                                                                                                                                                                                    
-         2                                                                                                                                                                                                                                                                                                                                                    
-
-
-COUNT(SLE_ID)                                                                                                                                                                                                                                                                                                                                                 
--------------                                                                                                                                                                                                                                                                                                                                                 
-            2                                                                                                                                                                                                                                                                                                                                                 
-
-
 ID_Przestepstwa Data sledztwa        ID_Przestepstwa                                                                                                                                                                                                                                                                                                          
 --------------- -------------------- ---------------                                                                                                                                                                                                                                                                                                          
-              1 2021-11-15 00:00                   2                                                                                                                                                                                                                                                                                                          
-              2 2019-11-15 00:00                   1                                                                                                                                                                                                                                                                                                          
+              1 2021-11-15                         2                                                                                                                                                                                                                                                                                                          
+              2 2019-11-15                         1                                                                                                                                                                                                                                                                                                          
 
 table bd1_DOWODY
 
@@ -562,15 +501,9 @@ Dodano nowy wiersz do bd1_DOWODY - DOW_ID=2
 
 1 row created.
 
+Dodano nowy wiersz do bd1_DOWODY - DOW_ID=3                                                                                                                                                                                                                                                                                                                   
 
-  COUNT(*)                                                                                                                                                                                                                                                                                                                                                    
-----------                                                                                                                                                                                                                                                                                                                                                    
-         2                                                                                                                                                                                                                                                                                                                                                    
-
-
-COUNT(DOW_ID)                                                                                                                                                                                                                                                                                                                                                 
--------------                                                                                                                                                                                                                                                                                                                                                 
-            2                                                                                                                                                                                                                                                                                                                                                 
+1 row created.
 
 
 ID_Dowodu Opis dowodu          Rodzaj dowodu        ID_Sledztwa                                                                                                                                                                                                                                                                                               
@@ -581,6 +514,7 @@ ID_Dowodu Opis dowodu          Rodzaj dowodu        ID_Sledztwa
         2 Dowod zabezpieczony  Przedmiot kradiezy             2                                                                                                                                                                                                                                                                                               
           w domu oskazonego                                                                                                                                                                                                                                                                                                                                   
                                                                                                                                                                                                                                                                                                                                                               
+        3                      Przedmiot kradiezy             1                                                                                                                                                                                                                                                                                               
 
 table bd1_STANOWISKO_SWIADKA
 
@@ -607,22 +541,12 @@ Dodano nowy wiersz do bd1_STANOWISKO_SWIADKA - STA_SW_ID=2
 1 row created.
 
 
-  COUNT(*)                                                                                                                                                                                                                                                                                                                                                    
-----------                                                                                                                                                                                                                                                                                                                                                    
-         2                                                                                                                                                                                                                                                                                                                                                    
-
-
-COUNT(STA_SW_ID)                                                                                                                                                                                                                                                                                                                                              
-----------------                                                                                                                                                                                                                                                                                                                                              
-               2                                                                                                                                                                                                                                                                                                                                              
-
-
 ID_Stanowiska_Swiadka Stanowisko swiadka z Data skladanai stano Rodzaj stanowiska sw Typ swiadka          Opis stanowiska swia                                                                                                                                                                                                                                
 --------------------- -------------------- -------------------- -------------------- -------------------- --------------------                                                                                                                                                                                                                                
-                    1 Zeznanie na korzysc  2021-10-09 00:00     Swiadek zdarzenia    Brat Oskazonego      Zeznanie swojej wers                                                                                                                                                                                                                                
+                    1 Zeznanie na korzysc  2021-10-09           Swiadek zdarzenia    Brat Oskazonego      Zeznanie swojej wers                                                                                                                                                                                                                                
                       oskazonego                                                                          je zdarzen                                                                                                                                                                                                                                          
                                                                                                                                                                                                                                                                                                                                                               
-                    2 Zeznanie na niekorzy 2021-10-09 00:00     Swiadek zdarzenia    Przypadkowa osoba    Zeznanie swojej wers                                                                                                                                                                                                                                
+                    2 Zeznanie na niekorzy 2021-10-09           Swiadek zdarzenia    Przypadkowa osoba    Zeznanie swojej wers                                                                                                                                                                                                                                
                       sc oskazonego                                                                       je zdarzen                                                                                                                                                                                                                                          
                                                                                                                                                                                                                                                                                                                                                               
 
@@ -658,16 +582,6 @@ Dodano nowy wiersz do bd1_ZEZNANIA - ZEZ_ID=1
 Dodano nowy wiersz do bd1_ZEZNANIA - ZEZ_ID=2                                                                                                                                                                                                                                                                                                                 
 
 1 row created.
-
-
-  COUNT(*)                                                                                                                                                                                                                                                                                                                                                    
-----------                                                                                                                                                                                                                                                                                                                                                    
-         2                                                                                                                                                                                                                                                                                                                                                    
-
-
-COUNT(ZEZ_ID)                                                                                                                                                                                                                                                                                                                                                 
--------------                                                                                                                                                                                                                                                                                                                                                 
-            2                                                                                                                                                                                                                                                                                                                                                 
 
 
 ID_Zeznan Typ zeznania         ZEZ_OPIS                                                         ID_Dowodu ID_Stanowiska_Swiadka ID_Oskarzenia                                                                                                                                                                                                                 
@@ -706,16 +620,6 @@ Dodano nowy wiersz do bd1_SPRAWY_SADOWE - SPR_ID=2
 1 row created.
 
 
-  COUNT(*)                                                                                                                                                                                                                                                                                                                                                    
-----------                                                                                                                                                                                                                                                                                                                                                    
-         2                                                                                                                                                                                                                                                                                                                                                    
-
-
-COUNT(SPR_ID)                                                                                                                                                                                                                                                                                                                                                 
--------------                                                                                                                                                                                                                                                                                                                                                 
-            2                                                                                                                                                                                                                                                                                                                                                 
-
-
 ID_Sprawy_Sadowej ID_Przestepstwa ID_Uslugi                                                                                                                                                                                                                                                                                                                   
 ----------------- --------------- ---------                                                                                                                                                                                                                                                                                                                   
                 1               1         1                                                                                                                                                                                                                                                                                                                   
@@ -743,4 +647,80 @@ BD1_USLUGI
 BD1_ZEZNANIA                                                                                                                                                                                                                                                                                                                                                  
 
 15 rows selected.
+
+
+ID_Osoby Imie                 Nazwisko             Plec                 Adres Zamieszkania   Kod Pocztowy         Numer Telefonu                                                                                                                                                                                                                              
+-------- -------------------- -------------------- -------------------- -------------------- -------------------- --------------------                                                                                                                                                                                                                        
+       6 Julia                Czesak               Kobieta              Nowy Sacz            33-300                                                                                                                                                                                                                                                           
+       7 Pawel                Ciula                Mezczyzna            Mszalnica                                                                                                                                                                                                                                                                             
+       8 Kamila               Kowalska             Kobieta              Limanowa                                                                                                                                                                                                                                                                              
+
+
+ID_Osoby Imie                 Nazwisko             Plec                 Adres Zamieszkania                                                                                                                                                                                                                                                                    
+-------- -------------------- -------------------- -------------------- --------------------                                                                                                                                                                                                                                                                  
+       2 Kamil                Nowak                Mezczyzna            Limanowa                                                                                                                                                                                                                                                                              
+
+
+ID Histori Pracownika Data Zatrudnienia    Data Zwolnienia      Lokalizacja instytut                                                                                                                                                                                                                                                                          
+--------------------- -------------------- -------------------- --------------------                                                                                                                                                                                                                                                                          
+                    1 2021-08-21                                Bochnia                                                                                                                                                                                                                                                                                       
+                    2 2019-08-21                                Bochnia                                                                                                                                                                                                                                                                                       
+
+
+ID_Kary Wyrok                                                            Data rozpo Data zakon ID_Oskarzenia                                                                                                                                                                                                                                                  
+------- ---------------------------------------------------------------- ---------- ---------- -------------                                                                                                                                                                                                                                                  
+      1 Wiezienie                                                        2021-11-29 2025-11-21             2                                                                                                                                                                                                                                                  
+
+
+1 row updated.
+
+
+ID Histori Pracownika Data Zatrudnienia    Data Zwolnienia      Stanowisko ID Instytut ID ID_Pracownika                                                                                                                                                                                                                                                       
+--------------------- -------------------- -------------------- ------------- ----------- -------------                                                                                                                                                                                                                                                       
+                    1 2021-08-21           2021-12-07                       1           3             1                                                                                                                                                                                                                                                       
+
+
+Imie                 Nazwisko             NUMER_TELEFONU                                                                                                                                                                                                                                                                                                      
+-------------------- -------------------- --------------------------                                                                                                                                                                                                                                                                                          
+Jakub                Kowalski             123-456-789                                                                                                                                                                                                                                                                                                         
+Kamil                Nowak                987-654-321                                                                                                                                                                                                                                                                                                         
+Dominik              Filipek              123-987-456                                                                                                                                                                                                                                                                                                         
+Natalia              Nowak                987-654-321                                                                                                                                                                                                                                                                                                         
+Artur                Nowak                nie podano numeru telefonu                                                                                                                                                                                                                                                                                          
+Julia                Czesak               nie podano numeru telefonu                                                                                                                                                                                                                                                                                          
+Pawel                Ciula                nie podano numeru telefonu                                                                                                                                                                                                                                                                                          
+Kamila               Kowalska             nie podano numeru telefonu                                                                                                                                                                                                                                                                                          
+
+8 rows selected.
+
+
+ID_Dowodu ID_Sledztwa Rodzaj dowodu        Opis dowodu                                                                                                                                                                                                                                                                                                        
+--------- ----------- -------------------- --------------------                                                                                                                                                                                                                                                                                               
+        1           1 Bron                 Dowod zebrany z miej                                                                                                                                                                                                                                                                                               
+                                           sca zbrodni                                                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                                                              
+        2           2 Przedmiot kradiezy   Dowod zabezpieczony                                                                                                                                                                                                                                                                                                
+                                           w domu oskazonego                                                                                                                                                                                                                                                                                                  
+                                                                                                                                                                                                                                                                                                                                                              
+        3           1 Przedmiot kradiezy   nie podano opisu                                                                                                                                                                                                                                                                                                   
+
+
+ID_Kary Wyrok                                                            Data rozpo Data zakon  KONIEC_ZA                                                                                                                                                                                                                                                     
+------- ---------------------------------------------------------------- ---------- ---------- ----------                                                                                                                                                                                                                                                     
+      1 Wiezienie                                                        2021-11-29 2025-11-21       1436                                                                                                                                                                                                                                                     
+      2 Wyrok w zawieszeniu                                              2021-10-15 2022-11-15        334                                                                                                                                                                                                                                                     
+
+
+Imie                 Nazwisko             KOD_POCZTOWY                                                                                                                                                                                                                                                                                                        
+-------------------- -------------------- --------------------------                                                                                                                                                                                                                                                                                          
+Jakub                Kowalski             33-300                                                                                                                                                                                                                                                                                                              
+Kamil                Nowak                34-600                                                                                                                                                                                                                                                                                                              
+Dominik              Filipek              33-500                                                                                                                                                                                                                                                                                                              
+Natalia              Nowak                33-661                                                                                                                                                                                                                                                                                                              
+Artur                Nowak                33-661                                                                                                                                                                                                                                                                                                              
+Julia                Czesak               33-300                                                                                                                                                                                                                                                                                                              
+Pawel                Ciula                nie podano kodu pocztowego                                                                                                                                                                                                                                                                                          
+Kamila               Kowalska             nie podano kodu pocztowego                                                                                                                                                                                                                                                                                          
+
+8 rows selected.
 
