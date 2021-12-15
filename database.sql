@@ -1,4 +1,3 @@
-------------------------------------------------------
 -- UWAGI:
 -- Skrypt nalezy uruchomić DWA RAZY - po drugim uruchomieniu 
 -- nie mogą w nim występ[owac żadne błędy!
@@ -20,7 +19,7 @@ SET SERVEROUTPUT ON;
 
 -- zmień format daty
 alter session set 
-	nls_date_format = 'YYYY-MM-DD HH24:MI';
+	nls_date_format = 'YYYY-MM-DD';
 
 --
 select sysdate from dual;
@@ -94,22 +93,22 @@ TABLESPACE STUDENT_DATA;
 	------------------------
 	-- DML bd1_STANOWISKO
 	------------------------
-	insert into bd1_STANOWISKO (STA_ID,STA_Rodzaj,STA_OPIS)
-	values ('1','Prawnik','Obrona klienta');
+	insert into bd1_STANOWISKO (STA_Rodzaj,STA_OPIS)
+	values ('Prawnik','Obrona klienta');
 
-	insert into bd1_STANOWISKO (STA_ID,STA_Rodzaj,STA_OPIS)
-	values ('2','Prokurator','Oskazanie oskazonego');
+	insert into bd1_STANOWISKO (STA_Rodzaj,STA_OPIS)
+	values ('Prokurator','Oskazanie oskazonego');
+	
+		insert into bd1_STANOWISKO (STA_Rodzaj,STA_OPIS)
+	values ('Sedzia Sadowy','Prowadzenie rozpraw');
+	
+		insert into bd1_STANOWISKO (STA_Rodzaj,STA_OPIS)
+	values ('Komornik','');
 
 	column STA_ID HEADING 'ID' for 999999
 	column STA_Rodzaj HEADING 'Rodzaj stanowiska' for A20
 	column STA_OPIS HEADING 'Opis stanowiska' for A20
 
-
-	-- ile wierszy
-	select count(*) from bd1_STANOWISKO;
-
-	-- szybciej:
-	select count(STA_ID) from bd1_STANOWISKO;
 
 	select * from bd1_STANOWISKO;	
 
@@ -120,7 +119,7 @@ PROMPT   table bd1_INSTYTUTY
 ---------------------------	
 create table bd1_INSTYTUTY (
 INS_ID				number(8) NOT NULL,		
-INS_Lokalizacja		varchar2(64)
+INS_Lokalizacja		varchar2(64) NOT NULL
 )
 PCTFREE 5
 TABLESPACE STUDENT_DATA;
@@ -168,14 +167,17 @@ TABLESPACE STUDENT_DATA;
 	insert into bd1_INSTYTUTY (INS_Lokalizacja)
 	values ('Bochnia');
 	
+	insert into bd1_INSTYTUTY (INS_Lokalizacja)
+	values ('Nowy Sacz');
+	
+	insert into bd1_INSTYTUTY (INS_Lokalizacja)
+	values ('Limanowa');
+	
+	insert into bd1_INSTYTUTY (INS_Lokalizacja)
+	values ('Mszalnica');
+	
 	column INS_ID HEADING 'ID' for 999999
 	column INS_Lokalizacja HEADING 'Lokalizacja instytutu' for A20
-
-	-- ile wierszy
-	select count(*) from bd1_INSTYTUTY;
-
-	-- szybciej:
-	select count(INS_ID) from bd1_INSTYTUTY;
 
 	select * from bd1_INSTYTUTY;	
 
@@ -238,6 +240,18 @@ TABLESPACE STUDENT_DATA;
 	insert into bd1_OSOBY (OSO_Imie,OSO_Nazwisko,OSO_Plec,OSO_Adres_Zamieszkania,OSO_Kod_Pocztowy,OSO_Telefon)
 	values ('Natalia','Nowak','Kobieta','Krakow','33-661','987-654-321');
 	
+	insert into bd1_OSOBY (OSO_Imie,OSO_Nazwisko,OSO_Plec,OSO_Adres_Zamieszkania,OSO_Kod_Pocztowy,OSO_Telefon)
+	values ('Artur','Nowak','Mezczyzna','Krakow','33-661',NULL);
+	
+	insert into bd1_OSOBY (OSO_Imie,OSO_Nazwisko,OSO_Plec,OSO_Adres_Zamieszkania,OSO_Kod_Pocztowy,OSO_Telefon)
+	values ('Julia','Czesak','Kobieta','Nowy Sacz','33-300',NULL);
+	
+	insert into bd1_OSOBY (OSO_Imie,OSO_Nazwisko,OSO_Plec,OSO_Adres_Zamieszkania,OSO_Kod_Pocztowy,OSO_Telefon)
+	values ('Pawel','Ciula','Mezczyzna','Mszalnica',NULL,NULL);
+	
+	insert into bd1_OSOBY (OSO_Imie,OSO_Nazwisko,OSO_Plec,OSO_Adres_Zamieszkania,OSO_Kod_Pocztowy,OSO_Telefon)
+	values ('Kamila','Kowalska','Kobieta','Limanowa',NULL,NULL);
+	
 	column OSO_ID HEADING 'ID' for 999999
 	column OSO_Imie HEADING 'Imie' for A20
 	column OSO_Nazwisko HEADING 'Nazwisko' for A20
@@ -246,16 +260,9 @@ TABLESPACE STUDENT_DATA;
 	column OSO_Kod_Pocztowy HEADING 'Kod Pocztowy' for A20
 	column OSO_Telefon HEADING 'Numer Telefonu' for A20
 
-	-- ile wierszy
-	select count(*) from bd1_OSOBY;
-
-	-- szybciej:
-	select count(OSO_ID) from bd1_OSOBY;
-
 	select * from bd1_OSOBY;	
 
 ---------------------------
-
 
 PROMPT   table bd1_PRACOWNICY
 ---------------------------	
@@ -312,12 +319,6 @@ TABLESPACE STUDENT_DATA;
 
 	column PRA_ID HEADING 'ID_Pracownika' for 999999
 	column OSO_ID HEADING 'ID_Osoby' for 99999
-
-	-- ile wierszy
-	select count(*) from bd1_PRACOWNICY;
-
-	-- szybciej:
-	select count(PRA_ID) from bd1_PRACOWNICY;
 
 	select * from bd1_PRACOWNICY;
 ---------------------------
@@ -386,9 +387,9 @@ TABLESPACE STUDENT_DATA;
 	-- DML bd1_HISTORIA_ZATRUDNIENIA
 	------------------------
 	insert into bd1_HISTORIA_ZATRUDNIENIA (HIS_Data_Zatrudnienia,HIS_Data_Zwolnienia,STA_ID,INS_ID,PRA_ID)
-	values ('2021-08-21','2021-11-10','1','3','1');
+	values ('2021-08-21','','1','3','1');
 	insert into bd1_HISTORIA_ZATRUDNIENIA (HIS_Data_Zatrudnienia,HIS_Data_Zwolnienia,STA_ID,INS_ID,PRA_ID)
-	values ('2019-08-21','2020-11-10','2','3','2');
+	values ('2019-08-21','','2','3','2');
 	
 	column HIS_Pracownika_ID HEADING 'ID Histori Pracownika' for 999999
 	column HIS_Data_Zatrudnienia HEADING 'Data Zatrudnienia' for A20
@@ -397,12 +398,6 @@ TABLESPACE STUDENT_DATA;
 	column INS_ID HEADING 'Instytut ID' for 999999
 	column PRA_ID HEADING 'Pracownik ID' for 999999
 	
-	-- ile wierszy
-	select count(*) from bd1_HISTORIA_ZATRUDNIENIA;
-
-	-- szybciej:
-	select count(HIS_Pracownika_ID) from bd1_HISTORIA_ZATRUDNIENIA;
-
 	select * from bd1_HISTORIA_ZATRUDNIENIA;	
 ---------------------------
 
@@ -461,12 +456,6 @@ TABLESPACE STUDENT_DATA;
 
 	column KLI_ID HEADING 'ID_Klienta' for 999999
 	column OSO_ID HEADING 'ID_Osoby' for 99999
-
-	-- ile wierszy
-	select count(*) from bd1_KLIENCI;
-
-	-- szybciej:
-	select count(KLI_ID) from bd1_KLIENCI;
 
 	select * from bd1_KLIENCI;
 ---------------------------
@@ -533,12 +522,6 @@ TABLESPACE STUDENT_DATA;
 	column PRA_ID HEADING 'ID_Pracownika' for 99999
 	column KLI_ID HEADING 'ID_Klienta' for 99999
 
-	-- ile wierszy
-	select count(*) from bd1_USLUGI;
-
-	-- szybciej:
-	select count(USL_ID) from bd1_USLUGI;
-
 	select * from bd1_USLUGI;
 ---------------------------
 PROMPT   table bd1_OSKARZENIA
@@ -597,12 +580,6 @@ TABLESPACE STUDENT_DATA;
 	column OSK_Data HEADING 'Data oskarzenia' for A20
 	column OSK_Rodzaj HEADING 'Rodzaj oskarzenia' for A20
 
-	-- ile wierszy
-	select count(*) from bd1_OSKARZENIA;
-
-	-- szybciej:
-	select count(OSK_ID) from bd1_OSKARZENIA;
-
 	select * from bd1_OSKARZENIA;
 ---------------------------
 PROMPT   table bd1_KARY
@@ -659,7 +636,7 @@ TABLESPACE STUDENT_DATA;
 	values ('Wiezienie','2021-11-29','2025-11-21','2');
 	
 	insert into bd1_KARY (KAR_Wyrok,KAR_Data_Rozpoczecia,KAR_Data_Zakonczenia,OSK_ID)
-	values ('Wyrok w zawieszeniu','2021-10-15','2021-11-15','1');
+	values ('Wyrok w zawieszeniu','2021-10-15','2022-11-15','1');
 	
 
 	column KAR_ID HEADING 'ID_Kary' for 999999
@@ -667,12 +644,6 @@ TABLESPACE STUDENT_DATA;
 	column KAR_Data_Rozpoczecia HEADING 'Data rozpoczecia kary' for 99999
 	column KAR_Data_Zakonczenia HEADING 'Data zakonczenia kary' for 99999
 	column OSK_ID HEADING 'ID_Oskarzenia' for 99999
-
-	-- ile wierszy
-	select count(*) from bd1_KARY;
-
-	-- szybciej:
-	select count(KAR_ID) from bd1_KARY;
 
 	select * from bd1_KARY;
 ---------------------------
@@ -727,12 +698,6 @@ TABLESPACE STUDENT_DATA;
 	column PRZ_ID HEADING 'ID_Przestepstwa' for 999999
 	column PRZ_Data HEADING 'Data przestepstwa' for A20
 	column PRZ_Rodzaj HEADING 'Rodzaj przestepstwa' for A20
-
-	-- ile wierszy
-	select count(*) from bd1_PRZESTEPSTWA;
-
-	-- szybciej:
-	select count(PRZ_ID) from bd1_PRZESTEPSTWA;
 
 	select * from bd1_PRZESTEPSTWA;
 ---------------------------
@@ -795,12 +760,6 @@ TABLESPACE STUDENT_DATA;
 	column SLE_Data HEADING 'Data sledztwa' for A20
 	column PRZ_ID HEADING 'ID_Przestepstwa' for 99999
 
-	-- ile wierszy
-	select count(*) from bd1_SLEDZTWA;
-
-	-- szybciej:
-	select count(SLE_ID) from bd1_SLEDZTWA;
-
 	select * from bd1_SLEDZTWA;		
 
 ---------------------------
@@ -808,7 +767,7 @@ PROMPT   table bd1_DOWODY;
 ---------------------------	
 create table bd1_DOWODY (
 DOW_ID		number(8) NOT NULL,		
-DOW_Opis  	varchar2(64) NOT NULL,		
+DOW_Opis  	varchar2(64),		
 DOW_Rodzaj	varchar2(64) NOT NULL,
 SLE_ID		number(8) NOT NULL
 )
@@ -858,18 +817,15 @@ TABLESPACE STUDENT_DATA;
 	
 	insert into bd1_DOWODY (DOW_Opis,DOW_Rodzaj,SLE_ID)
 	values ('Dowod zabezpieczony w domu oskazonego','Przedmiot kradiezy','2');
+	
+	insert into bd1_DOWODY (DOW_Opis,DOW_Rodzaj,SLE_ID)
+	values (NULL,'Przedmiot kradiezy','1');
 
 
 	column DOW_ID HEADING 'ID_Dowodu' for 999999
 	column DOW_Opis HEADING 'Opis dowodu' for A20
 	column DOW_Rodzaj HEADING 'Rodzaj dowodu' for A20
 	column SLE_ID HEADING 'ID_Sledztwa' for 99999
-
-	-- ile wierszy
-	select count(*) from bd1_DOWODY;
-
-	-- szybciej:
-	select count(DOW_ID) from bd1_DOWODY;
 
 	select * from bd1_DOWODY;
 ---------------------------
@@ -892,7 +848,7 @@ TABLESPACE STUDENT_DATA;
 	ALTER TABLE bd1_STANOWISKO_SWIADKA 
 		ADD CONSTRAINT bd1_STANOWISKO_SWIADKA 
 		PRIMARY KEY (STA_SW_ID) ;
--- SEQUENCE
+	-- SEQUENCE
 	------------------------		
 	drop sequence SEQ_bd1_STANOWISKO_SWIADKA;
 	CREATE SEQUENCE SEQ_bd1_STANOWISKO_SWIADKA
@@ -930,12 +886,6 @@ TABLESPACE STUDENT_DATA;
 	column STA_SW_Rodzaj HEADING 'Rodzaj stanowiska swiadka' for A20
 	column STA_SW_Typ_Swiadka HEADING 'Typ swiadka' for A20
 	column STA_SW_Opis HEADING 'Opis stanowiska swiadka' for A20
-
-	-- ile wierszy
-	select count(*) from bd1_STANOWISKO_SWIADKA;
-
-	-- szybciej:
-	select count(STA_SW_ID) from bd1_STANOWISKO_SWIADKA;
 
 	select * from bd1_STANOWISKO_SWIADKA;		
 ---------------------------
@@ -1010,12 +960,6 @@ TABLESPACE STUDENT_DATA;
 	column STA_SW_ID HEADING 'ID_Stanowiska_Swiadka' for 99999
 	column OSK_ID HEADING 'ID_Oskarzenia' for 99999
 
-	-- ile wierszy
-	select count(*) from bd1_ZEZNANIA;
-
-	-- szybciej:
-	select count(ZEZ_ID) from bd1_ZEZNANIA;
-
 	select * from bd1_ZEZNANIA;
 
 ---------------------------
@@ -1082,12 +1026,6 @@ TABLESPACE STUDENT_DATA;
 	column PRZ_ID HEADING 'ID_Przestepstwa' for 99999
 	column USL_ID HEADING 'ID_Uslugi' for 99999
 	
-	-- ile wierszy
-	select count(*) from bd1_SPRAWY_SADOWE;
-
-	-- szybciej:
-	select count(SPR_ID) from bd1_SPRAWY_SADOWE;
-
 	select * from bd1_SPRAWY_SADOWE;
 
  ---------------------------
@@ -1103,5 +1041,87 @@ PROMPT Lista utworzonych tabel:
 SELECT TABLE_NAME FROM USER_TABLES
 WHERE DROPPED='NO';
 
+---------------------------	SELECT --------------------------------------
+
+
+
+SELECT * FROM BD1_OSOBY WHERE OSO_ID > '5';
+/*ID_Osoby Imie            Nazwisko        Plec                 Adres Zamieszkania   Kod Pocztowy         Numer Telefonu
+-------- --------------- --------------- -------------------- -------------------- -------------------- --------------------
+       6 Julia           Czesak          Kobieta              Nowy Sacz            33-300
+       7 Pawel           Ciula           Mezczyzna            Mszalnica            33-300
+       8 Kamila          Kowalska        Kobieta              Limanowa             34-600													*/
+
+
+SELECT OSO_ID,OSO_Imie,OSO_Nazwisko,OSO_Plec,OSO_Adres_Zamieszkania FROM bd1_OSOBY WHERE OSO_Nazwisko='Nowak' AND OSO_Adres_Zamieszkania='Limanowa'; 
+ 
+/*ID_Osoby Imie            Nazwisko        Plec            Adres Zamieszka
+-------- --------------- --------------- --------------- ---------------
+       2 Kamil           Nowak           Mezczyzna       Limanowa 			*/
+ 
+
+SELECT HIS_Pracownika_ID,HIS_Data_Zatrudnienia,HIS_Data_Zwolnienia,INS_Lokalizacja FROM bd1_HISTORIA_ZATRUDNIENIA, bd1_INSTYTUTY WHERE bd1_HISTORIA_ZATRUDNIENIA.INS_ID=bd1_INSTYTUTY.INS_ID AND INS_Lokalizacja='Bochnia';
+/*ID Histori Pracownika Data Zatrudnien Data Zwolnienia Lokalizacja instytutu
+--------------------- --------------- --------------- ----------------------------
+                    1 2021-08-21                      Bochnia
+                    2 2019-08-21                      Bochnia					*/
+					
+
+SELECT * FROM bd1_KARY WHERE KAR_Data_Zakonczenia > '2020-01-01' AND KAR_WYROK='Wiezienie';
+/*ID_Kary Wyrok                                                            Data rozpo Data zakon ID_Oskarzenia
+------- ---------------------------------------------------------------- ---------- ---------- -------------
+      1 Wiezienie                                                        2021-11-29 2025-11-21             2 */
+	  
+UPDATE bd1_HISTORIA_ZATRUDNIENIA SET HIS_Data_Zwolnienia='2021-12-07' WHERE HIS_Pracownika_ID LIKE '1';
+SELECT * FROM bd1_HISTORIA_ZATRUDNIENIA WHERE HIS_Pracownika_ID LIKE '1';
+/*ID Histori Pracownika Data Zatrudnien Data Zwolnienia Stanowisko ID Instytut ID ID_Pracownika
+--------------------- --------------- --------------- ------------- ----------- -------------
+                    1 2021-08-21      2021-12-07                  1           3             1 */
+					
+					
+---------------------------	NVL --------------------------------------				
+
+SELECT OSO_Imie,OSO_Nazwisko, NVL(OSO_Telefon, 'nie podano numeru telefonu') Numer_Telefonu FROM bd1_OSOBY;
+/*Imie                 Nazwisko             NUMER_TELEFONU
+-------------------- -------------------- --------------------------
+Jakub                Kowalski             123-456-789
+Kamil                Nowak                987-654-321
+Dominik              Filipek              123-987-456
+Natalia              Nowak                987-654-321
+Artur                Nowak                nie podano numeru telefonu
+Julia                Czesak               nie podano numeru telefonu
+Pawel                Ciula                nie podano numeru telefonu
+Kamila               Kowalska             nie podano numeru telefonu */
+
+SELECT DOW_ID,SLE_ID,DOW_Rodzaj, NVL(DOW_Opis, 'nie podano opisu') DOW_Opis FROM bd1_DOWODY;
+/* ID_Dowodu ID_Sledztwa Rodzaj dowodu        Opis dowodu
+--------- ----------- -------------------- --------------------
+        1           1 Bron                 Dowod zebrany z miej
+                                           sca zbrodni
+
+        2           2 Przedmiot kradiezy   Dowod zabezpieczony
+                                           w domu oskazonego
+
+        3           1 Przedmiot kradiezy   nie podano opisu */
+		
+SELECT KAR_ID, KAR_Wyrok,KAR_Data_Rozpoczecia,KAR_Data_Zakonczenia, NVL(ROUND(KAR_Data_Zakonczenia - CURRENT_DATE), 0) Koniec_za FROM bd1_KARY;
+/*ID_Kary Wyrok                                                            Data rozpo Data zakon  KONIEC_ZA
+------- ---------------------------------------------------------------- ---------- ---------- ----------
+      1 Wiezienie                                                        2021-11-29 2025-11-21       1444
+      2 Wyrok w zawieszeniu                                              2021-10-15 2022-11-15        342 */
+	  
+SELECT OSO_Imie,OSO_Nazwisko, NVL(OSO_Kod_Pocztowy, 'nie podano kodu pocztowego') Kod_pocztowy FROM bd1_OSOBY;
+/*Imie                 Nazwisko             KOD_POCZTOWY
+-------------------- -------------------- --------------------------
+Jakub                Kowalski             33-300
+Kamil                Nowak                34-600
+Dominik              Filipek              33-500
+Natalia              Nowak                33-661
+Artur                Nowak                33-661
+Julia                Czesak               33-300
+Pawel                Ciula                nie podano kodu pocztowego
+Kamila               Kowalska             nie podano kodu pocztowego*/
+
 -- ## -- ## -- ## -- ## -- 
 SPOOL OFF
+
