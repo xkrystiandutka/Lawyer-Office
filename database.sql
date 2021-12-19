@@ -1,3 +1,4 @@
+------------------------------------------------------
 -- UWAGI:
 -- Skrypt nalezy uruchomić DWA RAZY - po drugim uruchomieniu 
 -- nie mogą w nim występ[owac żadne błędy!
@@ -25,7 +26,7 @@ alter session set
 select sysdate from dual;
 --
 
----------------------------
+-------------------------
 PROMPT   sekwencja kasowania
 ---------------------------
 drop table bd1_SPRAWY_SADOWE;
@@ -176,6 +177,9 @@ TABLESPACE STUDENT_DATA;
 	insert into bd1_INSTYTUTY (INS_Lokalizacja)
 	values ('Mszalnica');
 	
+	insert into bd1_INSTYTUTY (INS_Lokalizacja)
+	values ('Warszawa');
+	
 	column INS_ID HEADING 'ID' for 999999
 	column INS_Lokalizacja HEADING 'Lokalizacja instytutu' for A20
 
@@ -232,7 +236,7 @@ TABLESPACE STUDENT_DATA;
 	values ('Jakub','Kowalski','Mezczyzna','Nowy Sacz','33-300','123-456-789');
 	
 	insert into bd1_OSOBY (OSO_Imie,OSO_Nazwisko,OSO_Plec,OSO_Adres_Zamieszkania,OSO_Kod_Pocztowy,OSO_Telefon)
-	values ('Kamil','Nowak','Mezczyzna','Limanowa','34-600','987-654-321');
+	values ('Kamil','Nowak','Mezczyzna','Krakow','34-600','987-654-321');
 	
 	insert into bd1_OSOBY (OSO_Imie,OSO_Nazwisko,OSO_Plec,OSO_Adres_Zamieszkania,OSO_Kod_Pocztowy,OSO_Telefon)
 	values ('Dominik','Filipek','Mezczyzna','Bochnia','33-500','123-987-456');
@@ -244,13 +248,13 @@ TABLESPACE STUDENT_DATA;
 	values ('Artur','Nowak','Mezczyzna','Krakow','33-661',NULL);
 	
 	insert into bd1_OSOBY (OSO_Imie,OSO_Nazwisko,OSO_Plec,OSO_Adres_Zamieszkania,OSO_Kod_Pocztowy,OSO_Telefon)
-	values ('Julia','Czesak','Kobieta','Nowy Sacz','33-300',NULL);
+	values ('Julia','Kowalski','Kobieta','Nowy Sacz','33-300',NULL);
 	
 	insert into bd1_OSOBY (OSO_Imie,OSO_Nazwisko,OSO_Plec,OSO_Adres_Zamieszkania,OSO_Kod_Pocztowy,OSO_Telefon)
 	values ('Pawel','Ciula','Mezczyzna','Mszalnica',NULL,NULL);
 	
 	insert into bd1_OSOBY (OSO_Imie,OSO_Nazwisko,OSO_Plec,OSO_Adres_Zamieszkania,OSO_Kod_Pocztowy,OSO_Telefon)
-	values ('Kamila','Kowalska','Kobieta','Limanowa',NULL,NULL);
+	values ('Kamila','Nowak','Kobieta','Limanowa',NULL,NULL);
 	
 	column OSO_ID HEADING 'ID' for 999999
 	column OSO_Imie HEADING 'Imie' for A20
@@ -316,7 +320,13 @@ TABLESPACE STUDENT_DATA;
 	
 	insert into bd1_PRACOWNICY (OSO_ID)
 	values ('2');
-
+	
+	insert into bd1_PRACOWNICY (OSO_ID)
+	values ('5');
+	
+	insert into bd1_PRACOWNICY (OSO_ID)
+	values ('6');
+	
 	column PRA_ID HEADING 'ID_Pracownika' for 999999
 	column OSO_ID HEADING 'ID_Osoby' for 99999
 
@@ -390,7 +400,10 @@ TABLESPACE STUDENT_DATA;
 	values ('2021-08-21','','1','3','1');
 	insert into bd1_HISTORIA_ZATRUDNIENIA (HIS_Data_Zatrudnienia,HIS_Data_Zwolnienia,STA_ID,INS_ID,PRA_ID)
 	values ('2019-08-21','','2','3','2');
-	
+	insert into bd1_HISTORIA_ZATRUDNIENIA (HIS_Data_Zatrudnienia,HIS_Data_Zwolnienia,STA_ID,INS_ID,PRA_ID)
+	values ('2019-08-21','2021-09-11','2','4','3');
+	insert into bd1_HISTORIA_ZATRUDNIENIA (HIS_Data_Zatrudnienia,HIS_Data_Zwolnienia,STA_ID,INS_ID,PRA_ID)
+	values ('2019-08-21','','3','4','4');
 	column HIS_Pracownika_ID HEADING 'ID Histori Pracownika' for 999999
 	column HIS_Data_Zatrudnienia HEADING 'Data Zatrudnienia' for A20
 	column HIS_Data_Zwolnienia HEADING 'Data Zwolnienia' for A20
@@ -453,6 +466,12 @@ TABLESPACE STUDENT_DATA;
 	
 	insert into bd1_KLIENCI (OSO_ID)
 	values ('4');
+	
+	insert into bd1_KLIENCI (OSO_ID)
+	values ('7');
+	
+	insert into bd1_KLIENCI (OSO_ID)
+	values ('8');
 
 	column KLI_ID HEADING 'ID_Klienta' for 999999
 	column OSO_ID HEADING 'ID_Osoby' for 99999
@@ -517,6 +536,18 @@ TABLESPACE STUDENT_DATA;
 	
 	insert into bd1_USLUGI (PRA_ID,KLI_ID)
 	values ('2','2');
+	
+	insert into bd1_USLUGI (PRA_ID,KLI_ID)
+	values ('2','3');
+	
+	insert into bd1_USLUGI (PRA_ID,KLI_ID)
+	values ('2','2');
+
+	insert into bd1_USLUGI (PRA_ID,KLI_ID)
+	values ('4','3');
+	
+	insert into bd1_USLUGI (PRA_ID,KLI_ID)
+	values ('4','3');
 
 	column USL_ID HEADING 'ID_Uslugi' for 999999
 	column PRA_ID HEADING 'ID_Pracownika' for 99999
@@ -693,11 +724,11 @@ TABLESPACE STUDENT_DATA;
 	values ('2021-11-27','Drogowe');
 	
 	insert into bd1_PRZESTEPSTWA (PRZ_Data,PRZ_Rodzaj)
-	values ('2021-10-21','Bezprawne zbieranie danych o życiu prywatnym');
+	values ('2021-10-21','Bezprawne zbieranie danych o zyciu prywatnym');
 
 	column PRZ_ID HEADING 'ID_Przestepstwa' for 999999
 	column PRZ_Data HEADING 'Data przestepstwa' for A20
-	column PRZ_Rodzaj HEADING 'Rodzaj przestepstwa' for A20
+	column PRZ_Rodzaj HEADING 'Rodzaj przestepstwa' for A25
 
 	select * from bd1_PRZESTEPSTWA;
 ---------------------------
@@ -878,7 +909,16 @@ TABLESPACE STUDENT_DATA;
 	values ('Zeznanie na korzysc oskazonego','2021-10-09','Swiadek zdarzenia','Brat Oskazonego','Zeznanie swojej wersje zdarzen');
 	
 	insert into bd1_STANOWISKO_SWIADKA (STA_SW_Zeznania,STA_SW_Data,STA_SW_Rodzaj,STA_SW_Typ_Swiadka,STA_SW_Opis)
-	values ('Zeznanie na niekorzysc oskazonego','2021-10-09','Swiadek zdarzenia','Przypadkowa osoba','Zeznanie swojej wersje zdarzen');
+	values ('Zeznanie na niekorzysc oskazonego','2019-11-09','Swiadek zdarzenia','Przypadkowa osoba','Zeznanie swojej wersje zdarzen');
+	
+	insert into bd1_STANOWISKO_SWIADKA (STA_SW_Zeznania,STA_SW_Data,STA_SW_Rodzaj,STA_SW_Typ_Swiadka,STA_SW_Opis)
+	values ('Zeznanie na niekorzysc oskazonego','2021-06-09','Swiadek zdarzenia','Ojciec ofiary','Zeznanie swojej wersje zdarzen');
+	
+	insert into bd1_STANOWISKO_SWIADKA (STA_SW_Zeznania,STA_SW_Data,STA_SW_Rodzaj,STA_SW_Typ_Swiadka,STA_SW_Opis)
+	values ('Zeznanie na korzysc oskazonego','2021-05-10','Swiadek zdarzenia','Siostra oskazonego','Zeznanie swojej wersje zdarzen');
+	
+	insert into bd1_STANOWISKO_SWIADKA (STA_SW_Zeznania,STA_SW_Data,STA_SW_Rodzaj,STA_SW_Typ_Swiadka,STA_SW_Opis)
+	values ('Zeznanie na niekorzysc oskazonego','2021-08-21','Swiadek zdarzenia','Matka ofiary','Zeznanie swojej wersje zdarzen');
 	
 	column STA_SW_ID HEADING 'ID_Stanowiska_Swiadka' for 999999
 	column STA_SW_Zeznania HEADING 'Stanowisko swiadka zeznania' for A20
@@ -1078,8 +1118,8 @@ SELECT * FROM bd1_HISTORIA_ZATRUDNIENIA WHERE HIS_Pracownika_ID LIKE '1';
 --------------------- --------------- --------------- ------------- ----------- -------------
                     1 2021-08-21      2021-12-07                  1           3             1 */
 					
-					
 ---------------------------	NVL --------------------------------------				
+
 
 SELECT OSO_Imie,OSO_Nazwisko, NVL(OSO_Telefon, 'nie podano numeru telefonu') Numer_Telefonu FROM bd1_OSOBY;
 /*Imie                 Nazwisko             NUMER_TELEFONU
@@ -1123,5 +1163,84 @@ Pawel                Ciula                nie podano kodu pocztowego
 Kamila               Kowalska             nie podano kodu pocztowego*/
 
 -- ## -- ## -- ## -- ## -- 
+
+
+
+
+---
+---------------------------	GROUP BY --------------------------------------
+---
+
+
+
+SELECT kli.KLI_ID,kli.OSO_ID,oso.OSO_Imie,oso.OSO_Nazwisko,oso.OSO_Plec,oso.OSO_Adres_Zamieszkania
+FROM bd1_KLIENCI kli 
+INNER JOIN bd1_OSOBY oso ON kli.OSO_ID=oso.OSO_ID;
+/*
+ID_Klienta ID_Osoby Imie                 Nazwisko             Plec                 Adres Zamieszkania
+---------- -------- -------------------- -------------------- -------------------- --------------------
+         1        3 Dominik              Filipek              Mezczyzna            Bochnia
+         2        4 Natalia              Nowak                Kobieta              Krakow
+         3        7 Pawel                Ciula                Mezczyzna            Mszalnica
+         4        8 Kamila               Nowak                Kobieta              Limanowa */
+		 
+SELECT his.HIS_Data_Zatrudnienia,his.PRA_ID,ins.INS_Lokalizacja,sta.STA_OPIS
+FROM bd1_HISTORIA_ZATRUDNIENIA his 
+INNER JOIN bd1_INSTYTUTY ins ON his.INS_ID=ins.INS_ID 
+INNER JOIN bd1_STANOWISKO sta ON his.STA_ID=sta.STA_ID;
+/*
+Data Zatrudnienia    ID_Pracownika Lokalizacja instytut Opis stanowiska
+-------------------- ------------- -------------------- --------------------
+2021-08-21                       1 Bochnia              Obrona klienta
+2019-08-21                       2 Bochnia              Oskazanie oskazonego
+2019-08-21                       3 Nowy Sacz            Oskazanie oskazonego
+2019-08-21                       4 Nowy Sacz            Prowadzenie rozpraw */
+
+COLUMN pracownik HEADING 'Imie i nazwisko pracownika' FORMAT A26
+COLUMN klient HEADING 'Imie i nazwisko klienta' FORMAT A25
+COLUMN rodzaj HEADING 'Rodzaj przestepstwa klienta' FORMAT A35
+SELECT spr.SPR_ID,oso.OSO_Imie||' '|| oso.OSO_Nazwisko AS pracownik,oso_.OSO_Imie|| ' ' ||oso_.OSO_Nazwisko AS klient, prze.PRZ_Rodzaj AS rodzaj  
+FROM bd1_SPRAWY_SADOWE spr 
+INNER JOIN bd1_USLUGI usl ON spr.USL_ID=usl.USL_ID
+INNER JOIN bd1_PRACOWNICY pra ON usl.PRA_ID=pra.PRA_ID  
+INNER JOIN bd1_KLIENCI kli ON usl.KLI_ID=kli.KLI_ID
+INNER JOIN bd1_OSOBY oso ON pra.OSO_ID=oso.OSO_ID 
+INNER JOIN bd1_OSOBY oso_ ON kli.OSO_ID=oso_.OSO_ID
+INNER JOIN bd1_PRZESTEPSTWA prze ON spr.PRZ_ID=prze.PRZ_ID;
+/*
+ID_Sprawy_Sadowej Imie i nazwisko pracownika Imie i nazwisko klienta   Rodzaj przestepstwa klienta
+----------------- -------------------------- ------------------------- -----------------------------------
+                1 Kamil Nowak                Dominik Filipek           Drogowe
+                2 Kamil Nowak                Natalia Nowak             Bezprawne zbieranie danych o zyciu
+                                                                       prywatnym
+*/
+
+
+--------HAVING---------
+
+-- ilosc instytutow znajduajcych sie w tym samym miescie (min 2)
+SELECT INS_Lokalizacja, COUNT(INS_Lokalizacja) AS Ilosc FROM bd1_INSTYTUTY GROUP BY INS_Lokalizacja HAVING COUNT(INS_Lokalizacja)>1;
+/*Lokalizacja instytut      ILOSC
+-------------------- ----------
+Warszawa                      2*/
+
+-- ilosc osob o tym samym nazwisku w bazie danych (min 2)
+COLUMN a HEADING 'Ilosc osob o takim samym nazwisku'
+SELECT OSO_Nazwisko, COUNT(OSO_Nazwisko) AS a FROM bd1_OSOBY GROUP BY OSO_Nazwisko HAVING COUNT(OSO_Nazwisko)>1 ORDER BY OSO_Nazwisko DESC;
+/*Nazwisko             Ilosc osob o takim samym nazwisku
+-------------------- ---------------------------------
+Nowak                                                4
+Kowalski                                             2 */
+-- stanowiska swiadkow zdarzen w bazie danych zeznane po dacie 2020-01-01 ustawione w kolejnosci malejacej (od najnowszych do najstarszych)
+SELECT STA_SW_Rodzaj,STA_SW_Data  FROM bd1_STANOWISKO_SWIADKA GROUP BY STA_SW_Data,STA_SW_Rodzaj HAVING MAX(STA_SW_Data) > '2020-01-01' ORDER BY STA_SW_Data DESC;
+/*Rodzaj stanowiska sw Data skladanai stano
+-------------------- --------------------
+Swiadek zdarzenia    2021-10-09
+Swiadek zdarzenia    2021-08-21
+Swiadek zdarzenia    2021-06-09
+Swiadek zdarzenia    2021-05-10 */
+
+
+
 SPOOL OFF
 
