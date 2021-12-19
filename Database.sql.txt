@@ -125,6 +125,10 @@ Dodano nowy wiersz do bd1_INSTYTUTY - INS_ID=6
 
 1 row created.
 
+Dodano nowy wiersz do bd1_INSTYTUTY - INS_ID=7                                                                                                                                                                                                                                                                                                                
+
+1 row created.
+
 
      ID Lokalizacja instytut                                                                                                                                                                                                                                                                                                                                  
 ------- --------------------                                                                                                                                                                                                                                                                                                                                  
@@ -134,8 +138,9 @@ Dodano nowy wiersz do bd1_INSTYTUTY - INS_ID=6
       4 Nowy Sacz                                                                                                                                                                                                                                                                                                                                             
       5 Limanowa                                                                                                                                                                                                                                                                                                                                              
       6 Mszalnica                                                                                                                                                                                                                                                                                                                                             
+      7 Warszawa                                                                                                                                                                                                                                                                                                                                              
 
-6 rows selected.
+7 rows selected.
 
 table bd1_OSOBY
 
@@ -189,13 +194,13 @@ Dodano nowy wiersz do bd1_OSOBY - OSO_ID=8
      ID Imie                 Nazwisko             Plec                 Adres Zamieszkania   Kod Pocztowy         Numer Telefonu                                                                                                                                                                                                                               
 ------- -------------------- -------------------- -------------------- -------------------- -------------------- --------------------                                                                                                                                                                                                                         
       1 Jakub                Kowalski             Mezczyzna            Nowy Sacz            33-300               123-456-789                                                                                                                                                                                                                                  
-      2 Kamil                Nowak                Mezczyzna            Limanowa             34-600               987-654-321                                                                                                                                                                                                                                  
+      2 Kamil                Nowak                Mezczyzna            Krakow               34-600               987-654-321                                                                                                                                                                                                                                  
       3 Dominik              Filipek              Mezczyzna            Bochnia              33-500               123-987-456                                                                                                                                                                                                                                  
       4 Natalia              Nowak                Kobieta              Krakow               33-661               987-654-321                                                                                                                                                                                                                                  
       5 Artur                Nowak                Mezczyzna            Krakow               33-661                                                                                                                                                                                                                                                            
-      6 Julia                Czesak               Kobieta              Nowy Sacz            33-300                                                                                                                                                                                                                                                            
+      6 Julia                Kowalski             Kobieta              Nowy Sacz            33-300                                                                                                                                                                                                                                                            
       7 Pawel                Ciula                Mezczyzna            Mszalnica                                                                                                                                                                                                                                                                              
-      8 Kamila               Kowalska             Kobieta              Limanowa                                                                                                                                                                                                                                                                               
+      8 Kamila               Nowak                Kobieta              Limanowa                                                                                                                                                                                                                                                                               
 
 8 rows selected.
 
@@ -226,11 +231,21 @@ Dodano nowy wiersz do bd1_PRACOWNICY - PRA_ID=2
 
 1 row created.
 
+Dodano nowy wiersz do bd1_PRACOWNICY - PRA_ID=3                                                                                                                                                                                                                                                                                                               
+
+1 row created.
+
+Dodano nowy wiersz do bd1_PRACOWNICY - PRA_ID=4                                                                                                                                                                                                                                                                                                               
+
+1 row created.
+
 
 ID_Pracownika ID_Osoby                                                                                                                                                                                                                                                                                                                                        
 ------------- --------                                                                                                                                                                                                                                                                                                                                        
             1        1                                                                                                                                                                                                                                                                                                                                        
             2        2                                                                                                                                                                                                                                                                                                                                        
+            3        5                                                                                                                                                                                                                                                                                                                                        
+            4        6                                                                                                                                                                                                                                                                                                                                        
 
 table bd1_HISTORIA_ZATRUDNIENIA
 
@@ -265,11 +280,21 @@ Dodano nowy wiersz do bd1_HISTORIA_ZATRUDNIENIA - HIS_Pracownika_ID=2
 
 1 row created.
 
+Dodano nowy wiersz do bd1_HISTORIA_ZATRUDNIENIA - HIS_Pracownika_ID=3                                                                                                                                                                                                                                                                                         
+
+1 row created.
+
+Dodano nowy wiersz do bd1_HISTORIA_ZATRUDNIENIA - HIS_Pracownika_ID=4                                                                                                                                                                                                                                                                                         
+
+1 row created.
+
 
 ID Histori Pracownika Data Zatrudnienia    Data Zwolnienia      Stanowisko ID Instytut ID Pracownik ID                                                                                                                                                                                                                                                        
 --------------------- -------------------- -------------------- ------------- ----------- ------------                                                                                                                                                                                                                                                        
                     1 2021-08-21                                            1           3            1                                                                                                                                                                                                                                                        
                     2 2019-08-21                                            2           3            2                                                                                                                                                                                                                                                        
+                    3 2019-08-21           2021-09-11                       2           4            3                                                                                                                                                                                                                                                        
+                    4 2019-08-21                                            3           4            4                                                                                                                                                                                                                                                        
 
 table bd1_KLIENCI
 
@@ -298,11 +323,21 @@ Dodano nowy wiersz do bd1_KLIENCI - KLI_ID=2
 
 1 row created.
 
+Dodano nowy wiersz do bd1_KLIENCI - KLI_ID=3                                                                                                                                                                                                                                                                                                                  
+
+1 row created.
+
+Dodano nowy wiersz do bd1_KLIENCI - KLI_ID=4                                                                                                                                                                                                                                                                                                                  
+
+1 row created.
+
 
 ID_Klienta ID_Osoby                                                                                                                                                                                                                                                                                                                                           
 ---------- --------                                                                                                                                                                                                                                                                                                                                           
          1        3                                                                                                                                                                                                                                                                                                                                           
          2        4                                                                                                                                                                                                                                                                                                                                           
+         3        7                                                                                                                                                                                                                                                                                                                                           
+         4        8                                                                                                                                                                                                                                                                                                                                           
 
 table bd1_USLUGI
 
@@ -334,11 +369,33 @@ Dodano nowy wiersz do bd1_USLUGI - USL_ID=2
 
 1 row created.
 
+Dodano nowy wiersz do bd1_USLUGI - USL_ID=3                                                                                                                                                                                                                                                                                                                   
+
+1 row created.
+
+Dodano nowy wiersz do bd1_USLUGI - USL_ID=4                                                                                                                                                                                                                                                                                                                   
+
+1 row created.
+
+Dodano nowy wiersz do bd1_USLUGI - USL_ID=5                                                                                                                                                                                                                                                                                                                   
+
+1 row created.
+
+Dodano nowy wiersz do bd1_USLUGI - USL_ID=6                                                                                                                                                                                                                                                                                                                   
+
+1 row created.
+
 
 ID_Uslugi ID_Pracownika ID_Klienta                                                                                                                                                                                                                                                                                                                            
 --------- ------------- ----------                                                                                                                                                                                                                                                                                                                            
         1             2          1                                                                                                                                                                                                                                                                                                                            
         2             2          2                                                                                                                                                                                                                                                                                                                            
+        3             2          3                                                                                                                                                                                                                                                                                                                            
+        4             2          2                                                                                                                                                                                                                                                                                                                            
+        5             4          3                                                                                                                                                                                                                                                                                                                            
+        6             4          3                                                                                                                                                                                                                                                                                                                            
+
+6 rows selected.
 
 table bd1_OSKARZENIA
 
@@ -434,11 +491,10 @@ Dodano nowy wiersz do bd1_PRZESTEPSTWA - PRZ_ID=2
 
 
 ID_Przestepstwa Data przestepstwa    Rodzaj przestepstwa                                                                                                                                                                                                                                                                                                      
---------------- -------------------- --------------------                                                                                                                                                                                                                                                                                                     
+--------------- -------------------- -------------------------                                                                                                                                                                                                                                                                                                
               1 2021-11-27           Drogowe                                                                                                                                                                                                                                                                                                                  
-              2 2021-10-21           Bezprawne zbieranie                                                                                                                                                                                                                                                                                                      
-                                     danych o ??yciu pryw                                                                                                                                                                                                                                                                                                     
-                                     atnym                                                                                                                                                                                                                                                                                                                    
+              2 2021-10-21           Bezprawne zbieranie danyc                                                                                                                                                                                                                                                                                                
+                                     h o zyciu prywatnym                                                                                                                                                                                                                                                                                                      
                                                                                                                                                                                                                                                                                                                                                               
 
 table bd1_SLEDZTWA
@@ -540,13 +596,34 @@ Dodano nowy wiersz do bd1_STANOWISKO_SWIADKA - STA_SW_ID=2
 
 1 row created.
 
+Dodano nowy wiersz do bd1_STANOWISKO_SWIADKA - STA_SW_ID=3                                                                                                                                                                                                                                                                                                    
+
+1 row created.
+
+Dodano nowy wiersz do bd1_STANOWISKO_SWIADKA - STA_SW_ID=4                                                                                                                                                                                                                                                                                                    
+
+1 row created.
+
+Dodano nowy wiersz do bd1_STANOWISKO_SWIADKA - STA_SW_ID=5                                                                                                                                                                                                                                                                                                    
+
+1 row created.
+
 
 ID_Stanowiska_Swiadka Stanowisko swiadka z Data skladanai stano Rodzaj stanowiska sw Typ swiadka          Opis stanowiska swia                                                                                                                                                                                                                                
 --------------------- -------------------- -------------------- -------------------- -------------------- --------------------                                                                                                                                                                                                                                
                     1 Zeznanie na korzysc  2021-10-09           Swiadek zdarzenia    Brat Oskazonego      Zeznanie swojej wers                                                                                                                                                                                                                                
                       oskazonego                                                                          je zdarzen                                                                                                                                                                                                                                          
                                                                                                                                                                                                                                                                                                                                                               
-                    2 Zeznanie na niekorzy 2021-10-09           Swiadek zdarzenia    Przypadkowa osoba    Zeznanie swojej wers                                                                                                                                                                                                                                
+                    2 Zeznanie na niekorzy 2019-11-09           Swiadek zdarzenia    Przypadkowa osoba    Zeznanie swojej wers                                                                                                                                                                                                                                
+                      sc oskazonego                                                                       je zdarzen                                                                                                                                                                                                                                          
+                                                                                                                                                                                                                                                                                                                                                              
+                    3 Zeznanie na niekorzy 2021-06-09           Swiadek zdarzenia    Ojciec ofiary        Zeznanie swojej wers                                                                                                                                                                                                                                
+                      sc oskazonego                                                                       je zdarzen                                                                                                                                                                                                                                          
+                                                                                                                                                                                                                                                                                                                                                              
+                    4 Zeznanie na korzysc  2021-05-10           Swiadek zdarzenia    Siostra oskazonego   Zeznanie swojej wers                                                                                                                                                                                                                                
+                      oskazonego                                                                          je zdarzen                                                                                                                                                                                                                                          
+                                                                                                                                                                                                                                                                                                                                                              
+                    5 Zeznanie na niekorzy 2021-08-21           Swiadek zdarzenia    Matka ofiary         Zeznanie swojej wers                                                                                                                                                                                                                                
                       sc oskazonego                                                                       je zdarzen                                                                                                                                                                                                                                          
                                                                                                                                                                                                                                                                                                                                                               
 
@@ -651,14 +728,14 @@ BD1_ZEZNANIA
 
 ID_Osoby Imie                 Nazwisko             Plec                 Adres Zamieszkania   Kod Pocztowy         Numer Telefonu                                                                                                                                                                                                                              
 -------- -------------------- -------------------- -------------------- -------------------- -------------------- --------------------                                                                                                                                                                                                                        
-       6 Julia                Czesak               Kobieta              Nowy Sacz            33-300                                                                                                                                                                                                                                                           
+       6 Julia                Kowalski             Kobieta              Nowy Sacz            33-300                                                                                                                                                                                                                                                           
        7 Pawel                Ciula                Mezczyzna            Mszalnica                                                                                                                                                                                                                                                                             
-       8 Kamila               Kowalska             Kobieta              Limanowa                                                                                                                                                                                                                                                                              
+       8 Kamila               Nowak                Kobieta              Limanowa                                                                                                                                                                                                                                                                              
 
 
 ID_Osoby Imie                 Nazwisko             Plec                 Adres Zamieszkania                                                                                                                                                                                                                                                                    
 -------- -------------------- -------------------- -------------------- --------------------                                                                                                                                                                                                                                                                  
-       2 Kamil                Nowak                Mezczyzna            Limanowa                                                                                                                                                                                                                                                                              
+       8 Kamila               Nowak                Kobieta              Limanowa                                                                                                                                                                                                                                                                              
 
 
 ID Histori Pracownika Data Zatrudnienia    Data Zwolnienia      Lokalizacja instytut                                                                                                                                                                                                                                                                          
@@ -687,9 +764,9 @@ Kamil                Nowak                987-654-321
 Dominik              Filipek              123-987-456                                                                                                                                                                                                                                                                                                         
 Natalia              Nowak                987-654-321                                                                                                                                                                                                                                                                                                         
 Artur                Nowak                nie podano numeru telefonu                                                                                                                                                                                                                                                                                          
-Julia                Czesak               nie podano numeru telefonu                                                                                                                                                                                                                                                                                          
+Julia                Kowalski             nie podano numeru telefonu                                                                                                                                                                                                                                                                                          
 Pawel                Ciula                nie podano numeru telefonu                                                                                                                                                                                                                                                                                          
-Kamila               Kowalska             nie podano numeru telefonu                                                                                                                                                                                                                                                                                          
+Kamila               Nowak                nie podano numeru telefonu                                                                                                                                                                                                                                                                                          
 
 8 rows selected.
 
@@ -707,8 +784,8 @@ ID_Dowodu ID_Sledztwa Rodzaj dowodu        Opis dowodu
 
 ID_Kary Wyrok                                                            Data rozpo Data zakon  KONIEC_ZA                                                                                                                                                                                                                                                     
 ------- ---------------------------------------------------------------- ---------- ---------- ----------                                                                                                                                                                                                                                                     
-      1 Wiezienie                                                        2021-11-29 2025-11-21       1436                                                                                                                                                                                                                                                     
-      2 Wyrok w zawieszeniu                                              2021-10-15 2022-11-15        334                                                                                                                                                                                                                                                     
+      1 Wiezienie                                                        2021-11-29 2025-11-21       1432                                                                                                                                                                                                                                                     
+      2 Wyrok w zawieszeniu                                              2021-10-15 2022-11-15        330                                                                                                                                                                                                                                                     
 
 
 Imie                 Nazwisko             KOD_POCZTOWY                                                                                                                                                                                                                                                                                                        
@@ -718,9 +795,52 @@ Kamil                Nowak                34-600
 Dominik              Filipek              33-500                                                                                                                                                                                                                                                                                                              
 Natalia              Nowak                33-661                                                                                                                                                                                                                                                                                                              
 Artur                Nowak                33-661                                                                                                                                                                                                                                                                                                              
-Julia                Czesak               33-300                                                                                                                                                                                                                                                                                                              
+Julia                Kowalski             33-300                                                                                                                                                                                                                                                                                                              
 Pawel                Ciula                nie podano kodu pocztowego                                                                                                                                                                                                                                                                                          
-Kamila               Kowalska             nie podano kodu pocztowego                                                                                                                                                                                                                                                                                          
+Kamila               Nowak                nie podano kodu pocztowego                                                                                                                                                                                                                                                                                          
 
 8 rows selected.
+
+
+ID_Klienta ID_Osoby Imie                 Nazwisko             Plec                 Adres Zamieszkania                                                                                                                                                                                                                                                         
+---------- -------- -------------------- -------------------- -------------------- --------------------                                                                                                                                                                                                                                                       
+         1        3 Dominik              Filipek              Mezczyzna            Bochnia                                                                                                                                                                                                                                                                    
+         2        4 Natalia              Nowak                Kobieta              Krakow                                                                                                                                                                                                                                                                     
+         3        7 Pawel                Ciula                Mezczyzna            Mszalnica                                                                                                                                                                                                                                                                  
+         4        8 Kamila               Nowak                Kobieta              Limanowa                                                                                                                                                                                                                                                                   
+
+
+Data Zatrudnienia    ID_Pracownika Lokalizacja instytut Opis stanowiska                                                                                                                                                                                                                                                                                       
+-------------------- ------------- -------------------- --------------------                                                                                                                                                                                                                                                                                  
+2021-08-21                       1 Bochnia              Obrona klienta                                                                                                                                                                                                                                                                                        
+2019-08-21                       2 Bochnia              Oskazanie oskazonego                                                                                                                                                                                                                                                                                  
+2019-08-21                       3 Nowy Sacz            Oskazanie oskazonego                                                                                                                                                                                                                                                                                  
+2019-08-21                       4 Nowy Sacz            Prowadzenie rozpraw                                                                                                                                                                                                                                                                                   
+
+
+ID_Sprawy_Sadowej Imie i nazwisko pracownika Imie i nazwisko klienta   Rodzaj przestepstwa klienta                                                                                                                                                                                                                                                            
+----------------- -------------------------- ------------------------- -----------------------------------                                                                                                                                                                                                                                                    
+                1 Kamil Nowak                Dominik Filipek           Drogowe                                                                                                                                                                                                                                                                                
+                2 Kamil Nowak                Natalia Nowak             Bezprawne zbieranie danych o zyciu                                                                                                                                                                                                                                                     
+                                                                       prywatnym                                                                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                                                                                                                                              
+
+
+Lokalizacja instytut      ILOSC                                                                                                                                                                                                                                                                                                                               
+-------------------- ----------                                                                                                                                                                                                                                                                                                                               
+Warszawa                      2                                                                                                                                                                                                                                                                                                                               
+
+
+Nazwisko             Ilosc osob o takim samym nazwisku                                                                                                                                                                                                                                                                                                        
+-------------------- ---------------------------------                                                                                                                                                                                                                                                                                                        
+Nowak                                                4                                                                                                                                                                                                                                                                                                        
+Kowalski                                             2                                                                                                                                                                                                                                                                                                        
+
+
+Rodzaj stanowiska sw Data skladanai stano                                                                                                                                                                                                                                                                                                                     
+-------------------- --------------------                                                                                                                                                                                                                                                                                                                     
+Swiadek zdarzenia    2021-10-09                                                                                                                                                                                                                                                                                                                               
+Swiadek zdarzenia    2021-08-21                                                                                                                                                                                                                                                                                                                               
+Swiadek zdarzenia    2021-06-09                                                                                                                                                                                                                                                                                                                               
+Swiadek zdarzenia    2021-05-10                                                                                                                                                                                                                                                                                                                               
 
