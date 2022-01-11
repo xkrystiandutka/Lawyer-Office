@@ -26,7 +26,7 @@ alter session set
 select sysdate from dual;
 --
 
--------------------------
+--------------------------
 PROMPT   sekwencja kasowania
 ---------------------------
 drop table bd1_SPRAWY_SADOWE;
@@ -55,7 +55,8 @@ PROMPT   table bd1_STANOWISKO
 create table bd1_STANOWISKO (
 STA_ID			number(8)	NOT NULL,		
 STA_Rodzaj		varchar2(64)	NOT NULL,
-STA_OPIS		varchar2(64)	
+STA_OPIS		varchar2(64),
+STA_Zarobki		number(8) 
 )
 PCTFREE 5
 TABLESPACE STUDENT_DATA;
@@ -94,21 +95,22 @@ TABLESPACE STUDENT_DATA;
 	------------------------
 	-- DML bd1_STANOWISKO
 	------------------------
-	insert into bd1_STANOWISKO (STA_Rodzaj,STA_OPIS)
-	values ('Prawnik','Obrona klienta');
+	insert into bd1_STANOWISKO (STA_Rodzaj,STA_OPIS,STA_Zarobki)
+	values ('Prawnik','Obrona klienta','4000');
 
-	insert into bd1_STANOWISKO (STA_Rodzaj,STA_OPIS)
-	values ('Prokurator','Oskazanie oskazonego');
+	insert into bd1_STANOWISKO (STA_Rodzaj,STA_OPIS,STA_Zarobki)
+	values ('Prokurator','Oskazanie oskazonego','7500');
 	
-		insert into bd1_STANOWISKO (STA_Rodzaj,STA_OPIS)
-	values ('Sedzia Sadowy','Prowadzenie rozpraw');
+		insert into bd1_STANOWISKO (STA_Rodzaj,STA_OPIS,STA_Zarobki)
+	values ('Sedzia Sadowy','Prowadzenie rozpraw','16000');
 	
-		insert into bd1_STANOWISKO (STA_Rodzaj,STA_OPIS)
-	values ('Komornik','');
+		insert into bd1_STANOWISKO (STA_Rodzaj,STA_OPIS,STA_Zarobki)
+	values ('Komornik','','2500');
 
 	column STA_ID HEADING 'ID' for 999999
 	column STA_Rodzaj HEADING 'Rodzaj stanowiska' for A20
 	column STA_OPIS HEADING 'Opis stanowiska' for A20
+	column STA_Zarobki HEADING 'Stanowisko zarobki' for 999999
 
 
 	select * from bd1_STANOWISKO;	
@@ -397,13 +399,13 @@ TABLESPACE STUDENT_DATA;
 	-- DML bd1_HISTORIA_ZATRUDNIENIA
 	------------------------
 	insert into bd1_HISTORIA_ZATRUDNIENIA (HIS_Data_Zatrudnienia,HIS_Data_Zwolnienia,STA_ID,INS_ID,PRA_ID)
-	values ('2021-08-21','','1','3','1');
+	values ('2021-03-21','','1','3','1');
 	insert into bd1_HISTORIA_ZATRUDNIENIA (HIS_Data_Zatrudnienia,HIS_Data_Zwolnienia,STA_ID,INS_ID,PRA_ID)
-	values ('2019-08-21','','2','3','2');
+	values ('2019-02-11','','2','3','2');
 	insert into bd1_HISTORIA_ZATRUDNIENIA (HIS_Data_Zatrudnienia,HIS_Data_Zwolnienia,STA_ID,INS_ID,PRA_ID)
-	values ('2019-08-21','2021-09-11','2','4','3');
+	values ('2019-01-15','2021-09-11','2','4','3');
 	insert into bd1_HISTORIA_ZATRUDNIENIA (HIS_Data_Zatrudnienia,HIS_Data_Zwolnienia,STA_ID,INS_ID,PRA_ID)
-	values ('2019-08-21','','3','4','4');
+	values ('2019-09-06','','3','4','4');
 	column HIS_Pracownika_ID HEADING 'ID Histori Pracownika' for 999999
 	column HIS_Data_Zatrudnienia HEADING 'Data Zatrudnienia' for A20
 	column HIS_Data_Zwolnienia HEADING 'Data Zwolnienia' for A20
@@ -1081,7 +1083,6 @@ PROMPT Lista utworzonych tabel:
 SELECT TABLE_NAME FROM USER_TABLES
 WHERE DROPPED='NO';
 
----------------------------	SELECT --------------------------------------
 
 
 
@@ -1118,8 +1119,9 @@ SELECT * FROM bd1_HISTORIA_ZATRUDNIENIA WHERE HIS_Pracownika_ID LIKE '1';
 --------------------- --------------- --------------- ------------- ----------- -------------
                     1 2021-08-21      2021-12-07                  1           3             1 */
 					
----------------------------	NVL --------------------------------------				
-
+-----------------
+	--NVL
+-----------------					
 
 SELECT OSO_Imie,OSO_Nazwisko, NVL(OSO_Telefon, 'nie podano numeru telefonu') Numer_Telefonu FROM bd1_OSOBY;
 /*Imie                 Nazwisko             NUMER_TELEFONU
@@ -1161,16 +1163,6 @@ Artur                Nowak                33-661
 Julia                Czesak               33-300
 Pawel                Ciula                nie podano kodu pocztowego
 Kamila               Kowalska             nie podano kodu pocztowego*/
-
--- ## -- ## -- ## -- ## -- 
-
-
-
-
----
----------------------------	GROUP BY --------------------------------------
----
-
 
 
 SELECT kli.KLI_ID,kli.OSO_ID,oso.OSO_Imie,oso.OSO_Nazwisko,oso.OSO_Plec,oso.OSO_Adres_Zamieszkania
@@ -1240,6 +1232,109 @@ Swiadek zdarzenia    2021-08-21
 Swiadek zdarzenia    2021-06-09
 Swiadek zdarzenia    2021-05-10 */
 
+COLUMN pracownik HEADING 'Imie i nazwisko pracownika' FORMAT A26 
+SELECT pra.PRA_ID, his.HIS_Data_Zatrudnienia, oso.OSO_Imie||' '|| oso.OSO_Nazwisko AS pracownik, sta.STA_Rodzaj, sta.STA_Zarobki FROM  bd1_HISTORIA_ZATRUDNIENIA his 
+INNER JOIN bd1_PRACOWNICY pra ON his.PRA_ID=pra.PRA_ID  
+INNER JOIN bd1_OSOBY oso ON pra.OSO_ID=oso.OSO_ID 
+INNER JOIN bd1_STANOWISKO sta ON his.STA_ID=sta.STA_ID
+WHERE sta.STA_Zarobki BETWEEN (SELECT AVG(STA_Zarobki) FROM bd1_STANOWISKO) AND (SELECT MAX(STA_Zarobki) FROM bd1_STANOWISKO); 
+/*ID_Pracownika Data Zatrudnienia    Imie i nazwisko pracownika Rodzaj stanowiska    Stanowisko zarobki
+------------- -------------------- -------------------------- -------------------- ------------------
+            2 2019-02-11           Kamil Nowak                Prokurator                         7500
+            3 2019-01-15           Artur Nowak                Prokurator                         7500
+            4 2019-09-06           Julia Kowalski             Sedzia Sadowy                     16000	*/
+
+COLUMN pracownik HEADING 'Imie i nazwisko pracownika' FORMAT A26 
+SELECT pra.PRA_ID, his.HIS_Data_Zatrudnienia, oso.OSO_Imie||' '|| oso.OSO_Nazwisko AS pracownik,ins.INS_Lokalizacja, sta.STA_Rodzaj, sta.STA_Zarobki  FROM  bd1_HISTORIA_ZATRUDNIENIA his 
+INNER JOIN bd1_PRACOWNICY pra ON his.PRA_ID=pra.PRA_ID  
+INNER JOIN bd1_OSOBY oso ON pra.OSO_ID=oso.OSO_ID 
+INNER JOIN bd1_STANOWISKO sta ON his.STA_ID=sta.STA_ID
+INNER JOIN bd1_STANOWISKO sta ON his.STA_ID=sta.STA_ID
+INNER JOIN bd1_INSTYTUTY ins ON his.INS_ID=ins.INS_ID
+WHERE sta.STA_Rodzaj IN(SELECT sta.STA_Rodzaj FROM bd1_STANOWISKO WHERE sta.STA_Rodzaj LIKE 'Prokurator'); 
+/*
+ID_Pracownika Data Zatrudnienia    Imie i nazwisko pracownika Lokalizacja instytut Rodzaj stanowiska    Stanowisko zarobki
+------------- -------------------- -------------------------- -------------------- -------------------- ------------------
+            2 2019-02-11           Kamil Nowak                Bochnia              Prokurator                         7500
+            3 2019-01-15           Artur Nowak                Nowy Sacz            Prokurator                         7500 */
+
+
+CREATE OR REPLACE VIEW Informacje_o_pracowniku(ID_Pracownika, Zatrudnienia, Imie_i_nazwisko_pracownika, Rodzaj_stanowiska, Stanowisko_zarobki)
+AS SELECT pra.PRA_ID, his.HIS_Data_Zatrudnienia, oso.OSO_Imie||' '|| oso.OSO_Nazwisko AS pracownik, sta.STA_Rodzaj, sta.STA_Zarobki FROM  bd1_HISTORIA_ZATRUDNIENIA his 
+INNER JOIN bd1_PRACOWNICY pra ON his.PRA_ID=pra.PRA_ID  
+INNER JOIN bd1_OSOBY oso ON pra.OSO_ID=oso.OSO_ID 
+INNER JOIN bd1_STANOWISKO sta ON his.STA_ID=sta.STA_ID
+WHERE sta.STA_Zarobki BETWEEN (SELECT AVG(STA_Zarobki) FROM bd1_STANOWISKO) AND (SELECT MAX(STA_Zarobki) FROM bd1_STANOWISKO); 
+
+describe Informacje_o_pracowniku;
+/* 
+ Name                                                                                                                                     Null?    Type
+ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------------------------------------------------------------------
+ ID_PRACOWNIKA                                                                                                                            NOT NULL NUMBER(8)
+ ZATRUDNIENIA                                                                                                                             NOT NULL VARCHAR2(64)
+ IMIE_I_NAZWISKO_PRACOWNIKA                                                                                                                VARCHAR2(65)
+ RODZAJ_STANOWISKA                                                                                                                        NOT NULL VARCHAR2(64)
+ STANOWISKO_ZAROBKI                                                                                                                        NUMBER(8)
+
+
+ALTER TABLE bd1_HISTORIA_ZATRUDNIENIA DISABLE CONSTRAINT FK1_bd1_HISTORIA_ZATRUDNIENIA;
+ALTER TABLE bd1_HISTORIA_ZATRUDNIENIA DISABLE CONSTRAINT FK3_bd1_HISTORIA_ZATRUDNIENIA;
+ALTER TABLE bd1_PRACOWNICY DISABLE CONSTRAINT FK1_bd1_PRACOWNICY;
+
+UPDATE Informacje_o_pracowniku SET Stanowisko_zarobki='8800' WHERE Rodzaj_stanowiska LIKE 'Prokurator';
+ 
+ERROR at line 1:
+ORA-01779: cannot modify a column which maps to a non key-preserved table 
+
+INSERT INTO Informacje_o_pracowniku(ID_Pracownika, Zatrudnienia, Imie_i_nazwisko_pracownika, Rodzaj_stanowiska, Stanowisko_zarobki)
+values ('5','2022-01-09','Kamil Czesak','Komornik','2600');
+
+ERROR at line 1:
+ORA-01779: cannot modify a column which maps to a non key-preserved table 
+
+DELETE FROM Informacje_o_pracowniku WHERE Imie_i_nazwisko_pracownika LIKE 'Kamil Nowak';   
+
+1 row deleted. */
+
+CREATE OR REPLACE VIEW Informacje_o_prokuratorach(ID_Pracownika, Zatrudnienia, Imie_i_nazwisko_pracownika, Lokalizacja_instytut, Rodzaj_stanowiska, Stanowisko_zarobki)
+AS SELECT pra.PRA_ID, his.HIS_Data_Zatrudnienia, oso.OSO_Imie||' '|| oso.OSO_Nazwisko AS pracownik,ins.INS_Lokalizacja, sta.STA_Rodzaj, sta.STA_Zarobki  FROM  bd1_HISTORIA_ZATRUDNIENIA his 
+INNER JOIN bd1_PRACOWNICY pra ON his.PRA_ID=pra.PRA_ID  
+INNER JOIN bd1_OSOBY oso ON pra.OSO_ID=oso.OSO_ID 
+INNER JOIN bd1_STANOWISKO sta ON his.STA_ID=sta.STA_ID
+INNER JOIN bd1_STANOWISKO sta ON his.STA_ID=sta.STA_ID
+INNER JOIN bd1_INSTYTUTY ins ON his.INS_ID=ins.INS_ID
+WHERE sta.STA_Rodzaj IN(SELECT sta.STA_Rodzaj FROM bd1_STANOWISKO WHERE sta.STA_Rodzaj LIKE 'Prokurator');
+
+describe Informacje_o_prokuratorach;
+
+/* Name                  Null?    Type
+ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------------------------------------------------------------------
+ ID_PRACOWNIKA             		NOT NULL NUMBER(8)
+ ZATRUDNIENIA              		NOT NULL VARCHAR2(64)
+ IMIE_I_NAZWISKO_PRACOWNIKA 	VARCHAR2(65)
+ LOKALIZACJA_INSTYTUT       	NOT NULL VARCHAR2(64)
+ RODZAJ_STANOWISKA 				NOT NULL VARCHAR2(64)
+ STANOWISKO_ZAROBKI         	NUMBER(8) 
+ 
+ALTER TABLE bd1_HISTORIA_ZATRUDNIENIA DISABLE CONSTRAINT FK1_bd1_HISTORIA_ZATRUDNIENIA;
+ALTER TABLE bd1_HISTORIA_ZATRUDNIENIA DISABLE CONSTRAINT FK3_bd1_HISTORIA_ZATRUDNIENIA;
+ALTER TABLE bd1_HISTORIA_ZATRUDNIENIA DISABLE CONSTRAINT FK2_bd1_HISTORIA_ZATRUDNIENIA;
+ALTER TABLE bd1_PRACOWNICY DISABLE CONSTRAINT FK1_bd1_PRACOWNICY;
+
+UPDATE Informacje_o_prokuratorach SET Lokalizacja_instytut='Bochnia' WHERE Lokalizacja_instytut LIKE 'Nowy Sacz';
+
+ERROR at line 1:
+ORA-01779: cannot modify a column which maps to a non key-preserved table 
+
+INSERT INTO Informacje_o_prokuratorach(ID_Pracownika, Zatrudnienia, Imie_i_nazwisko_pracownika, Lokalizacja_instytut, Rodzaj_stanowiska, Stanowisko_zarobki)
+values ('10','2022-01-01','Filip Nowak','Krakow','Adwokat','4200');
+
+ERROR at line 1:
+ORA-01779: cannot modify a column which maps to a non key-preserved table 
+
+DELETE FROM Informacje_o_prokuratorach WHERE Lokalizacja_instytut LIKE 'Nowy Sacz';
+ 
+1 row deleted. */
 
 
 SPOOL OFF
