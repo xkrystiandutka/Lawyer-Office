@@ -26,7 +26,7 @@ alter session set
 select sysdate from dual;
 --
 
---------------------------
+---------------------------
 PROMPT   sekwencja kasowania
 ---------------------------
 drop table bd1_SPRAWY_SADOWE;
@@ -60,13 +60,20 @@ STA_Zarobki		number(8)
 )
 PCTFREE 5
 TABLESPACE STUDENT_DATA;
-
+	------------------------
+	-- NOLOGGING
+	------------------------
+	ALTER TABLE bd1_STANOWISKO NOLOGGING;				
 	------------------------
 	-- PRIMARY KEY
 	------------------------
 	ALTER TABLE bd1_STANOWISKO 
 		ADD CONSTRAINT bd1_STANOWISKO 
-		PRIMARY KEY (STA_ID) ;
+		PRIMARY KEY (STA_ID)
+		USING INDEX
+	PCTFREE 1
+	TABLESPACE STUDENT_INDEX 
+	NOLOGGING;
 	------------------------
 	-- SEQUENCE
 	------------------------		
@@ -90,7 +97,13 @@ TABLESPACE STUDENT_DATA;
 		DBMS_OUTPUT.PUT_LINE('Dodano nowy wiersz do bd1_STANOWISKO - STA_ID='||:NEW.STA_ID);
 		--
 	END;
-	/		
+	/
+	------------------------
+	-- INDEXy
+	------------------------	
+	CREATE INDEX bd1_IX_STA_Rodzaj 
+	ON bd1_STANOWISKO (STA_Rodzaj)
+	TABLESPACE STUDENT_INDEX NOLOGGING;	
 		
 	------------------------
 	-- DML bd1_STANOWISKO
@@ -126,13 +139,20 @@ INS_Lokalizacja		varchar2(64) NOT NULL
 )
 PCTFREE 5
 TABLESPACE STUDENT_DATA;
-
+	------------------------
+	-- NOLOGGING
+	------------------------
+	ALTER TABLE bd1_INSTYTUTY NOLOGGING;				
 	------------------------
 	-- PRIMARY KEY
 	------------------------
 	ALTER TABLE bd1_INSTYTUTY 
 		ADD CONSTRAINT bd1_INSTYTUTY 
-		PRIMARY KEY (INS_ID) ;
+		PRIMARY KEY (INS_ID)
+		USING INDEX
+	PCTFREE 1
+	TABLESPACE STUDENT_INDEX 
+	NOLOGGING;		
 	------------------------	
 	-- SEQUENCE
 	------------------------		
@@ -156,7 +176,14 @@ TABLESPACE STUDENT_DATA;
 		DBMS_OUTPUT.PUT_LINE('Dodano nowy wiersz do bd1_INSTYTUTY - INS_ID='||:NEW.INS_ID);
 		--
 	END;
-	/		
+	/
+
+	------------------------
+	-- INDEXy
+	------------------------	
+	CREATE INDEX bd1_IX_INS_Lokalizacja 
+	ON bd1_INSTYTUTY (INS_Lokalizacja)
+	TABLESPACE STUDENT_INDEX NOLOGGING;		
 		
 	------------------------
 	-- DML bd1_INSTYTUTY
@@ -201,13 +228,20 @@ OSO_Telefon				char(16)
 )
 PCTFREE 5
 TABLESPACE STUDENT_DATA;
-
+	------------------------
+	-- NOLOGGING
+	------------------------
+	ALTER TABLE bd1_OSOBY NOLOGGING;				
 	------------------------
 	-- PRIMARY KEY
 	------------------------
 	ALTER TABLE bd1_OSOBY 
 		ADD CONSTRAINT bd1_OSOBY 
-		PRIMARY KEY (OSO_ID) ;
+		PRIMARY KEY (OSO_ID)
+		USING INDEX
+	PCTFREE 1
+	TABLESPACE STUDENT_INDEX 
+	NOLOGGING		;
 	-- SEQUENCE
 	------------------------		
 	drop sequence SEQ_bd1_OSOBY;
@@ -229,7 +263,21 @@ TABLESPACE STUDENT_DATA;
 		DBMS_OUTPUT.PUT_LINE('Dodano nowy wiersz do bd1_OSOBY - OSO_ID='||:NEW.OSO_ID);
 		--
 	END;
-	/		
+	/	
+	------------------------
+	-- INDEXy
+	------------------------	
+	CREATE INDEX bd1_IX_OSO_Imie
+	ON bd1_OSOBY (OSO_Imie)
+	TABLESPACE STUDENT_INDEX NOLOGGING;
+
+	CREATE INDEX bd1_IX_OSO_Nazwisko 
+	ON bd1_OSOBY (OSO_Nazwisko)
+	TABLESPACE STUDENT_INDEX NOLOGGING;
+
+	CREATE INDEX bd1_IX_OSO_Adres_Zamieszkania 
+	ON bd1_OSOBY (OSO_Adres_Zamieszkania)
+	TABLESPACE STUDENT_INDEX NOLOGGING;	
 		
 	------------------------
 	-- DML bd1_OSOBY
@@ -278,13 +326,20 @@ OSO_ID		number(8) NOT NULL
 )
 PCTFREE 5
 TABLESPACE STUDENT_DATA;
-
+	------------------------
+	-- NOLOGGING
+	------------------------
+	ALTER TABLE bd1_PRACOWNICY NOLOGGING;				
 	------------------------
 	-- PRIMARY KEY
 	------------------------
 	ALTER TABLE bd1_PRACOWNICY 
 		ADD CONSTRAINT bd1_PRACOWNICY 
-		PRIMARY KEY (PRA_ID) ;
+		PRIMARY KEY (PRA_ID)
+		USING INDEX
+	PCTFREE 1
+	TABLESPACE STUDENT_INDEX 
+	NOLOGGING		;
 		--  FOREIGN Keys
 	------------------------
 	ALTER TABLE bd1_PRACOWNICY
@@ -312,7 +367,14 @@ TABLESPACE STUDENT_DATA;
 		DBMS_OUTPUT.PUT_LINE('Dodano nowy wiersz do bd1_PRACOWNICY - PRA_ID='||:NEW.PRA_ID);
 		--
 	END;
-	/		
+	/	
+	------------------------
+	-- INDEXy
+	------------------------	
+	CREATE INDEX bd1_IX_OSO_ID
+	ON bd1_PRACOWNICY (OSO_ID)
+	TABLESPACE STUDENT_INDEX NOLOGGING;
+
 		
 	------------------------
 	-- DML bd1_PRACOWNICY
@@ -347,13 +409,20 @@ PRA_ID						number(8) NOT NULL
 )
 PCTFREE 5
 TABLESPACE STUDENT_DATA;
-
+	------------------------
+	-- NOLOGGING
+	------------------------
+	ALTER TABLE bd1_HISTORIA_ZATRUDNIENIA NOLOGGING;				
 	------------------------
 	-- PRIMARY KEY
 	------------------------
 	ALTER TABLE bd1_HISTORIA_ZATRUDNIENIA 
 		ADD CONSTRAINT bd1_HISTORIA_ZATRUDNIENIA 
-		PRIMARY KEY (HIS_Pracownika_ID) ;
+		PRIMARY KEY (HIS_Pracownika_ID)
+		USING INDEX
+	PCTFREE 1
+	TABLESPACE STUDENT_INDEX 
+	NOLOGGING		;
 ------------------------
 	--  FOREIGN Keys
 	------------------------
@@ -393,8 +462,18 @@ TABLESPACE STUDENT_DATA;
 		DBMS_OUTPUT.PUT_LINE('Dodano nowy wiersz do bd1_HISTORIA_ZATRUDNIENIA - HIS_Pracownika_ID='||:NEW.HIS_Pracownika_ID);
 		--
 	END;
-	/		
-		
+	/
+	------------------------
+	-- INDEXy
+	------------------------	
+	CREATE INDEX bd1_IX_HIS_Data_Zatrudnienia
+	ON bd1_HISTORIA_ZATRUDNIENIA (HIS_Data_Zatrudnienia)
+	TABLESPACE STUDENT_INDEX NOLOGGING;
+
+	CREATE INDEX bd1_IX_HIS_HIS_Data_Zwolnienia
+	ON bd1_HISTORIA_ZATRUDNIENIA (HIS_Data_Zwolnienia)
+	TABLESPACE STUDENT_INDEX NOLOGGING;
+	
 	------------------------
 	-- DML bd1_HISTORIA_ZATRUDNIENIA
 	------------------------
@@ -424,13 +503,20 @@ OSO_ID		number(8) NOT NULL
 )
 PCTFREE 5
 TABLESPACE STUDENT_DATA;
-
+	------------------------
+	-- NOLOGGING
+	------------------------
+	ALTER TABLE bd1_KLIENCI NOLOGGING;				
 	------------------------
 	-- PRIMARY KEY
 	------------------------
 	ALTER TABLE bd1_KLIENCI 
 		ADD CONSTRAINT bd1_KLIENCI 
-		PRIMARY KEY (KLI_ID) ;
+		PRIMARY KEY (KLI_ID)
+		USING INDEX
+	PCTFREE 1
+	TABLESPACE STUDENT_INDEX 
+	NOLOGGING		;
 	--  FOREIGN Keys
 	------------------------
 	ALTER TABLE bd1_KLIENCI
@@ -458,8 +544,9 @@ TABLESPACE STUDENT_DATA;
 		DBMS_OUTPUT.PUT_LINE('Dodano nowy wiersz do bd1_KLIENCI - KLI_ID='||:NEW.KLI_ID);
 		--
 	END;
-	/		
-		
+	/	
+	
+
 	------------------------
 	-- DML bd1_KLIENCI
 	------------------------
@@ -490,13 +577,20 @@ KLI_ID		number(8) NOT NULL
 )
 PCTFREE 5
 TABLESPACE STUDENT_DATA;
-
+	------------------------
+	-- NOLOGGING
+	------------------------
+	ALTER TABLE bd1_USLUGI NOLOGGING;				
 	------------------------
 	-- PRIMARY KEY
 	------------------------
 	ALTER TABLE bd1_USLUGI 
 		ADD CONSTRAINT bd1_USLUGI 
-		PRIMARY KEY (USL_ID) ;
+		PRIMARY KEY (USL_ID)
+		USING INDEX
+	PCTFREE 1
+	TABLESPACE STUDENT_INDEX 
+	NOLOGGING		;
 	--  FOREIGN Keys
 	------------------------
 	ALTER TABLE bd1_USLUGI
@@ -528,7 +622,18 @@ TABLESPACE STUDENT_DATA;
 		DBMS_OUTPUT.PUT_LINE('Dodano nowy wiersz do bd1_USLUGI - USL_ID='||:NEW.USL_ID);
 		--
 	END;
-	/		
+	/	
+
+	------------------------
+	-- INDEXy
+	------------------------	
+	CREATE INDEX bd1_IX_PRA_ID
+	ON bd1_USLUGI (PRA_ID)
+	TABLESPACE STUDENT_INDEX NOLOGGING;	
+	
+	CREATE INDEX bd1_IX_KLI_ID
+	ON bd1_USLUGI (KLI_ID)
+	TABLESPACE STUDENT_INDEX NOLOGGING;
 		
 	------------------------
 	-- DML bd1_USLUGI
@@ -566,13 +671,20 @@ OSK_Rodzaj	varchar2(64)
 )
 PCTFREE 5
 TABLESPACE STUDENT_DATA;
-
+	------------------------
+	-- NOLOGGING
+	------------------------
+	ALTER TABLE bd1_OSKARZENIA NOLOGGING;				
 	------------------------
 	-- PRIMARY KEY
 	------------------------
 	ALTER TABLE bd1_OSKARZENIA 
 		ADD CONSTRAINT bd1_OSKARZENIA 
-		PRIMARY KEY (OSK_ID) ;
+		PRIMARY KEY (OSK_ID)
+		USING INDEX
+	PCTFREE 1
+	TABLESPACE STUDENT_INDEX 
+	NOLOGGING		;
 	-- SEQUENCE
 	------------------------		
 	drop sequence SEQ_bd1_OSKARZENIA;
@@ -595,6 +707,13 @@ TABLESPACE STUDENT_DATA;
 		--
 	END;
 	/		
+	
+	------------------------
+	-- INDEXy
+	------------------------	
+	CREATE INDEX bd1_IX_OSK_Rodzaj
+	ON bd1_OSKARZENIA (OSK_Rodzaj)
+	TABLESPACE STUDENT_INDEX NOLOGGING;	
 		
 	------------------------
 	-- DML bd1_OSKARZENIA
@@ -626,13 +745,20 @@ OSK_ID 					number(8) NOT NULL
 )
 PCTFREE 5
 TABLESPACE STUDENT_DATA;
-
+	------------------------
+	-- NOLOGGING
+	------------------------
+	ALTER TABLE bd1_OSKARZENIA NOLOGGING;				
 	------------------------
 	-- PRIMARY KEY
 	------------------------
 	ALTER TABLE bd1_KARY 
 		ADD CONSTRAINT bd1_KARY 
-		PRIMARY KEY (KAR_ID) ;
+		PRIMARY KEY (KAR_ID)
+		USING INDEX
+	PCTFREE 1
+	TABLESPACE STUDENT_INDEX 
+	NOLOGGING		;
 	--  FOREIGN Keys
 	------------------------
 	ALTER TABLE bd1_KARY 
@@ -660,7 +786,23 @@ TABLESPACE STUDENT_DATA;
 		DBMS_OUTPUT.PUT_LINE('Dodano nowy wiersz do bd1_KARY - KAR_ID='||:NEW.KAR_ID);
 		--
 	END;
-	/		
+	/	
+
+	------------------------
+	-- INDEXy
+	------------------------	
+	CREATE INDEX bd1_IX_KAR_Wyrok
+	ON bd1_KARY (KAR_Wyrok)
+	TABLESPACE STUDENT_INDEX NOLOGGING;
+
+	CREATE INDEX bd1_IX_KAR_Data_Rozpoczecia
+	ON bd1_KARY (KAR_Data_Rozpoczecia)
+	TABLESPACE STUDENT_INDEX NOLOGGING;	
+
+	CREATE INDEX bd1_IX_KAR_Data_Zakonczenia
+	ON bd1_KARY (KAR_Data_Zakonczenia)
+	TABLESPACE STUDENT_INDEX NOLOGGING;		
+
 		
 	------------------------
 	-- DML bd1_KARY
@@ -689,13 +831,20 @@ PRZ_Rodzaj	varchar2(64) NOT NULL
 )
 PCTFREE 5
 TABLESPACE STUDENT_DATA;
-
+	------------------------
+	-- NOLOGGING
+	------------------------
+	ALTER TABLE bd1_PRZESTEPSTWA NOLOGGING;				
 	------------------------
 	-- PRIMARY KEY
 	------------------------
 	ALTER TABLE bd1_PRZESTEPSTWA 
 		ADD CONSTRAINT bd1_PRZESTEPSTWA 
-		PRIMARY KEY (PRZ_ID) ;
+		PRIMARY KEY (PRZ_ID)
+		USING INDEX
+	PCTFREE 1
+	TABLESPACE STUDENT_INDEX 
+	NOLOGGING		;
 	-- SEQUENCE
 	------------------------		
 	drop sequence SEQ_bd1_PRZESTEPSTWA;
@@ -718,7 +867,14 @@ TABLESPACE STUDENT_DATA;
 		--
 	END;
 	/		
-		
+	
+	------------------------
+	-- INDEXy
+	------------------------	
+	CREATE INDEX bd1_IX_PRZ_Rodzaj
+	ON bd1_PRZESTEPSTWA (PRZ_Rodzaj)
+	TABLESPACE STUDENT_INDEX NOLOGGING;
+	
 	------------------------
 	-- DML bd1_PRZESTEPSTWA
 	------------------------
@@ -743,13 +899,20 @@ PRZ_ID				number(8) NOT NULL
 )
 PCTFREE 5
 TABLESPACE STUDENT_DATA;
-
+	------------------------
+	-- NOLOGGING
+	------------------------
+	ALTER TABLE bd1_SLEDZTWA NOLOGGING;				
 	------------------------
 	-- PRIMARY KEY
 	------------------------
 	ALTER TABLE bd1_SLEDZTWA 
 		ADD CONSTRAINT bd1_SLEDZTWA 
-		PRIMARY KEY (SLE_ID) ;
+		PRIMARY KEY (SLE_ID)
+		USING INDEX
+	PCTFREE 1
+	TABLESPACE STUDENT_INDEX 
+	NOLOGGING		;
 	--  FOREIGN Keys
 	------------------------
 	ALTER TABLE bd1_SLEDZTWA  
@@ -777,7 +940,14 @@ TABLESPACE STUDENT_DATA;
 		DBMS_OUTPUT.PUT_LINE('Dodano nowy wiersz do bd1_SLEDZTWA - SLE_ID='||:NEW.SLE_ID);
 		--
 	END;
-	/		
+	/	
+
+	------------------------
+	-- INDEXy
+	------------------------	
+	CREATE INDEX bd1_IX_SLE_Data
+	ON bd1_SLEDZTWA (SLE_Data)
+	TABLESPACE STUDENT_INDEX NOLOGGING;	
 		
 	------------------------
 	-- DML bd1_SLEDZTWA
@@ -806,13 +976,20 @@ SLE_ID		number(8) NOT NULL
 )
 PCTFREE 5
 TABLESPACE STUDENT_DATA;
-
+	------------------------
+	-- NOLOGGING
+	------------------------
+	ALTER TABLE bd1_DOWODY NOLOGGING;				
 	------------------------
 	-- PRIMARY KEY
 	------------------------
 	ALTER TABLE bd1_DOWODY 
 		ADD CONSTRAINT bd1_DOWODY 
-		PRIMARY KEY (DOW_ID) ;
+		PRIMARY KEY (DOW_ID)
+		USING INDEX
+	PCTFREE 1
+	TABLESPACE STUDENT_INDEX 
+	NOLOGGING		;
 	--  FOREIGN Keys
 	------------------------
 	ALTER TABLE bd1_DOWODY  
@@ -840,7 +1017,18 @@ TABLESPACE STUDENT_DATA;
 		DBMS_OUTPUT.PUT_LINE('Dodano nowy wiersz do bd1_DOWODY - DOW_ID='||:NEW.DOW_ID);
 		--
 	END;
-	/		
+	/	
+
+	------------------------
+	-- INDEXy
+	------------------------	
+	CREATE INDEX bd1_IX_DOW_Opis
+	ON bd1_DOWODY (DOW_Opis)
+	TABLESPACE STUDENT_INDEX NOLOGGING;		
+	
+	CREATE INDEX bd1_IX_DOW_Rodzaj
+	ON bd1_DOWODY (DOW_Rodzaj)
+	TABLESPACE STUDENT_INDEX NOLOGGING;	
 		
 	------------------------
 	-- DML bd1_DOWODY
@@ -874,13 +1062,20 @@ STA_SW_Opis			varchar2(64) NOT NULL
 )
 PCTFREE 5
 TABLESPACE STUDENT_DATA;
-
+	------------------------
+	-- NOLOGGING
+	------------------------
+	ALTER TABLE bd1_STANOWISKO_SWIADKA NOLOGGING;				
 	------------------------
 	-- PRIMARY KEY
 	------------------------
 	ALTER TABLE bd1_STANOWISKO_SWIADKA 
 		ADD CONSTRAINT bd1_STANOWISKO_SWIADKA 
-		PRIMARY KEY (STA_SW_ID) ;
+		PRIMARY KEY (STA_SW_ID)
+		USING INDEX
+	PCTFREE 1
+	TABLESPACE STUDENT_INDEX 
+	NOLOGGING		;
 	-- SEQUENCE
 	------------------------		
 	drop sequence SEQ_bd1_STANOWISKO_SWIADKA;
@@ -903,7 +1098,18 @@ TABLESPACE STUDENT_DATA;
 		--
 	END;
 	/		
-		
+	
+	------------------------
+	-- INDEXy
+	------------------------	
+	CREATE INDEX bd1_IX_STA_SW_Rodzaj
+	ON bd1_STANOWISKO_SWIADKA (STA_SW_Rodzaj)
+	TABLESPACE STUDENT_INDEX NOLOGGING;		
+	
+	CREATE INDEX bd1_IX_STA_SW_Data
+	ON bd1_STANOWISKO_SWIADKA (STA_SW_Data)
+	TABLESPACE STUDENT_INDEX NOLOGGING;
+	
 	------------------------
 	-- DML bd1_STANOWISKO_SWIADKA
 	------------------------
@@ -927,7 +1133,7 @@ TABLESPACE STUDENT_DATA;
 	column STA_SW_Data HEADING 'Data skladanai stanowiska swiadka' for A20
 	column STA_SW_Rodzaj HEADING 'Rodzaj stanowiska swiadka' for A20
 	column STA_SW_Typ_Swiadka HEADING 'Typ swiadka' for A20
-	column STA_SW_Opis HEADING 'Opis stanowiska swiadka' for A20
+	column STA_SW_Opis HEADING 'Opis stanowiska swiadka' for A32
 
 	select * from bd1_STANOWISKO_SWIADKA;		
 ---------------------------
@@ -944,13 +1150,20 @@ OSK_ID		number(8) NOT NULL
 )
 PCTFREE 5
 TABLESPACE STUDENT_DATA;
-
+	------------------------
+	-- NOLOGGING
+	------------------------
+	ALTER TABLE bd1_ZEZNANIA NOLOGGING;				
 	------------------------
 	-- PRIMARY KEY
 	------------------------
 	ALTER TABLE bd1_ZEZNANIA 
 		ADD CONSTRAINT bd1_ZEZNANIA 
-		PRIMARY KEY (ZEZ_ID) ;
+		PRIMARY KEY (ZEZ_ID)
+		USING INDEX
+	PCTFREE 1
+	TABLESPACE STUDENT_INDEX 
+	NOLOGGING		;
 	--  FOREIGN Keys
 	------------------------
 	ALTER TABLE bd1_ZEZNANIA  
@@ -987,6 +1200,17 @@ TABLESPACE STUDENT_DATA;
 		--
 	END;
 	/		
+	
+	------------------------
+	-- INDEXy
+	------------------------	
+	CREATE INDEX bd1_IX_ZEZ_Typ
+	ON bd1_ZEZNANIA (ZEZ_Typ)
+	TABLESPACE STUDENT_INDEX NOLOGGING;		
+	
+	CREATE INDEX bd1_IX_ZEZ_Opis
+	ON bd1_ZEZNANIA (ZEZ_Opis)
+	TABLESPACE STUDENT_INDEX NOLOGGING;
 		
 	------------------------
 	-- DML bd1_ZEZNANIA
@@ -1016,13 +1240,20 @@ USL_ID		number(8) NOT NULL
 )
 PCTFREE 5
 TABLESPACE STUDENT_DATA;
-
+	------------------------
+	-- NOLOGGING
+	------------------------
+	ALTER TABLE bd1_SPRAWY_SADOWE NOLOGGING;				
 	------------------------
 	-- PRIMARY KEY
 	------------------------
 	ALTER TABLE bd1_SPRAWY_SADOWE 
 		ADD CONSTRAINT bd1_SPRAWY_SADOWE 
-		PRIMARY KEY (SPR_ID) ;
+		PRIMARY KEY (SPR_ID)
+		USING INDEX
+	PCTFREE 1
+	TABLESPACE STUDENT_INDEX 
+	NOLOGGING		;
 	--  FOREIGN Keys
 	------------------------
 	ALTER TABLE bd1_SPRAWY_SADOWE  
@@ -1082,8 +1313,6 @@ PROMPT Lista utworzonych tabel:
 
 SELECT TABLE_NAME FROM USER_TABLES
 WHERE DROPPED='NO';
-
-
 
 
 SELECT * FROM BD1_OSOBY WHERE OSO_ID > '5';
@@ -1337,5 +1566,177 @@ DELETE FROM Informacje_o_prokuratorach WHERE Lokalizacja_instytut LIKE 'Nowy Sac
 1 row deleted. */
 
 
+---------------------------	---------------------------
+----------- INDEX MONITORING	
+--------------------------- ---------------------------	
+
+	column INDEX_NAME HEADING 'NAME' for A32
+    column INDEX_TYPE HEADING 'TYPE' for A10
+    column TABLE_NAME HEADING 'TABLE' for A20
+    column PF HEADING 'PCT_FREE' for 9999999
+    column IE HEADING '1oEXTENT' for 9999999
+    
+    SELECT INDEX_NAME,INDEX_TYPE,TABLE_NAME,
+            PCT_FREE||'[%]' PF,
+            INITIAL_EXTENT/1024||'[kB]' IE 
+    FROM USER_INDEXES;  
+	
+/*	NAME                             TYPE       TABLE                PCT_FREE                                    1oEXTENT
+-------------------------------- ---------- -------------------- ------------------------------------------- --------------------------------------------
+BD1_IX_STA_SW_RODZAJ             NORMAL     BD1_STANOWISKO_SWIAD 10[%]                                       64[kB]
+                                            KA
+
+BD1_IX_KAR_WYROK                 NORMAL     BD1_KARY             10[%]                                       64[kB]
+BD1_PRZESTEPSTWA                 NORMAL     BD1_PRZESTEPSTWA     1[%]                                        64[kB]
+BD1_PRACOWNICY                   NORMAL     BD1_PRACOWNICY       1[%]                                        64[kB]
+BD1_STANOWISKO                   NORMAL     BD1_STANOWISKO       1[%]                                        64[kB]
+BD1_HISTORIA_ZATRUDNIENIA        NORMAL     BD1_HISTORIA_ZATRUDN 1[%]                                        64[kB]
+                                            IENIA
+
+BD1_SPRAWY_SADOWE                NORMAL     BD1_SPRAWY_SADOWE    1[%]                                        64[kB]
+BD1_IX_OSO_NAZWISKO              NORMAL     BD1_OSOBY            10[%]                                       64[kB]
+BD1_USLUGI                       NORMAL     BD1_USLUGI           1[%]                                        64[kB]
+BD1_IX_OSO_ID                    NORMAL     BD1_PRACOWNICY       10[%]                                       64[kB]
+BD1_INSTYTUTY                    NORMAL     BD1_INSTYTUTY        1[%]                                        64[kB]
+BD1_IX_DOW_RODZAJ                NORMAL     BD1_DOWODY           10[%]                                       64[kB]
+BD1_IX_ZEZ_OPIS                  NORMAL     BD1_ZEZNANIA         10[%]                                       64[kB]
+BD1_IX_KAR_DATA_ROZPOCZECIA      NORMAL     BD1_KARY             10[%]                                       64[kB]
+BD1_IX_OSK_RODZAJ                NORMAL     BD1_OSKARZENIA       10[%]                                       64[kB]
+BD1_OSKARZENIA                   NORMAL     BD1_OSKARZENIA       1[%]                                        64[kB]
+BD1_IX_HIS_DATA_ZATRUDNIENIA     NORMAL     BD1_HISTORIA_ZATRUDN 10[%]                                       64[kB]
+                                            IENIA
+
+BD1_KARY                         NORMAL     BD1_KARY             1[%]                                        64[kB]
+BD1_OSOBY                        NORMAL     BD1_OSOBY            1[%]                                        64[kB]
+BD1_IX_OSO_ADRES_ZAMIESZKANIA    NORMAL     BD1_OSOBY            10[%]                                       64[kB]
+BD1_IX_INS_LOKALIZACJA           NORMAL     BD1_INSTYTUTY        10[%]                                       64[kB]
+BD1_IX_STA_SW_DATA               NORMAL     BD1_STANOWISKO_SWIAD 10[%]                                       64[kB]
+                                            KA
+
+BD1_IX_KAR_DATA_ZAKONCZENIA      NORMAL     BD1_KARY             10[%]                                       64[kB]
+BD1_IX_ZEZ_TYP                   NORMAL     BD1_ZEZNANIA         10[%]                                       64[kB]
+BD1_IX_PRZ_RODZAJ                NORMAL     BD1_PRZESTEPSTWA     10[%]                                       64[kB]
+BD1_STANOWISKO_SWIADKA           NORMAL     BD1_STANOWISKO_SWIAD 1[%]                                        64[kB]
+                                            KA
+
+BD1_IX_OSO_IMIE                  NORMAL     BD1_OSOBY            10[%]                                       64[kB]
+BD1_ZEZNANIA                     NORMAL     BD1_ZEZNANIA         1[%]                                        64[kB]
+BD1_IX_HIS_HIS_DATA_ZWOLNIENIA   NORMAL     BD1_HISTORIA_ZATRUDN 10[%]                                       64[kB]
+                                            IENIA
+
+BD1_DOWODY                       NORMAL     BD1_DOWODY           1[%]                                        64[kB]
+BD1_IX_DOW_OPIS                  NORMAL     BD1_DOWODY           10[%]                                       64[kB]
+BD1_IX_KLI_ID                    NORMAL     BD1_USLUGI           10[%]                                       64[kB]
+BD1_IX_PRA_ID                    NORMAL     BD1_USLUGI           10[%]                                       64[kB]
+BD1_KLIENCI                      NORMAL     BD1_KLIENCI          1[%]                                        64[kB]
+BD1_IX_STA_RODZAJ                NORMAL     BD1_STANOWISKO       10[%]                                       64[kB]
+BD1_SLEDZTWA                     NORMAL     BD1_SLEDZTWA         1[%]                                        64[kB]
+BD1_IX_SLE_DATA                  NORMAL     BD1_SLEDZTWA         10[%]                                       64[kB]
+
+37 rows selected.	*/
+
+Commit;
+
+select ROWID, OSO_ID, OSO_IMIE, OSO_NAZWISKO, OSO_Adres_Zamieszkania from bd1_OSOBY;
+
+/*
+ROWID              ID_Osoby Imie                 Nazwisko             Adres Zamieszkania
+------------------ -------- -------------------- -------------------- --------------------
+AALwOaABZAAAEYdAAA        1 Jakub                Kowalski             Nowy Sacz
+AALwOaABZAAAEYdAAB        2 Kamil                Nowak                Krakow
+AALwOaABZAAAEYdAAC        3 Dominik              Filipek              Bochnia
+AALwOaABZAAAEYdAAD        4 Natalia              Nowak                Krakow
+AALwOaABZAAAEYdAAE        5 Artur                Nowak                Krakow
+AALwOaABZAAAEYdAAF        6 Julia                Kowalski             Nowy Sacz
+AALwOaABZAAAEYdAAG        7 Pawel                Ciula                Mszalnica
+AALwOaABZAAAEYdAAH        8 Kamila               Nowak                Limanowa */
+
+insert into bd1_OSOBY (OSO_Imie,OSO_Nazwisko,OSO_Plec,OSO_Adres_Zamieszkania,OSO_Kod_Pocztowy,OSO_Telefon)
+	values ('Piotr','Kasparow','Mezczyzna','Limanowa','34-600','123-456-789');
+	
+select ROWID, OSO_ID, OSO_IMIE, OSO_NAZWISKO, OSO_Adres_Zamieszkania from bd1_OSOBY;
+
+/*
+ROWID              ID_Osoby Imie                 Nazwisko             Adres Zamieszkania
+------------------ -------- -------------------- -------------------- --------------------
+AALwcwABZAAAEYdAAA        1 Jakub                Kowalski             Nowy Sacz
+AALwcwABZAAAEYdAAB        2 Kamil                Nowak                Krakow
+AALwcwABZAAAEYdAAC        3 Dominik              Filipek              Bochnia
+AALwcwABZAAAEYdAAD        4 Natalia              Nowak                Krakow
+AALwcwABZAAAEYdAAE        5 Artur                Nowak                Krakow
+AALwcwABZAAAEYdAAF        6 Julia                Kowalski             Nowy Sacz
+AALwcwABZAAAEYdAAG        7 Pawel                Ciula                Mszalnica
+AALwcwABZAAAEYdAAH        8 Kamila               Nowak                Limanowa
+AALwcwABZAAAEYdAAI        9 Piotr                Kasparow             Limanowa */
+
+rollback;
+
+select ROWID, OSO_ID, OSO_IMIE, OSO_NAZWISKO, OSO_Adres_Zamieszkania from bd1_OSOBY;
+
+/*
+ROWID              ID_Osoby Imie                 Nazwisko             Adres Zamieszkania
+------------------ -------- -------------------- -------------------- --------------------
+AALwh2ABZAAAEYdAAA        1 Jakub                Kowalski             Nowy Sacz
+AALwh2ABZAAAEYdAAB        2 Kamil                Nowak                Krakow
+AALwh2ABZAAAEYdAAC        3 Dominik              Filipek              Bochnia
+AALwh2ABZAAAEYdAAD        4 Natalia              Nowak                Krakow
+AALwh2ABZAAAEYdAAE        5 Artur                Nowak                Krakow
+AALwh2ABZAAAEYdAAF        6 Julia                Kowalski             Nowy Sacz
+AALwh2ABZAAAEYdAAG        7 Pawel                Ciula                Mszalnica
+AALwh2ABZAAAEYdAAH        8 Kamila               Nowak                Limanowa */
+
+UPDATE bd1_OSOBY SET OSO_Adres_Zamieszkania = 'Warszawa' WHERE OSO_ID = 8;
+
+select ROWID, OSO_ID, OSO_IMIE, OSO_NAZWISKO, OSO_Adres_Zamieszkania from bd1_OSOBY;
+
+/*
+ROWID              ID_Osoby Imie                 Nazwisko             Adres Zamieszkania
+------------------ -------- -------------------- -------------------- --------------------
+AALwh2ABZAAAEYdAAA        1 Jakub                Kowalski             Nowy Sacz
+AALwh2ABZAAAEYdAAB        2 Kamil                Nowak                Krakow
+AALwh2ABZAAAEYdAAC        3 Dominik              Filipek              Bochnia
+AALwh2ABZAAAEYdAAD        4 Natalia              Nowak                Krakow
+AALwh2ABZAAAEYdAAE        5 Artur                Nowak                Krakow
+AALwh2ABZAAAEYdAAF        6 Julia                Kowalski             Nowy Sacz
+AALwh2ABZAAAEYdAAG        7 Pawel                Ciula                Mszalnica
+AALwh2ABZAAAEYdAAH        8 Kamila               Nowak                Warszawa
+*/
+
+SAVEPOINT trs_BeforeDelete;
+
+DELETE FROM bd1_OSOBY WHERE OSO_NAZWISKO LIKE 'Ciula';
+
+select ROWID, OSO_ID, OSO_IMIE, OSO_NAZWISKO, OSO_Adres_Zamieszkania from bd1_OSOBY;
+
+/*
+ROWID              ID_Osoby Imie                 Nazwisko             Adres Zamieszkania
+------------------ -------- -------------------- -------------------- --------------------
+AALwh2ABZAAAEYdAAA        1 Jakub                Kowalski             Nowy Sacz
+AALwh2ABZAAAEYdAAB        2 Kamil                Nowak                Krakow
+AALwh2ABZAAAEYdAAC        3 Dominik              Filipek              Bochnia
+AALwh2ABZAAAEYdAAD        4 Natalia              Nowak                Krakow
+AALwh2ABZAAAEYdAAE        5 Artur                Nowak                Krakow
+AALwh2ABZAAAEYdAAF        6 Julia                Kowalski             Nowy Sacz
+AALwh2ABZAAAEYdAAH        8 Kamila               Nowak                Warszawa
+*/
+
+ROLLBACK TO SAVEPOINT trs_BeforeDelete;
+
+select ROWID, OSO_ID, OSO_IMIE, OSO_NAZWISKO, OSO_Adres_Zamieszkania from bd1_OSOBY;
+
+/*
+ROWID              ID_Osoby Imie                 Nazwisko             Adres Zamieszkania
+------------------ -------- -------------------- -------------------- --------------------
+AALwktABZAAAEYdAAA        1 Jakub                Kowalski             Nowy Sacz
+AALwktABZAAAEYdAAB        2 Kamil                Nowak                Krakow
+AALwktABZAAAEYdAAC        3 Dominik              Filipek              Bochnia
+AALwktABZAAAEYdAAD        4 Natalia              Nowak                Krakow
+AALwktABZAAAEYdAAE        5 Artur                Nowak                Krakow
+AALwktABZAAAEYdAAF        6 Julia                Kowalski             Nowy Sacz
+AALwktABZAAAEYdAAG        7 Pawel                Ciula                Mszalnica
+AALwktABZAAAEYdAAH        8 Kamila               Nowak                Warszawa
+*/
+commit work;
+	
 SPOOL OFF
 
