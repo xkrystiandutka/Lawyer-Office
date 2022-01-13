@@ -53,6 +53,9 @@ Table created.
 Table altered.
 
 
+Table altered.
+
+
 Sequence dropped.
 
 
@@ -60,6 +63,9 @@ Sequence created.
 
 
 Trigger created.
+
+
+Index created.
 
 Dodano nowy wiersz do bd1_STANOWISKO - STA_ID=1                                                                                                                                                                                                                                                                                                               
 
@@ -93,6 +99,9 @@ Table created.
 Table altered.
 
 
+Table altered.
+
+
 Sequence dropped.
 
 
@@ -100,6 +109,9 @@ Sequence created.
 
 
 Trigger created.
+
+
+Index created.
 
 Dodano nowy wiersz do bd1_INSTYTUTY - INS_ID=1                                                                                                                                                                                                                                                                                                                
 
@@ -132,12 +144,12 @@ Dodano nowy wiersz do bd1_INSTYTUTY - INS_ID=7
 
      ID Lokalizacja instytut                                                                                                                                                                                                                                                                                                                                  
 ------- --------------------                                                                                                                                                                                                                                                                                                                                  
-      1 Krakow                                                                                                                                                                                                                                                                                                                                                
-      2 Warszawa                                                                                                                                                                                                                                                                                                                                              
       3 Bochnia                                                                                                                                                                                                                                                                                                                                               
-      4 Nowy Sacz                                                                                                                                                                                                                                                                                                                                             
+      1 Krakow                                                                                                                                                                                                                                                                                                                                                
       5 Limanowa                                                                                                                                                                                                                                                                                                                                              
       6 Mszalnica                                                                                                                                                                                                                                                                                                                                             
+      4 Nowy Sacz                                                                                                                                                                                                                                                                                                                                             
+      2 Warszawa                                                                                                                                                                                                                                                                                                                                              
       7 Warszawa                                                                                                                                                                                                                                                                                                                                              
 
 7 rows selected.
@@ -150,6 +162,9 @@ Table created.
 Table altered.
 
 
+Table altered.
+
+
 Sequence dropped.
 
 
@@ -157,6 +172,15 @@ Sequence created.
 
 
 Trigger created.
+
+
+Index created.
+
+
+Index created.
+
+
+Index created.
 
 Dodano nowy wiersz do bd1_OSOBY - OSO_ID=1                                                                                                                                                                                                                                                                                                                    
 
@@ -215,6 +239,9 @@ Table altered.
 Table altered.
 
 
+Table altered.
+
+
 Sequence dropped.
 
 
@@ -222,6 +249,9 @@ Sequence created.
 
 
 Trigger created.
+
+
+Index created.
 
 Dodano nowy wiersz do bd1_PRACOWNICY - PRA_ID=1                                                                                                                                                                                                                                                                                                               
 
@@ -264,6 +294,9 @@ Table altered.
 Table altered.
 
 
+Table altered.
+
+
 Sequence dropped.
 
 
@@ -271,6 +304,12 @@ Sequence created.
 
 
 Trigger created.
+
+
+Index created.
+
+
+Index created.
 
 Dodano nowy wiersz do bd1_HISTORIA_ZATRUDNIENIA - HIS_Pracownika_ID=1                                                                                                                                                                                                                                                                                         
 
@@ -299,6 +338,9 @@ ID Histori Pracownika Data Zatrudnienia    Data Zwolnienia      Stanowisko ID In
 table bd1_KLIENCI
 
 Table created.
+
+
+Table altered.
 
 
 Table altered.
@@ -353,6 +395,9 @@ Table altered.
 Table altered.
 
 
+Table altered.
+
+
 Sequence dropped.
 
 
@@ -360,6 +405,12 @@ Sequence created.
 
 
 Trigger created.
+
+
+Index created.
+
+
+Index created.
 
 Dodano nowy wiersz do bd1_USLUGI - USL_ID=1                                                                                                                                                                                                                                                                                                                   
 
@@ -405,6 +456,9 @@ Table created.
 Table altered.
 
 
+Table altered.
+
+
 Sequence dropped.
 
 
@@ -412,6 +466,9 @@ Sequence created.
 
 
 Trigger created.
+
+
+Index created.
 
 Dodano nowy wiersz do bd1_OSKARZENIA - OSK_ID=1                                                                                                                                                                                                                                                                                                               
 
@@ -443,6 +500,9 @@ Table altered.
 Table altered.
 
 
+Table altered.
+
+
 Sequence dropped.
 
 
@@ -450,6 +510,15 @@ Sequence created.
 
 
 Trigger created.
+
+
+Index created.
+
+
+Index created.
+
+
+Index created.
 
 Dodano nowy wiersz do bd1_KARY - KAR_ID=1                                                                                                                                                                                                                                                                                                                     
 
@@ -473,6 +542,9 @@ Table created.
 Table altered.
 
 
+Table altered.
+
+
 Sequence dropped.
 
 
@@ -480,6 +552,9 @@ Sequence created.
 
 
 Trigger created.
+
+
+Index created.
 
 Dodano nowy wiersz do bd1_PRZESTEPSTWA - PRZ_ID=1                                                                                                                                                                                                                                                                                                             
 
@@ -508,6 +583,9 @@ Table altered.
 Table altered.
 
 
+Table altered.
+
+
 Sequence dropped.
 
 
@@ -515,6 +593,9 @@ Sequence created.
 
 
 Trigger created.
+
+
+Index created.
 
 Dodano nowy wiersz do bd1_SLEDZTWA - SLE_ID=1                                                                                                                                                                                                                                                                                                                 
 
@@ -541,6 +622,9 @@ Table altered.
 Table altered.
 
 
+Table altered.
+
+
 Sequence dropped.
 
 
@@ -548,6 +632,12 @@ Sequence created.
 
 
 Trigger created.
+
+
+Index created.
+
+
+Index created.
 
 Dodano nowy wiersz do bd1_DOWODY - DOW_ID=1                                                                                                                                                                                                                                                                                                                   
 
@@ -580,6 +670,9 @@ Table created.
 Table altered.
 
 
+Table altered.
+
+
 Sequence dropped.
 
 
@@ -587,6 +680,12 @@ Sequence created.
 
 
 Trigger created.
+
+
+Index created.
+
+
+Index created.
 
 Dodano nowy wiersz do bd1_STANOWISKO_SWIADKA - STA_SW_ID=1                                                                                                                                                                                                                                                                                                    
 
@@ -609,27 +708,30 @@ Dodano nowy wiersz do bd1_STANOWISKO_SWIADKA - STA_SW_ID=5
 1 row created.
 
 
-ID_Stanowiska_Swiadka Stanowisko swiadka z Data skladanai stano Rodzaj stanowiska sw Typ swiadka          Opis stanowiska swia                                                                                                                                                                                                                                
---------------------- -------------------- -------------------- -------------------- -------------------- --------------------                                                                                                                                                                                                                                
-                    1 Zeznanie na korzysc  2021-10-09           Swiadek zdarzenia    Brat Oskazonego      Zeznanie swojej wers                                                                                                                                                                                                                                
-                      oskazonego                                                                          je zdarzen                                                                                                                                                                                                                                          
+ID_Stanowiska_Swiadka Stanowisko swiadka z Data skladanai stano Rodzaj stanowiska sw Typ swiadka          Opis stanowiska swiadka                                                                                                                                                                                                                             
+--------------------- -------------------- -------------------- -------------------- -------------------- --------------------------------                                                                                                                                                                                                                    
+                    1 Zeznanie na korzysc  2021-10-09           Swiadek zdarzenia    Brat Oskazonego      Zeznanie swojej wersje zdarzen                                                                                                                                                                                                                      
+                      oskazonego                                                                                                                                                                                                                                                                                                                              
                                                                                                                                                                                                                                                                                                                                                               
-                    2 Zeznanie na niekorzy 2019-11-09           Swiadek zdarzenia    Przypadkowa osoba    Zeznanie swojej wers                                                                                                                                                                                                                                
-                      sc oskazonego                                                                       je zdarzen                                                                                                                                                                                                                                          
+                    2 Zeznanie na niekorzy 2019-11-09           Swiadek zdarzenia    Przypadkowa osoba    Zeznanie swojej wersje zdarzen                                                                                                                                                                                                                      
+                      sc oskazonego                                                                                                                                                                                                                                                                                                                           
                                                                                                                                                                                                                                                                                                                                                               
-                    3 Zeznanie na niekorzy 2021-06-09           Swiadek zdarzenia    Ojciec ofiary        Zeznanie swojej wers                                                                                                                                                                                                                                
-                      sc oskazonego                                                                       je zdarzen                                                                                                                                                                                                                                          
+                    3 Zeznanie na niekorzy 2021-06-09           Swiadek zdarzenia    Ojciec ofiary        Zeznanie swojej wersje zdarzen                                                                                                                                                                                                                      
+                      sc oskazonego                                                                                                                                                                                                                                                                                                                           
                                                                                                                                                                                                                                                                                                                                                               
-                    4 Zeznanie na korzysc  2021-05-10           Swiadek zdarzenia    Siostra oskazonego   Zeznanie swojej wers                                                                                                                                                                                                                                
-                      oskazonego                                                                          je zdarzen                                                                                                                                                                                                                                          
+                    4 Zeznanie na korzysc  2021-05-10           Swiadek zdarzenia    Siostra oskazonego   Zeznanie swojej wersje zdarzen                                                                                                                                                                                                                      
+                      oskazonego                                                                                                                                                                                                                                                                                                                              
                                                                                                                                                                                                                                                                                                                                                               
-                    5 Zeznanie na niekorzy 2021-08-21           Swiadek zdarzenia    Matka ofiary         Zeznanie swojej wers                                                                                                                                                                                                                                
-                      sc oskazonego                                                                       je zdarzen                                                                                                                                                                                                                                          
+                    5 Zeznanie na niekorzy 2021-08-21           Swiadek zdarzenia    Matka ofiary         Zeznanie swojej wersje zdarzen                                                                                                                                                                                                                      
+                      sc oskazonego                                                                                                                                                                                                                                                                                                                           
                                                                                                                                                                                                                                                                                                                                                               
 
 table bd1_ZEZNANIA
 
 Table created.
+
+
+Table altered.
 
 
 Table altered.
@@ -652,6 +754,12 @@ Sequence created.
 
 Trigger created.
 
+
+Index created.
+
+
+Index created.
+
 Dodano nowy wiersz do bd1_ZEZNANIA - ZEZ_ID=1                                                                                                                                                                                                                                                                                                                 
 
 1 row created.
@@ -669,6 +777,9 @@ ID_Zeznan Typ zeznania         ZEZ_OPIS                                         
 table bd1_SPRAWY_SADOWE
 
 Table created.
+
+
+Table altered.
 
 
 Table altered.
@@ -784,8 +895,8 @@ ID_Dowodu ID_Sledztwa Rodzaj dowodu        Opis dowodu
 
 ID_Kary Wyrok                                                            Data rozpo Data zakon  KONIEC_ZA                                                                                                                                                                                                                                                     
 ------- ---------------------------------------------------------------- ---------- ---------- ----------                                                                                                                                                                                                                                                     
-      1 Wiezienie                                                        2021-11-29 2025-11-21       1409                                                                                                                                                                                                                                                     
-      2 Wyrok w zawieszeniu                                              2021-10-15 2022-11-15        307                                                                                                                                                                                                                                                     
+      1 Wiezienie                                                        2021-11-29 2025-11-21       1407                                                                                                                                                                                                                                                     
+      2 Wyrok w zawieszeniu                                              2021-10-15 2022-11-15        305                                                                                                                                                                                                                                                     
 
 
 Imie                 Nazwisko             KOD_POCZTOWY                                                                                                                                                                                                                                                                                                        
@@ -879,4 +990,168 @@ View created.
  LOKALIZACJA_INSTYTUT                                                                                                                                                                                        NOT NULL VARCHAR2(64)
  RODZAJ_STANOWISKA                                                                                                                                                                                           NOT NULL VARCHAR2(64)
  STANOWISKO_ZAROBKI                                                                                                                                                                                                   NUMBER(8)
+
+
+NAME                             TYPE       TABLE                PCT_FREE                                    1oEXTENT                                                                                                                                                                                                                                         
+-------------------------------- ---------- -------------------- ------------------------------------------- --------------------------------------------                                                                                                                                                                                                     
+BD1_SPRAWY_SADOWE                NORMAL     BD1_SPRAWY_SADOWE    1[%]                                        64[kB]                                                                                                                                                                                                                                           
+BD1_IX_ZEZ_OPIS                  NORMAL     BD1_ZEZNANIA         10[%]                                       64[kB]                                                                                                                                                                                                                                           
+BD1_IX_ZEZ_TYP                   NORMAL     BD1_ZEZNANIA         10[%]                                       64[kB]                                                                                                                                                                                                                                           
+BD1_ZEZNANIA                     NORMAL     BD1_ZEZNANIA         1[%]                                        64[kB]                                                                                                                                                                                                                                           
+BD1_IX_STA_SW_DATA               NORMAL     BD1_STANOWISKO_SWIAD 10[%]                                       64[kB]                                                                                                                                                                                                                                           
+                                            KA                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                              
+BD1_IX_STA_SW_RODZAJ             NORMAL     BD1_STANOWISKO_SWIAD 10[%]                                       64[kB]                                                                                                                                                                                                                                           
+                                            KA                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                              
+BD1_STANOWISKO_SWIADKA           NORMAL     BD1_STANOWISKO_SWIAD 1[%]                                        64[kB]                                                                                                                                                                                                                                           
+                                            KA                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                              
+BD1_IX_DOW_RODZAJ                NORMAL     BD1_DOWODY           10[%]                                       64[kB]                                                                                                                                                                                                                                           
+BD1_IX_DOW_OPIS                  NORMAL     BD1_DOWODY           10[%]                                       64[kB]                                                                                                                                                                                                                                           
+BD1_DOWODY                       NORMAL     BD1_DOWODY           1[%]                                        64[kB]                                                                                                                                                                                                                                           
+BD1_IX_SLE_DATA                  NORMAL     BD1_SLEDZTWA         10[%]                                       64[kB]                                                                                                                                                                                                                                           
+BD1_SLEDZTWA                     NORMAL     BD1_SLEDZTWA         1[%]                                        64[kB]                                                                                                                                                                                                                                           
+BD1_IX_PRZ_RODZAJ                NORMAL     BD1_PRZESTEPSTWA     10[%]                                       64[kB]                                                                                                                                                                                                                                           
+BD1_PRZESTEPSTWA                 NORMAL     BD1_PRZESTEPSTWA     1[%]                                        64[kB]                                                                                                                                                                                                                                           
+BD1_IX_KAR_DATA_ZAKONCZENIA      NORMAL     BD1_KARY             10[%]                                       64[kB]                                                                                                                                                                                                                                           
+BD1_IX_KAR_DATA_ROZPOCZECIA      NORMAL     BD1_KARY             10[%]                                       64[kB]                                                                                                                                                                                                                                           
+BD1_IX_KAR_WYROK                 NORMAL     BD1_KARY             10[%]                                       64[kB]                                                                                                                                                                                                                                           
+BD1_KARY                         NORMAL     BD1_KARY             1[%]                                        64[kB]                                                                                                                                                                                                                                           
+BD1_IX_OSK_RODZAJ                NORMAL     BD1_OSKARZENIA       10[%]                                       64[kB]                                                                                                                                                                                                                                           
+BD1_OSKARZENIA                   NORMAL     BD1_OSKARZENIA       1[%]                                        64[kB]                                                                                                                                                                                                                                           
+BD1_IX_KLI_ID                    NORMAL     BD1_USLUGI           10[%]                                       64[kB]                                                                                                                                                                                                                                           
+BD1_IX_PRA_ID                    NORMAL     BD1_USLUGI           10[%]                                       64[kB]                                                                                                                                                                                                                                           
+BD1_USLUGI                       NORMAL     BD1_USLUGI           1[%]                                        64[kB]                                                                                                                                                                                                                                           
+BD1_KLIENCI                      NORMAL     BD1_KLIENCI          1[%]                                        64[kB]                                                                                                                                                                                                                                           
+BD1_IX_HIS_HIS_DATA_ZWOLNIENIA   NORMAL     BD1_HISTORIA_ZATRUDN 10[%]                                       64[kB]                                                                                                                                                                                                                                           
+                                            IENIA                                                                                                                                                                                                                                                                                                             
+                                                                                                                                                                                                                                                                                                                                                              
+BD1_IX_HIS_DATA_ZATRUDNIENIA     NORMAL     BD1_HISTORIA_ZATRUDN 10[%]                                       64[kB]                                                                                                                                                                                                                                           
+                                            IENIA                                                                                                                                                                                                                                                                                                             
+                                                                                                                                                                                                                                                                                                                                                              
+BD1_HISTORIA_ZATRUDNIENIA        NORMAL     BD1_HISTORIA_ZATRUDN 1[%]                                        64[kB]                                                                                                                                                                                                                                           
+                                            IENIA                                                                                                                                                                                                                                                                                                             
+                                                                                                                                                                                                                                                                                                                                                              
+BD1_IX_OSO_ID                    NORMAL     BD1_PRACOWNICY       10[%]                                       64[kB]                                                                                                                                                                                                                                           
+BD1_PRACOWNICY                   NORMAL     BD1_PRACOWNICY       1[%]                                        64[kB]                                                                                                                                                                                                                                           
+BD1_IX_OSO_ADRES_ZAMIESZKANIA    NORMAL     BD1_OSOBY            10[%]                                       64[kB]                                                                                                                                                                                                                                           
+BD1_IX_OSO_NAZWISKO              NORMAL     BD1_OSOBY            10[%]                                       64[kB]                                                                                                                                                                                                                                           
+BD1_IX_OSO_IMIE                  NORMAL     BD1_OSOBY            10[%]                                       64[kB]                                                                                                                                                                                                                                           
+BD1_OSOBY                        NORMAL     BD1_OSOBY            1[%]                                        64[kB]                                                                                                                                                                                                                                           
+BD1_IX_INS_LOKALIZACJA           NORMAL     BD1_INSTYTUTY        10[%]                                       64[kB]                                                                                                                                                                                                                                           
+BD1_INSTYTUTY                    NORMAL     BD1_INSTYTUTY        1[%]                                        64[kB]                                                                                                                                                                                                                                           
+BD1_IX_STA_RODZAJ                NORMAL     BD1_STANOWISKO       10[%]                                       64[kB]                                                                                                                                                                                                                                           
+BD1_STANOWISKO                   NORMAL     BD1_STANOWISKO       1[%]                                        64[kB]                                                                                                                                                                                                                                           
+
+37 rows selected.
+
+
+Commit complete.
+
+
+ROWID              ID_Osoby Imie                 Nazwisko             Adres Zamieszkania                                                                                                                                                                                                                                                                      
+------------------ -------- -------------------- -------------------- --------------------                                                                                                                                                                                                                                                                    
+AAL4v/AAKAAAA1mAAA        1 Jakub                Kowalski             Nowy Sacz                                                                                                                                                                                                                                                                               
+AAL4v/AAKAAAA1mAAB        2 Kamil                Nowak                Krakow                                                                                                                                                                                                                                                                                  
+AAL4v/AAKAAAA1mAAC        3 Dominik              Filipek              Bochnia                                                                                                                                                                                                                                                                                 
+AAL4v/AAKAAAA1mAAD        4 Natalia              Nowak                Krakow                                                                                                                                                                                                                                                                                  
+AAL4v/AAKAAAA1mAAE        5 Artur                Nowak                Krakow                                                                                                                                                                                                                                                                                  
+AAL4v/AAKAAAA1mAAF        6 Julia                Kowalski             Nowy Sacz                                                                                                                                                                                                                                                                               
+AAL4v/AAKAAAA1mAAG        7 Pawel                Ciula                Mszalnica                                                                                                                                                                                                                                                                               
+AAL4v/AAKAAAA1mAAH        8 Kamila               Nowak                Limanowa                                                                                                                                                                                                                                                                                
+
+8 rows selected.
+
+Dodano nowy wiersz do bd1_OSOBY - OSO_ID=9                                                                                                                                                                                                                                                                                                                    
+
+1 row created.
+
+
+ROWID              ID_Osoby Imie                 Nazwisko             Adres Zamieszkania                                                                                                                                                                                                                                                                      
+------------------ -------- -------------------- -------------------- --------------------                                                                                                                                                                                                                                                                    
+AAL4v/AAKAAAA1mAAA        1 Jakub                Kowalski             Nowy Sacz                                                                                                                                                                                                                                                                               
+AAL4v/AAKAAAA1mAAB        2 Kamil                Nowak                Krakow                                                                                                                                                                                                                                                                                  
+AAL4v/AAKAAAA1mAAC        3 Dominik              Filipek              Bochnia                                                                                                                                                                                                                                                                                 
+AAL4v/AAKAAAA1mAAD        4 Natalia              Nowak                Krakow                                                                                                                                                                                                                                                                                  
+AAL4v/AAKAAAA1mAAE        5 Artur                Nowak                Krakow                                                                                                                                                                                                                                                                                  
+AAL4v/AAKAAAA1mAAF        6 Julia                Kowalski             Nowy Sacz                                                                                                                                                                                                                                                                               
+AAL4v/AAKAAAA1mAAG        7 Pawel                Ciula                Mszalnica                                                                                                                                                                                                                                                                               
+AAL4v/AAKAAAA1mAAH        8 Kamila               Nowak                Limanowa                                                                                                                                                                                                                                                                                
+AAL4v/AAKAAAA1mAAI        9 Piotr                Kasparow             Limanowa                                                                                                                                                                                                                                                                                
+
+9 rows selected.
+
+
+Rollback complete.
+
+
+ROWID              ID_Osoby Imie                 Nazwisko             Adres Zamieszkania                                                                                                                                                                                                                                                                      
+------------------ -------- -------------------- -------------------- --------------------                                                                                                                                                                                                                                                                    
+AAL4v/AAKAAAA1mAAA        1 Jakub                Kowalski             Nowy Sacz                                                                                                                                                                                                                                                                               
+AAL4v/AAKAAAA1mAAB        2 Kamil                Nowak                Krakow                                                                                                                                                                                                                                                                                  
+AAL4v/AAKAAAA1mAAC        3 Dominik              Filipek              Bochnia                                                                                                                                                                                                                                                                                 
+AAL4v/AAKAAAA1mAAD        4 Natalia              Nowak                Krakow                                                                                                                                                                                                                                                                                  
+AAL4v/AAKAAAA1mAAE        5 Artur                Nowak                Krakow                                                                                                                                                                                                                                                                                  
+AAL4v/AAKAAAA1mAAF        6 Julia                Kowalski             Nowy Sacz                                                                                                                                                                                                                                                                               
+AAL4v/AAKAAAA1mAAG        7 Pawel                Ciula                Mszalnica                                                                                                                                                                                                                                                                               
+AAL4v/AAKAAAA1mAAH        8 Kamila               Nowak                Limanowa                                                                                                                                                                                                                                                                                
+
+8 rows selected.
+
+
+1 row updated.
+
+
+ROWID              ID_Osoby Imie                 Nazwisko             Adres Zamieszkania                                                                                                                                                                                                                                                                      
+------------------ -------- -------------------- -------------------- --------------------                                                                                                                                                                                                                                                                    
+AAL4v/AAKAAAA1mAAA        1 Jakub                Kowalski             Nowy Sacz                                                                                                                                                                                                                                                                               
+AAL4v/AAKAAAA1mAAB        2 Kamil                Nowak                Krakow                                                                                                                                                                                                                                                                                  
+AAL4v/AAKAAAA1mAAC        3 Dominik              Filipek              Bochnia                                                                                                                                                                                                                                                                                 
+AAL4v/AAKAAAA1mAAD        4 Natalia              Nowak                Krakow                                                                                                                                                                                                                                                                                  
+AAL4v/AAKAAAA1mAAE        5 Artur                Nowak                Krakow                                                                                                                                                                                                                                                                                  
+AAL4v/AAKAAAA1mAAF        6 Julia                Kowalski             Nowy Sacz                                                                                                                                                                                                                                                                               
+AAL4v/AAKAAAA1mAAG        7 Pawel                Ciula                Mszalnica                                                                                                                                                                                                                                                                               
+AAL4v/AAKAAAA1mAAH        8 Kamila               Nowak                Warszawa                                                                                                                                                                                                                                                                                
+
+8 rows selected.
+
+
+Savepoint created.
+
+
+1 row deleted.
+
+
+ROWID              ID_Osoby Imie                 Nazwisko             Adres Zamieszkania                                                                                                                                                                                                                                                                      
+------------------ -------- -------------------- -------------------- --------------------                                                                                                                                                                                                                                                                    
+AAL4v/AAKAAAA1mAAA        1 Jakub                Kowalski             Nowy Sacz                                                                                                                                                                                                                                                                               
+AAL4v/AAKAAAA1mAAB        2 Kamil                Nowak                Krakow                                                                                                                                                                                                                                                                                  
+AAL4v/AAKAAAA1mAAC        3 Dominik              Filipek              Bochnia                                                                                                                                                                                                                                                                                 
+AAL4v/AAKAAAA1mAAD        4 Natalia              Nowak                Krakow                                                                                                                                                                                                                                                                                  
+AAL4v/AAKAAAA1mAAE        5 Artur                Nowak                Krakow                                                                                                                                                                                                                                                                                  
+AAL4v/AAKAAAA1mAAF        6 Julia                Kowalski             Nowy Sacz                                                                                                                                                                                                                                                                               
+AAL4v/AAKAAAA1mAAH        8 Kamila               Nowak                Warszawa                                                                                                                                                                                                                                                                                
+
+7 rows selected.
+
+
+Rollback complete.
+
+
+ROWID              ID_Osoby Imie                 Nazwisko             Adres Zamieszkania                                                                                                                                                                                                                                                                      
+------------------ -------- -------------------- -------------------- --------------------                                                                                                                                                                                                                                                                    
+AAL4v/AAKAAAA1mAAA        1 Jakub                Kowalski             Nowy Sacz                                                                                                                                                                                                                                                                               
+AAL4v/AAKAAAA1mAAB        2 Kamil                Nowak                Krakow                                                                                                                                                                                                                                                                                  
+AAL4v/AAKAAAA1mAAC        3 Dominik              Filipek              Bochnia                                                                                                                                                                                                                                                                                 
+AAL4v/AAKAAAA1mAAD        4 Natalia              Nowak                Krakow                                                                                                                                                                                                                                                                                  
+AAL4v/AAKAAAA1mAAE        5 Artur                Nowak                Krakow                                                                                                                                                                                                                                                                                  
+AAL4v/AAKAAAA1mAAF        6 Julia                Kowalski             Nowy Sacz                                                                                                                                                                                                                                                                               
+AAL4v/AAKAAAA1mAAG        7 Pawel                Ciula                Mszalnica                                                                                                                                                                                                                                                                               
+AAL4v/AAKAAAA1mAAH        8 Kamila               Nowak                Warszawa                                                                                                                                                                                                                                                                                
+
+8 rows selected.
+
+
+Commit complete.
 
