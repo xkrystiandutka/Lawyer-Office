@@ -1,5 +1,5 @@
-# Oracle Database
-#### Database project for a law office created using Oracle  
+# Lawyer's office database
+#### Database project for a law office created using Oracle.  
 
 ![](datebase.png)
 * Create a SQL script that generates a full logical database structure,
