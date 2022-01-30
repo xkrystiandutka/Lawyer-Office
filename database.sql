@@ -1044,8 +1044,8 @@ TABLESPACE STUDENT_DATA;
 
 
 	column DOW_ID HEADING 'ID_Dowodu' for 999999
-	column DOW_Opis HEADING 'Opis dowodu' for A20
-	column DOW_Rodzaj HEADING 'Rodzaj dowodu' for A20
+	column DOW_Opis HEADING 'Opis dowodu' for A35
+	column DOW_Rodzaj HEADING 'Rodzaj dowodu' for A25
 	column SLE_ID HEADING 'ID_Sledztwa' for 99999
 
 	select * from bd1_DOWODY;
@@ -1738,5 +1738,202 @@ AALwktABZAAAEYdAAH        8 Kamila               Nowak                Warszawa
 */
 commit work;
 	
-SPOOL OFF
+---------------------------
+--  PROCEDURE bd1_pINSERT_Dowody
+---------------------------
+CREATE OR REPLACE PROCEDURE bd1_pINSERT_Dowody(
+						inDOW_Opis IN bd1_DOWODY.DOW_Opis%TYPE,
+						inDOW_Rodzaj IN bd1_DOWODY.DOW_Rodzaj%TYPE,
+						inSLE_ID IN bd1_DOWODY.SLE_ID%TYPE,
+						inMnoznik IN number,
+						ile IN number)
+	IS
+		mnoznik number;
+	BEGIN
+		IF inMnoznik < 50 THEN 
+			mnoznik := 50;
+		ELSIF inMnoznik > 100 and inMnoznik < 200 THEN 
+			mnoznik := 100;
+		ELSE 
+			mnoznik := 200;
+		END IF;
+		--
+		for licznikPETLI IN 1 .. ile
+	loop
+		insert into bd1_DOWODY (DOW_Opis,DOW_Rodzaj,SLE_ID)
+		values (inDOW_Opis||(inMnoznik+mnoznik+licznikPETLI),inDOW_Rodzaj,inSLE_ID);
+	end loop;
+END;
+/
 
+Select * from bd1_DOWODY;
+/* ID_Dowodu Opis dowodu                         Rodzaj dowodu             ID_Sledztwa
+--------- ----------------------------------- ------------------------- -----------
+        1 Dowod zebrany z miejsca zbrodni     Bron                                1
+        2 Dowod zabezpieczony w domu oskazone Przedmiot kradiezy                  2
+          go
+
+        3                                     Przedmiot kradiezy                  1 */
+
+	exec bd1_pINSERT_Dowody('Dowod znaleziony przy oskazonym nr ','Kradziez przedmiot','2',10,5);
+	
+Select * from bd1_DOWODY;
+
+/*
+Procedure created.
+
+Dodano nowy wiersz do bd1_DOWODY - DOW_ID=4
+Dodano nowy wiersz do bd1_DOWODY - DOW_ID=5
+Dodano nowy wiersz do bd1_DOWODY - DOW_ID=6
+Dodano nowy wiersz do bd1_DOWODY - DOW_ID=7
+Dodano nowy wiersz do bd1_DOWODY - DOW_ID=8
+
+PL/SQL procedure successfully completed.
+
+
+ID_Dowodu Opis dowodu                         Rodzaj dowodu             ID_Sledztwa
+--------- ----------------------------------- ------------------------- -----------
+        1 Dowod zebrany z miejsca zbrodni     Bron                                1
+        2 Dowod zabezpieczony w domu oskazone Przedmiot kradiezy                  2
+          go
+
+        3                                     Przedmiot kradiezy                  1
+        4 Dowod znaleziony przy oskazonym nr  Kradziez przedmiot                  2
+          61
+
+        5 Dowod znaleziony przy oskazonym nr  Kradziez przedmiot                  2
+          62
+
+        6 Dowod znaleziony przy oskazonym nr  Kradziez przedmiot                  2
+          63
+
+        7 Dowod znaleziony przy oskazonym nr  Kradziez przedmiot                  2
+          64
+
+        8 Dowod znaleziony przy oskazonym nr  Kradziez przedmiot                  2
+          65
+
+
+8 rows selected.
+*/
+
+
+CREATE OR REPLACE FUNCTION bd1_fINSERT_Dowody(
+					inDOW_Opis IN bd1_DOWODY.DOW_Opis%TYPE,
+					inDOW_Rodzaj IN bd1_DOWODY.DOW_Rodzaj%TYPE,
+					inSLE_ID IN bd1_DOWODY.SLE_ID%TYPE,
+					inMnoznik IN number,
+					ile IN number)
+RETURN varchar2
+IS
+	mnoznik number;
+	newDOW_ID bd1_DOWODY.DOW_ID%TYPE;
+BEGIN
+	IF ile < 10 THEN 
+		mnoznik := 1;
+	ELSIF ile > 50 and ile < 100 THEN 
+		mnoznik := 10;
+	ELSE 
+		mnoznik := 100;
+	END IF;
+	
+	for licznikPetli IN 1 .. ile
+	loop
+		insert into bd1_DOWODY (DOW_Opis,DOW_Rodzaj,SLE_ID)
+		values (inDOW_Opis||(inMnoznik+mnoznik+licznikPETLI),inDOW_Rodzaj,inSLE_ID);
+		--
+		SELECT SEQ_bd1_DOWODY.CURRVAL INTO newDOW_ID FROM DUAL; 
+		--
+		DBMS_OUTPUT.PUT_LINE('Dodano nowy wiersz do bd1_DOWODY - DOW_ID='||newDOW_ID);
+	end loop;
+	RETURN 'Dodano '||ile||' wierszy';
+END;
+/
+
+Select * from bd1_DOWODY;
+
+/*
+ID_Dowodu Opis dowodu                         Rodzaj dowodu             ID_Sledztwa
+--------- ----------------------------------- ------------------------- -----------
+        1 Dowod zebrany z miejsca zbrodni     Bron                                1
+        2 Dowod zabezpieczony w domu oskazone Przedmiot kradiezy                  2
+          go
+
+        3                                     Przedmiot kradiezy                  1
+        4 Dowod znaleziony przy oskazonym nr  Kradziez przedmiot                  2
+          61
+
+        5 Dowod znaleziony przy oskazonym nr  Kradziez przedmiot                  2
+          62
+
+        6 Dowod znaleziony przy oskazonym nr  Kradziez przedmiot                  2
+          63
+
+        7 Dowod znaleziony przy oskazonym nr  Kradziez przedmiot                  2
+          64
+
+        8 Dowod znaleziony przy oskazonym nr  Kradziez przedmiot                  2
+          65
+
+
+8 rows selected.
+*/
+
+	BEGIN
+		DBMS_OUTPUT.PUT_LINE(bd1_fINSERT_Dowody('Dowod znaleziony przy oskazonym nr ','Kradziez przedmiot','2',10,5));
+	END;
+	/
+
+Select * from bd1_DOWODY;
+/*
+Dodano nowy wiersz do bd1_DOWODY - DOW_ID=9
+Dodano nowy wiersz do bd1_DOWODY - DOW_ID=10
+Dodano nowy wiersz do bd1_DOWODY - DOW_ID=11
+Dodano nowy wiersz do bd1_DOWODY - DOW_ID=12
+Dodano nowy wiersz do bd1_DOWODY - DOW_ID=13
+Dodano 5 wierszy
+
+PL/SQL procedure successfully completed.
+
+
+ID_Dowodu Opis dowodu                         Rodzaj dowodu             ID_Sledztwa
+--------- ----------------------------------- ------------------------- -----------
+        1 Dowod zebrany z miejsca zbrodni     Bron                                1
+        2 Dowod zabezpieczony w domu oskazone Przedmiot kradiezy                  2
+          go
+
+        3                                     Przedmiot kradiezy                  1
+        4 Dowod znaleziony przy oskazonym nr  Kradziez przedmiot                  2
+          61
+
+        5 Dowod znaleziony przy oskazonym nr  Kradziez przedmiot                  2
+          62
+
+        6 Dowod znaleziony przy oskazonym nr  Kradziez przedmiot                  2
+          63
+
+        7 Dowod znaleziony przy oskazonym nr  Kradziez przedmiot                  2
+          64
+
+        8 Dowod znaleziony przy oskazonym nr  Kradziez przedmiot                  2
+          65
+
+        9 Dowod znaleziony przy oskazonym nr  Kradziez przedmiot                  2
+          12
+
+       10 Dowod znaleziony przy oskazonym nr  Kradziez przedmiot                  2
+          13
+
+       11 Dowod znaleziony przy oskazonym nr  Kradziez przedmiot                  2
+          14
+
+       12 Dowod znaleziony przy oskazonym nr  Kradziez przedmiot                  2
+          15
+
+       13 Dowod znaleziony przy oskazonym nr  Kradziez przedmiot                  2
+          16
+
+
+13 rows selected.	*/
+	
+SPOOL OFF
