@@ -7,8 +7,9 @@
 * SELECT to select data from tables using different operators in WHERE (UPDATE & NVL test),
 * Add group by & having select,
 * Subquestions and perspectives,
-* Indexes and TCS - Transactions.
-
+* Indexes and TCS - Transactions,
+* Insert into loop, 
+* Implicit cursors.
 
 For the purposes of the project, names of tables, data, descriptions, etc. are in Polish
 ## License

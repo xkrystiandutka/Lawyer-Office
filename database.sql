@@ -28,17 +28,6 @@ alter session set
 --
 select sysdate from dual;
 --
-
-------------------------------------------------------
--- prefix tabel": bd1_
-
--- UWAGA! 
---   Prefix "bd1_" został wprowadzony po to, abyście 
---   Państwo mogli uruchamiać przykładowe skrypty 
---   na swoich kontach bez obawy o zduplikowanie nazw tabel 
---   z Państwa prywatnych projektów z przykładami do Lk.
-------------------------------------------------------
-
 ---------------------------
 PROMPT   sekwencja kasowania
 ---------------------------
