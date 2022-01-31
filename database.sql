@@ -9,6 +9,9 @@ CLEAR SCREEN;
 SET LINESIZE 350;
 SET PAGESIZE 300;
 
+-- wyswietla komunikaty zwrotne z Oracle
+SET SERVEROUTPUT ON;
+
 -- Nagrywanie konunikatów z buforu ekranowego do pliku
 -- Przydatne w przypadku poszukiwania błedów w długich plikach!
 SPOOL "D:\ORACLE\Database.sql.txt"
@@ -25,6 +28,16 @@ alter session set
 --
 select sysdate from dual;
 --
+
+------------------------------------------------------
+-- prefix tabel": bd1_
+
+-- UWAGA! 
+--   Prefix "bd1_" został wprowadzony po to, abyście 
+--   Państwo mogli uruchamiać przykładowe skrypty 
+--   na swoich kontach bez obawy o zduplikowanie nazw tabel 
+--   z Państwa prywatnych projektów z przykładami do Lk.
+------------------------------------------------------
 
 ---------------------------
 PROMPT   sekwencja kasowania
@@ -114,15 +127,27 @@ TABLESPACE STUDENT_DATA;
 	insert into bd1_STANOWISKO (STA_Rodzaj,STA_OPIS,STA_Zarobki)
 	values ('Prokurator','Oskazanie oskazonego','7500');
 	
-		insert into bd1_STANOWISKO (STA_Rodzaj,STA_OPIS,STA_Zarobki)
+	insert into bd1_STANOWISKO (STA_Rodzaj,STA_OPIS,STA_Zarobki)
 	values ('Sedzia Sadowy','Prowadzenie rozpraw','16000');
 	
-		insert into bd1_STANOWISKO (STA_Rodzaj,STA_OPIS,STA_Zarobki)
+	insert into bd1_STANOWISKO (STA_Rodzaj,STA_OPIS,STA_Zarobki)
 	values ('Komornik','','2500');
+	
+	insert into bd1_STANOWISKO (STA_Rodzaj,STA_OPIS,STA_Zarobki)
+	values ('Radca Prawny','','5500');
+	
+	insert into bd1_STANOWISKO (STA_Rodzaj,STA_OPIS,STA_Zarobki)
+	values ('Rzecznik patentowy','','4500');
+	
+	insert into bd1_STANOWISKO (STA_Rodzaj,STA_OPIS,STA_Zarobki)
+	values ('Asystent sedziego','','3500');
+	
+	insert into bd1_STANOWISKO (STA_Rodzaj,STA_OPIS,STA_Zarobki)
+	values ('Doradca prawny','','3500');
 
 	column STA_ID HEADING 'ID' for 999999
-	column STA_Rodzaj HEADING 'Rodzaj stanowiska' for A20
-	column STA_OPIS HEADING 'Opis stanowiska' for A20
+	column STA_Rodzaj HEADING 'Rodzaj stanowiska' for A35
+	column STA_OPIS HEADING 'Opis stanowiska' for A35
 	column STA_Zarobki HEADING 'Stanowisko zarobki' for 999999
 
 
@@ -208,6 +233,9 @@ TABLESPACE STUDENT_DATA;
 	
 	insert into bd1_INSTYTUTY (INS_Lokalizacja)
 	values ('Warszawa');
+	
+	insert into bd1_INSTYTUTY (INS_Lokalizacja)
+	values ('Opole');
 	
 	column INS_ID HEADING 'ID' for 999999
 	column INS_Lokalizacja HEADING 'Lokalizacja instytutu' for A20
@@ -729,8 +757,8 @@ TABLESPACE STUDENT_DATA;
 	values ('2019-10-03','Kradziez');
 
 	column OSK_ID HEADING 'ID_Oskarzenia' for 999999
-	column OSK_Data HEADING 'Data oskarzenia' for A20
-	column OSK_Rodzaj HEADING 'Rodzaj oskarzenia' for A20
+	column OSK_Data HEADING 'Data oskarzenia' for A30
+	column OSK_Rodzaj HEADING 'Rodzaj oskarzenia' for A30
 
 	select * from bd1_OSKARZENIA;
 ---------------------------
@@ -815,9 +843,9 @@ TABLESPACE STUDENT_DATA;
 	
 
 	column KAR_ID HEADING 'ID_Kary' for 999999
-	column KAR_Wyrok HEADING 'Wyrok' for 99999
-	column KAR_Data_Rozpoczecia HEADING 'Data rozpoczecia kary' for 99999
-	column KAR_Data_Zakonczenia HEADING 'Data zakonczenia kary' for 99999
+	column KAR_Wyrok HEADING 'Wyrok' for A30
+	column KAR_Data_Rozpoczecia HEADING 'Data rozpoczecia kary' for A25
+	column KAR_Data_Zakonczenia HEADING 'Data zakonczenia kary' for A25
 	column OSK_ID HEADING 'ID_Oskarzenia' for 99999
 
 	select * from bd1_KARY;
@@ -1129,10 +1157,10 @@ TABLESPACE STUDENT_DATA;
 	values ('Zeznanie na niekorzysc oskazonego','2021-08-21','Swiadek zdarzenia','Matka ofiary','Zeznanie swojej wersje zdarzen');
 	
 	column STA_SW_ID HEADING 'ID_Stanowiska_Swiadka' for 999999
-	column STA_SW_Zeznania HEADING 'Stanowisko swiadka zeznania' for A20
-	column STA_SW_Data HEADING 'Data skladanai stanowiska swiadka' for A20
-	column STA_SW_Rodzaj HEADING 'Rodzaj stanowiska swiadka' for A20
-	column STA_SW_Typ_Swiadka HEADING 'Typ swiadka' for A20
+	column STA_SW_Zeznania HEADING 'Stanowisko swiadka zeznania' for A32
+	column STA_SW_Data HEADING 'Data skladania stanowiska' for A32
+	column STA_SW_Rodzaj HEADING 'Rodzaj stanowiska swiadka' for A30
+	column STA_SW_Typ_Swiadka HEADING 'Typ swiadka' for A25
 	column STA_SW_Opis HEADING 'Opis stanowiska swiadka' for A32
 
 	select * from bd1_STANOWISKO_SWIADKA;		
@@ -1216,12 +1244,13 @@ TABLESPACE STUDENT_DATA;
 	-- DML bd1_ZEZNANIA
 	------------------------
 	insert into bd1_ZEZNANIA (ZEZ_Typ,ZEZ_Opis,DOW_ID,STA_SW_ID,OSK_ID)
-	values ('Opinia bieglego','Braku mozliwosc wykorzystania zeznan z powodu wiezow krwi','2','1','3');
+	values ('Opinia bieglego','Brak mozliwosc wykorzystania zeznan','2','1','3');
 	insert into bd1_ZEZNANIA (ZEZ_Typ,ZEZ_Opis,DOW_ID,STA_SW_ID,OSK_ID)
-	values ('Opinia bieglego','Mozna wykorzystac zeznia','2','2','3');
+	values ('Opinia bieglego','Mozna wykorzystac zeznan','2','2','3');
 	
 	column ZEZ_ID HEADING 'ID_Zeznan' for 999999
-	column ZEZ_Typ HEADING 'Typ zeznania' for A20
+	column ZEZ_Typ HEADING 'Typ zeznania' for A35
+	column ZEZ_Opis HEADING 'Opis zeznania' for A35
 	column DOW_ID HEADING 'ID_Dowodu' for 99999
 	column STA_SW_ID HEADING 'ID_Stanowiska_Swiadka' for 99999
 	column OSK_ID HEADING 'ID_Oskarzenia' for 99999
@@ -1936,4 +1965,159 @@ ID_Dowodu Opis dowodu                         Rodzaj dowodu             ID_Sledz
 
 13 rows selected.	*/
 	
+
+	--  VIEW bd1_V_Postepowanie_w_sprawie ---------------------------	
+	CREATE OR REPLACE VIEW bd1_V_Postepowanie_w_sprawie 
+	AS
+	select o.OSK_ID,o.OSK_Data,o.OSK_Rodzaj,
+		k.KAR_ID,k.KAR_Wyrok,k.KAR_Data_Rozpoczecia,k.KAR_Data_Zakonczenia	
+		from bd1_OSKARZENIA o, bd1_KARY k
+		where o.OSK_ID = k.OSK_ID;
+
+		select * from bd1_V_Postepowanie_w_sprawie order by OSK_ID;
+
+/*View created.
+
+
+ID_Oskarzenia Data oskarzenia                Rodzaj oskarzenia              ID_Kary Wyrok                          Data rozpoczecia kary     Data zakonczenia kary
+------------- ------------------------------ ------------------------------ ------- ------------------------------ ------------------------- -------------------------
+            1 2021-10-02                     Przestepstwo drogowe                 2 Wyrok w zawieszeniu            2021-10-15                2022-11-15
+            2 2020-05-11                     Oszustwo                             1 Wiezienie                      2021-11-29                2025-11-21
+*/
+
+
+---------------------------
+--  PROCEDURE bd1_p_INSERT_zez_swi
+---------------------------		
+CREATE OR REPLACE VIEW bd1_V_zez_swi 
+	AS
+	select z.ZEZ_ID,s.STA_SW_OPIS, s.STA_SW_Data, z.ZEZ_Typ, z.ZEZ_Opis
+		from bd1_ZEZNANIA Z
+		INNER JOIN bd1_STANOWISKO_SWIADKA s on z.STA_SW_ID=s.STA_SW_ID;
+
+		select * from bd1_V_zez_swi;
+
+
+
+CREATE OR REPLACE Procedure bd1_p_zez_swi(
+	inSTA_SW_Zeznania IN bd1_STANOWISKO_SWIADKA.STA_SW_Zeznania%TYPE,
+	inSTA_SW_Data IN bd1_STANOWISKO_SWIADKA.STA_SW_Data%TYPE,
+	inSTA_SW_Rodzaj IN bd1_STANOWISKO_SWIADKA.STA_SW_Rodzaj%TYPE,
+	inSTA_SW_Typ_Swiadka IN bd1_STANOWISKO_SWIADKA.STA_SW_Typ_Swiadka%TYPE,
+	inSTA_SW_OPIS IN bd1_STANOWISKO_SWIADKA.STA_SW_OPIS%TYPE,
+	inZEZ_Typ IN bd1_ZEZNANIA.ZEZ_Typ%TYPE,
+	inZEZ_Opis IN bd1_ZEZNANIA.ZEZ_Opis%TYPE,
+	inDOW_ID IN bd1_ZEZNANIA.DOW_ID%TYPE,
+	inSTA_SW_ID IN bd1_ZEZNANIA.STA_SW_ID%TYPE,
+	inOSK_ID IN bd1_ZEZNANIA.OSK_ID%TYPE	
+		
+	)
+IS
+	PRAGMA AUTONOMOUS_TRANSACTION;
+	STA_SW_ID_curr bd1_STANOWISKO_SWIADKA.STA_SW_ID%TYPE;
+	ZEZ_ID_curr bd1_ZEZNANIA.ZEZ_ID%TYPE;
+	
+BEGIN
+	-- kursor niejawny INSERT
+	insert into bd1_STANOWISKO_SWIADKA (STA_SW_Zeznania,STA_SW_Data,STA_SW_Rodzaj,STA_SW_Typ_Swiadka,STA_SW_Opis)
+	values (inSTA_SW_Zeznania,inSTA_SW_Data,inSTA_SW_Rodzaj,inSTA_SW_Typ_Swiadka,inSTA_SW_OPIS);
+	--
+		-- niebezpieczne jeśli na bazie pracuje wielu użytkowników:
+		SELECT SEQ_bd1_STANOWISKO_SWIADKA.CURRVAL INTO STA_SW_ID_curr FROM DUAL; 
+	--
+	-- kursor niejawny INSERT
+	insert into bd1_ZEZNANIA (ZEZ_Typ,ZEZ_Opis,DOW_ID,STA_SW_ID,OSK_ID)
+	values (inZEZ_Typ,inZEZ_Opis,inDOW_ID,inSTA_SW_ID,inOSK_ID);
+	--
+		-- niebezpieczne jeśli na bazie pracuje wielu użytkowników:
+		SELECT SEQ_bd1_STANOWISKO.CURRVAL INTO ZEZ_ID_curr FROM DUAL;
+	--
+	DBMS_OUTPUT.PUT_LINE('Dodano nowy wiersz bd1_STANOWISKO_SWIADKA - ID='||STA_SW_ID_curr);
+	--
+	DBMS_OUTPUT.PUT_LINE('Dodano nowy wiersz bd1_ZEZNANIA - ID='||ZEZ_ID_curr);
+	--
+	-- prosta obsługa transakcji
+IF STA_SW_ID_curr > 0 and ZEZ_ID_curr > 0 THEN 
+		COMMIT;
+	ELSE 
+		ROLLBACK;
+	END IF;
+	--
+END;
+/
+
+exec bd1_p_zez_swi('Zeznanie na korzysc oskazonego','2022-01-25','Przechodzen','Obywatel','Zeznal swoja wersje zdarzen','Opinia bieglego','mozna wykorzystac',1,2,1);
+
+select * from bd1_V_zez_swi;
+
+/*
+ID_Zeznan Opis stanowiska swiadka          Data skladania stanowiska        Typ zeznania                        Opis zeznania
+--------- -------------------------------- -------------------------------- ----------------------------------- -----------------------------------
+        1 Zeznanie swojej wersje zdarzen   2021-10-09                       Opinia bieglego                     Brak mozliwosc wykorzystania zeznan
+        2 Zeznanie swojej wersje zdarzen   2019-11-09                       Opinia bieglego                     Mozna wykorzystac zeznan
+        3 Zeznanie swojej wersje zdarzen   2022-01-25                       Opinia bieglego                     mozna wykorzystac
+*/
+
+CREATE OR REPLACE Procedure bd1_pr_zez_swi(
+	inSTA_SW_Zeznania IN bd1_STANOWISKO_SWIADKA.STA_SW_Zeznania%TYPE,
+	inSTA_SW_Data IN bd1_STANOWISKO_SWIADKA.STA_SW_Data%TYPE,
+	inSTA_SW_Rodzaj IN bd1_STANOWISKO_SWIADKA.STA_SW_Rodzaj%TYPE,
+	inSTA_SW_Typ_Swiadka IN bd1_STANOWISKO_SWIADKA.STA_SW_Typ_Swiadka%TYPE,
+	inSTA_SW_OPIS IN bd1_STANOWISKO_SWIADKA.STA_SW_OPIS%TYPE,
+	inZEZ_Typ IN bd1_ZEZNANIA.ZEZ_Typ%TYPE,
+	inZEZ_Opis IN bd1_ZEZNANIA.ZEZ_Opis%TYPE,
+	inDOW_ID IN bd1_ZEZNANIA.DOW_ID%TYPE,
+	inSTA_SW_ID IN bd1_ZEZNANIA.STA_SW_ID%TYPE,
+	inOSK_ID IN bd1_ZEZNANIA.OSK_ID%TYPE	
+		
+	)
+IS
+	PRAGMA AUTONOMOUS_TRANSACTION;
+	STA_SW_ID_curr bd1_STANOWISKO_SWIADKA.STA_SW_ID%TYPE;
+	ZEZ_ID_curr bd1_ZEZNANIA.ZEZ_ID%TYPE;
+	
+BEGIN
+	-- kursor niejawny INSERT
+	insert into bd1_STANOWISKO_SWIADKA (STA_SW_Zeznania,STA_SW_Data,STA_SW_Rodzaj,STA_SW_Typ_Swiadka,STA_SW_Opis)
+	values (inSTA_SW_Zeznania,inSTA_SW_Data,inSTA_SW_Rodzaj,inSTA_SW_Typ_Swiadka,inSTA_SW_OPIS)
+	RETURNING STA_SW_ID
+	INTO STA_SW_ID_curr;
+	
+	IF SQL%FOUND then
+		insert into bd1_ZEZNANIA (ZEZ_Typ,ZEZ_Opis,DOW_ID,STA_SW_ID,OSK_ID)
+		values (inZEZ_Typ,inZEZ_Opis,inDOW_ID,inSTA_SW_ID,inOSK_ID)
+		RETURNING ZEZ_ID
+		INTO ZEZ_ID_curr;
+		
+		IF SQL%FOUND then
+	DBMS_OUTPUT.PUT_LINE('Dodano nowy wiersz bd1_STANOWISKO_SWIADKA - ID='||STA_SW_ID_curr);
+	commit;
+	ELSE
+	DBMS_OUTPUT.PUT_LINE('Dodano nowy wiersz bd1_ZEZNANIA - ID='||ZEZ_ID_curr);
+					ROLLBACK;
+
+				END IF;
+		ELSE
+			rollback;
+		END IF;
+END;
+/
+
+exec bd1_pr_zez_swi('Zeznanie na niekorzysc oskazonego','2022-01-28','Przechodzen','Policjant','Zeznal swoja wersje zdarzen','Opinia bieglego','nie mozna wykorzystac',2,3,2);
+/*
+Dodano nowy wiersz do bd1_STANOWISKO_SWIADKA - STA_SW_ID=7
+Dodano nowy wiersz do bd1_ZEZNANIA - ZEZ_ID=4
+*/
+
+select * from bd1_V_zez_swi;
+
+/*
+ID_Zeznan Opis stanowiska swiadka          Data skladania stanowiska        Typ zeznania                        Opis zeznania
+--------- -------------------------------- -------------------------------- ----------------------------------- -----------------------------------
+        1 Zeznanie swojej wersje zdarzen   2021-10-09                       Opinia bieglego                     Brak mozliwosc wykorzystania zeznan
+        2 Zeznanie swojej wersje zdarzen   2019-11-09                       Opinia bieglego                     Mozna wykorzystac zeznan
+        3 Zeznanie swojej wersje zdarzen   2019-11-09                       Opinia bieglego                     mozna wykorzystac
+        4 Zeznanie swojej wersje zdarzen   2022-01-28                       Opinia bieglego                     nie mozna wykorzystac 					*/
+		
+		
 SPOOL OFF
