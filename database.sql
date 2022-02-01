@@ -1,7 +1,7 @@
 ------------------------------------------------------
 -- UWAGI:
 -- Skrypt nalezy uruchomić DWA RAZY - po drugim uruchomieniu 
--- nie mogą w nim występ[owac żadne błędy!
+-- nie mogą w nim występowac żadne błędy!
 ------------------------------------------------------
 
 CLEAR SCREEN;
@@ -318,10 +318,13 @@ TABLESPACE STUDENT_DATA;
 	values ('Julia','Kowalski','Kobieta','Nowy Sacz','33-300',NULL);
 	
 	insert into bd1_OSOBY (OSO_Imie,OSO_Nazwisko,OSO_Plec,OSO_Adres_Zamieszkania,OSO_Kod_Pocztowy,OSO_Telefon)
-	values ('Pawel','Ciula','Mezczyzna','Mszalnica',NULL,NULL);
+	values ('Pawel','Ciula','Mezczyzna','Limanowa',NULL,NULL);
 	
 	insert into bd1_OSOBY (OSO_Imie,OSO_Nazwisko,OSO_Plec,OSO_Adres_Zamieszkania,OSO_Kod_Pocztowy,OSO_Telefon)
-	values ('Kamila','Nowak','Kobieta','Limanowa',NULL,NULL);
+	values ('Kamila','Nowak','Kobieta','Krakow',NULL,NULL);
+	
+	insert into bd1_OSOBY (OSO_Imie,OSO_Nazwisko,OSO_Plec,OSO_Adres_Zamieszkania,OSO_Kod_Pocztowy,OSO_Telefon)
+	values ('Szymon','Karambol','Mezczyzna','Limanowa',NULL,NULL);
 	
 	column OSO_ID HEADING 'ID' for 999999
 	column OSO_Imie HEADING 'Imie' for A20
@@ -578,6 +581,9 @@ TABLESPACE STUDENT_DATA;
 	
 	insert into bd1_KLIENCI (OSO_ID)
 	values ('8');
+	
+	insert into bd1_KLIENCI (OSO_ID)
+	values ('9');
 
 	column KLI_ID HEADING 'ID_Klienta' for 999999
 	column OSO_ID HEADING 'ID_Osoby' for 99999
@@ -746,7 +752,7 @@ TABLESPACE STUDENT_DATA;
 	values ('2019-10-03','Kradziez');
 
 	column OSK_ID HEADING 'ID_Oskarzenia' for 999999
-	column OSK_Data HEADING 'Data oskarzenia' for A30
+	column OSK_Data HEADING 'Data oskarzenia' for A20
 	column OSK_Rodzaj HEADING 'Rodzaj oskarzenia' for A30
 
 	select * from bd1_OSKARZENIA;
@@ -844,7 +850,8 @@ PROMPT   table bd1_PRZESTEPSTWA;
 create table bd1_PRZESTEPSTWA (
 PRZ_ID		number(8) NOT NULL,		
 PRZ_Data  	DATE NOT NULL,		
-PRZ_Rodzaj	varchar2(64) NOT NULL
+PRZ_Rodzaj	varchar2(64) NOT NULL,
+PRZ_Uwagi varchar2(64)
 )
 PCTFREE 5
 TABLESPACE STUDENT_DATA;
@@ -903,7 +910,8 @@ TABLESPACE STUDENT_DATA;
 
 	column PRZ_ID HEADING 'ID_Przestepstwa' for 999999
 	column PRZ_Data HEADING 'Data przestepstwa' for A20
-	column PRZ_Rodzaj HEADING 'Rodzaj przestepstwa' for A25
+	column PRZ_Rodzaj HEADING 'Rodzaj przestepstwa' for A35
+	column PRZ_Uwagi HEADING 'Uwagi' for A25
 
 	select * from bd1_PRZESTEPSTWA;
 ---------------------------
@@ -1061,7 +1069,7 @@ TABLESPACE STUDENT_DATA;
 
 
 	column DOW_ID HEADING 'ID_Dowodu' for 999999
-	column DOW_Opis HEADING 'Opis dowodu' for A35
+	column DOW_Opis HEADING 'Opis dowodu' for A40
 	column DOW_Rodzaj HEADING 'Rodzaj dowodu' for A25
 	column SLE_ID HEADING 'ID_Sledztwa' for 99999
 
@@ -1146,7 +1154,7 @@ TABLESPACE STUDENT_DATA;
 	values ('Zeznanie na niekorzysc oskazonego','2021-08-21','Swiadek zdarzenia','Matka ofiary','Zeznanie swojej wersje zdarzen');
 	
 	column STA_SW_ID HEADING 'ID_Stanowiska_Swiadka' for 999999
-	column STA_SW_Zeznania HEADING 'Stanowisko swiadka zeznania' for A32
+	column STA_SW_Zeznania HEADING 'Stanowisko swiadka zeznania' for A35
 	column STA_SW_Data HEADING 'Data skladania stanowiska' for A32
 	column STA_SW_Rodzaj HEADING 'Rodzaj stanowiska swiadka' for A30
 	column STA_SW_Typ_Swiadka HEADING 'Typ swiadka' for A25
@@ -2107,6 +2115,195 @@ ID_Zeznan Opis stanowiska swiadka          Data skladania stanowiska        Typ 
         2 Zeznanie swojej wersje zdarzen   2019-11-09                       Opinia bieglego                     Mozna wykorzystac zeznan
         3 Zeznanie swojej wersje zdarzen   2019-11-09                       Opinia bieglego                     mozna wykorzystac
         4 Zeznanie swojej wersje zdarzen   2022-01-28                       Opinia bieglego                     nie mozna wykorzystac 					*/
+
+CREATE OR REPLACE VIEW bd1_V_kli_oso 
+	AS
+	select k.KLI_ID, k.OSO_ID, OSO_Imie, OSO_Nazwisko, OSO_Plec, OSO_Adres_Zamieszkania, OSO_Kod_Pocztowy, OSO_Telefon
+		from bd1_KLIENCI k
+		INNER JOIN bd1_OSOBY o on o.OSO_ID=k.OSO_ID;
 		
+		
+		select * from bd1_V_kli_oso;
+		
+	CREATE OR REPLACE PROCEDURE bd1_P_kli_oso (
+	inOSO_Adres_Zamieszkania IN bd1_OSOBY.OSO_Adres_Zamieszkania%TYPE,
+	inOSO_Kod_Pocztowy IN bd1_OSOBY.OSO_Kod_Pocztowy%TYPE	)
+	IS
+	PRAGMA AUTONOMOUS_TRANSACTION; 
+	--
+	CURSOR curOSO_Adres(cOSO_Adres IN bd1_OSOBY.OSO_Adres_Zamieszkania%TYPE)
+	IS
+	select * from bd1_OSOBY
+		where OSO_Adres_Zamieszkania = cOSO_Adres
+	FOR UPDATE of OSO_Kod_Pocztowy; 
+	--
+	wiersz bd1_OSOBY%ROWTYPE;
+	--
+	ile number := 0;
+	status number := 0;
+BEGIN
+	--
+	OPEN curOSO_Adres(inOSO_Adres_Zamieszkania);
+	---
+	LOOP 
+	FETCH curOSO_Adres INTO wiersz; 
+		--
+		-- warunek wyjścia z pętli
+		EXIT WHEN curOSO_Adres%NOTFOUND OR curOSO_Adres%ROWCOUNT <1;
+		--
+		ile := ile + 1;
+			IF wiersz.OSO_Kod_Pocztowy IS NULL THEN
+			--
+				IF inOSO_Kod_Pocztowy IS NOT NULL then	
+					--
+					-- kursor niejawny
+					UPDATE bd1_OSOBY set OSO_Kod_Pocztowy = inOSO_Kod_Pocztowy
+					WHERE CURRENT OF curOSO_Adres;
+					-- 
+					-- check update
+					if SQL%FOUND THEN 
+						status := status + 1; 
+					ELSE 
+						status := 0; 
+					END IF;
+				END IF;
+			--
+			END IF;
+		--	
+	END LOOP;
+	--
+	CLOSE curOSO_Adres;
+	--
+	-- prosta obsługa transakcji
+	IF ile = status THEN
+		DBMS_OUTPUT.PUT_LINE('bd1_p_Set_OSO_Kod_Pocztowy: COMMIT :) ');
+		COMMIT;
+	ELSE 
+		DBMS_OUTPUT.PUT_LINE('bd1_p_Set_OSO_Kod_Pocztowy: ROLLBACK :( ');
+		ROLLBACK;
+	END IF;
+END;
+/
+
+exec bd1_P_kli_oso('Limanowa','34-600');
+
+/*
+Procedure created.
+
+bd1_p_Set_OSO_Kod_Pocztowy: COMMIT :)
+
+PL/SQL procedure successfully completed.
+*/
+
+select * from bd1_V_kli_oso;
+/*
+ID_Klienta ID_Osoby Imie                 Nazwisko             Plec                 Adres Zamieszkania   Kod Pocztowy         Numer Telefonu
+---------- -------- -------------------- -------------------- -------------------- -------------------- -------------------- --------------------
+         1        3 Dominik              Filipek              Mezczyzna            Bochnia              33-500               123-987-456
+         2        4 Natalia              Nowak                Kobieta              Krakow               33-661               987-654-321
+         3        7 Pawel                Ciula                Mezczyzna            Limanowa             34-600
+         4        8 Kamila               Nowak                Kobieta              Krakow
+         5        9 Szymon               Karambol             Mezczyzna            Limanowa             34-600 
+*/
+
+
+	CREATE OR REPLACE VIEW bd1_V_prz_sle 
+	AS
+	select p.PRZ_ID, p.PRZ_Data, p.PRZ_Rodzaj, p.PRZ_Uwagi, s.SLE_ID,s.SLE_Data
+		from bd1_PRZESTEPSTWA p
+		INNER JOIN bd1_SLEDZTWA s on s.PRZ_ID=p.PRZ_ID;
+		
+		
+		select * from bd1_V_prz_sle;
+/*
+ID_Przestepstwa Data przestepstwa    Rodzaj przestepstwa                 Uwagi           ID_Sledztwa Data sledztwa
+--------------- -------------------- ----------------------------------- --------------- ----------- --------------------
+              2 2021-10-21           Bezprawne zbieranie danych o zyciu                            1 2021-11-15
+                                     prywatnym
+
+              1 2021-11-27           Drogowe                                                       2 2019-11-15
+*/			  
+	
+	
+	CREATE OR REPLACE PROCEDURE bd1_P_prz_sle (
+	inPRZ_Rodzaj IN bd1_PRZESTEPSTWA.PRZ_Rodzaj%TYPE,
+	inPRZ_Uwagi IN bd1_PRZESTEPSTWA.PRZ_Uwagi%TYPE	)
+	IS
+	PRAGMA AUTONOMOUS_TRANSACTION; 
+	--
+	CURSOR curPRZ_Rodzaj(cPRZ_Rodzaj IN bd1_PRZESTEPSTWA.PRZ_Rodzaj%TYPE)
+	IS
+	select * from bd1_PRZESTEPSTWA
+		where PRZ_Rodzaj = cPRZ_Rodzaj
+	FOR UPDATE of PRZ_Uwagi; 
+	--
+	wiersz bd1_PRZESTEPSTWA%ROWTYPE;
+	--
+	ile number := 0;
+	status number := 0;
+BEGIN
+	--
+	OPEN curPRZ_Rodzaj(inPRZ_Rodzaj);
+	---
+	LOOP 
+	FETCH curPRZ_Rodzaj INTO wiersz; 
+		--
+		-- warunek wyjścia z pętli
+		EXIT WHEN curPRZ_Rodzaj%NOTFOUND OR curPRZ_Rodzaj%ROWCOUNT <1;
+		--
+		ile := ile + 1;
+			IF wiersz.PRZ_Uwagi IS NULL THEN
+			--
+				IF inPRZ_Uwagi IS NOT NULL then	
+					--
+					-- kursor niejawny
+					UPDATE bd1_PRZESTEPSTWA set PRZ_Uwagi = inPRZ_Uwagi
+					WHERE CURRENT OF curPRZ_Rodzaj;
+					-- 
+					-- check update
+					if SQL%FOUND THEN 
+						status := status + 1; 
+					ELSE 
+						status := 0; 
+					END IF;
+				END IF;
+			--
+			END IF;
+		--	
+	END LOOP;
+	--
+	CLOSE curPRZ_Rodzaj;
+	--
+	-- prosta obsługa transakcji
+	IF ile = status THEN
+		DBMS_OUTPUT.PUT_LINE('bd1_p_Set_PRZ_Uwagi: COMMIT :) ');
+		COMMIT;
+	ELSE 
+		DBMS_OUTPUT.PUT_LINE('bd1_p_Set_PRZ_Uwagi: ROLLBACK :( ');
+		ROLLBACK;
+	END IF;
+END;
+/
+
+/*Procedure created.
+
+bd1_p_Set_PRZ_Uwagi: COMMIT :)
+
+PL/SQL procedure successfully completed.
+*/
+exec bd1_P_prz_sle('Drogowe','Zostala dokonana kontrola trzezwosci');
+
+select * from bd1_V_prz_sle;
+
+/*
+ID_Przestepstwa Data przestepstwa    Rodzaj przestepstwa                 Uwagi                     ID_Sledztwa Data sledztwa
+--------------- -------------------- ----------------------------------- ------------------------- ----------- --------------------
+              2 2021-10-21           Bezprawne zbieranie danych o zyciu                                      1 2021-11-15
+                                     prywatnym
+
+              1 2021-11-27           Drogowe                             Zostala dokonana kontrola           2 2019-11-15
+                                                                          trzezwosci
+
+*/		
 		
 SPOOL OFF
