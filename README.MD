@@ -9,7 +9,8 @@
 * Subquestions and perspectives,
 * Indexes and TCS - Transactions,
 * Insert into loop, 
-* Implicit cursors.
+* Implicit cursors,
+* Explicit cursors.
 
 For the purposes of the project, names of tables, data, descriptions, etc. are in Polish
 ## License
