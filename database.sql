@@ -1243,106 +1243,32 @@ WHERE DROPPED='NO';
 
 
 SELECT * FROM BD1_OSOBY WHERE OSO_ID > '5';
-/*ID_Osoby Imie            Nazwisko        Plec                 Adres Zamieszkania   Kod Pocztowy         Numer Telefonu
--------- --------------- --------------- -------------------- -------------------- -------------------- --------------------
-       6 Julia           Czesak          Kobieta              Nowy Sacz            33-300
-       7 Pawel           Ciula           Mezczyzna            Mszalnica            33-300
-       8 Kamila          Kowalska        Kobieta              Limanowa             34-600													*/
-
 
 SELECT OSO_ID,OSO_Imie,OSO_Nazwisko,OSO_Plec,OSO_Adres_Zamieszkania FROM bd1_OSOBY WHERE OSO_Nazwisko='Nowak' AND OSO_Adres_Zamieszkania='Limanowa'; 
  
-/*ID_Osoby Imie            Nazwisko        Plec            Adres Zamieszka
--------- --------------- --------------- --------------- ---------------
-       2 Kamil           Nowak           Mezczyzna       Limanowa 			*/
- 
-
 SELECT HIS_Pracownika_ID,HIS_Data_Zatrudnienia,HIS_Data_Zwolnienia,INS_Lokalizacja FROM bd1_HISTORIA_ZATRUDNIENIA, bd1_INSTYTUTY WHERE bd1_HISTORIA_ZATRUDNIENIA.INS_ID=bd1_INSTYTUTY.INS_ID AND INS_Lokalizacja='Bochnia';
-/*ID Histori Pracownika Data Zatrudnien Data Zwolnienia Lokalizacja instytutu
---------------------- --------------- --------------- ----------------------------
-                    1 2021-08-21                      Bochnia
-                    2 2019-08-21                      Bochnia					*/
-					
 
 SELECT * FROM bd1_KARY WHERE KAR_Data_Zakonczenia > '2020-01-01' AND KAR_WYROK='Wiezienie';
-/*ID_Kary Wyrok                                                            Data rozpo Data zakon ID_Oskarzenia
-------- ---------------------------------------------------------------- ---------- ---------- -------------
-      1 Wiezienie                                                        2021-11-29 2025-11-21             2 */
 	  
 UPDATE bd1_HISTORIA_ZATRUDNIENIA SET HIS_Data_Zwolnienia='2021-12-07' WHERE HIS_Pracownika_ID LIKE '1';
 SELECT * FROM bd1_HISTORIA_ZATRUDNIENIA WHERE HIS_Pracownika_ID LIKE '1';
-/*ID Histori Pracownika Data Zatrudnien Data Zwolnienia Stanowisko ID Instytut ID ID_Pracownika
---------------------- --------------- --------------- ------------- ----------- -------------
-                    1 2021-08-21      2021-12-07                  1           3             1 */
-					
------------------
-	--NVL
------------------					
 
 SELECT OSO_Imie,OSO_Nazwisko, NVL(OSO_Telefon, 'nie podano numeru telefonu') Numer_Telefonu FROM bd1_OSOBY;
-/*Imie                 Nazwisko             NUMER_TELEFONU
--------------------- -------------------- --------------------------
-Jakub                Kowalski             123-456-789
-Kamil                Nowak                987-654-321
-Dominik              Filipek              123-987-456
-Natalia              Nowak                987-654-321
-Artur                Nowak                nie podano numeru telefonu
-Julia                Czesak               nie podano numeru telefonu
-Pawel                Ciula                nie podano numeru telefonu
-Kamila               Kowalska             nie podano numeru telefonu */
 
 SELECT DOW_ID,SLE_ID,DOW_Rodzaj, NVL(DOW_Opis, 'nie podano opisu') DOW_Opis FROM bd1_DOWODY;
-/* ID_Dowodu ID_Sledztwa Rodzaj dowodu        Opis dowodu
---------- ----------- -------------------- --------------------
-        1           1 Bron                 Dowod zebrany z miej
-                                           sca zbrodni
 
-        2           2 Przedmiot kradiezy   Dowod zabezpieczony
-                                           w domu oskazonego
-
-        3           1 Przedmiot kradiezy   nie podano opisu */
-		
 SELECT KAR_ID, KAR_Wyrok,KAR_Data_Rozpoczecia,KAR_Data_Zakonczenia, NVL(ROUND(KAR_Data_Zakonczenia - CURRENT_DATE), 0) Koniec_za FROM bd1_KARY;
-/*ID_Kary Wyrok                                                            Data rozpo Data zakon  KONIEC_ZA
-------- ---------------------------------------------------------------- ---------- ---------- ----------
-      1 Wiezienie                                                        2021-11-29 2025-11-21       1444
-      2 Wyrok w zawieszeniu                                              2021-10-15 2022-11-15        342 */
-	  
-SELECT OSO_Imie,OSO_Nazwisko, NVL(OSO_Kod_Pocztowy, 'nie podano kodu pocztowego') Kod_pocztowy FROM bd1_OSOBY;
-/*Imie                 Nazwisko             KOD_POCZTOWY
--------------------- -------------------- --------------------------
-Jakub                Kowalski             33-300
-Kamil                Nowak                34-600
-Dominik              Filipek              33-500
-Natalia              Nowak                33-661
-Artur                Nowak                33-661
-Julia                Czesak               33-300
-Pawel                Ciula                nie podano kodu pocztowego
-Kamila               Kowalska             nie podano kodu pocztowego*/
 
+SELECT OSO_Imie,OSO_Nazwisko, NVL(OSO_Kod_Pocztowy, 'nie podano kodu pocztowego') Kod_pocztowy FROM bd1_OSOBY;
 
 SELECT kli.KLI_ID,kli.OSO_ID,oso.OSO_Imie,oso.OSO_Nazwisko,oso.OSO_Plec,oso.OSO_Adres_Zamieszkania
 FROM bd1_KLIENCI kli 
 INNER JOIN bd1_OSOBY oso ON kli.OSO_ID=oso.OSO_ID;
-/*
-ID_Klienta ID_Osoby Imie                 Nazwisko             Plec                 Adres Zamieszkania
----------- -------- -------------------- -------------------- -------------------- --------------------
-         1        3 Dominik              Filipek              Mezczyzna            Bochnia
-         2        4 Natalia              Nowak                Kobieta              Krakow
-         3        7 Pawel                Ciula                Mezczyzna            Mszalnica
-         4        8 Kamila               Nowak                Kobieta              Limanowa */
-		 
+
 SELECT his.HIS_Data_Zatrudnienia,his.PRA_ID,ins.INS_Lokalizacja,sta.STA_OPIS
 FROM bd1_HISTORIA_ZATRUDNIENIA his 
 INNER JOIN bd1_INSTYTUTY ins ON his.INS_ID=ins.INS_ID 
 INNER JOIN bd1_STANOWISKO sta ON his.STA_ID=sta.STA_ID;
-/*
-Data Zatrudnienia    ID_Pracownika Lokalizacja instytut Opis stanowiska
--------------------- ------------- -------------------- --------------------
-2021-08-21                       1 Bochnia              Obrona klienta
-2019-08-21                       2 Bochnia              Oskazanie oskazonego
-2019-08-21                       3 Nowy Sacz            Oskazanie oskazonego
-2019-08-21                       4 Nowy Sacz            Prowadzenie rozpraw */
 
 COLUMN pracownik HEADING 'Imie i nazwisko pracownika' FORMAT A26
 COLUMN klient HEADING 'Imie i nazwisko klienta' FORMAT A25
@@ -1355,38 +1281,18 @@ INNER JOIN bd1_KLIENCI kli ON usl.KLI_ID=kli.KLI_ID
 INNER JOIN bd1_OSOBY oso ON pra.OSO_ID=oso.OSO_ID 
 INNER JOIN bd1_OSOBY oso_ ON kli.OSO_ID=oso_.OSO_ID
 INNER JOIN bd1_PRZESTEPSTWA prze ON spr.PRZ_ID=prze.PRZ_ID;
-/*
-ID_Sprawy_Sadowej Imie i nazwisko pracownika Imie i nazwisko klienta   Rodzaj przestepstwa klienta
------------------ -------------------------- ------------------------- -----------------------------------
-                1 Kamil Nowak                Dominik Filipek           Drogowe
-                2 Kamil Nowak                Natalia Nowak             Bezprawne zbieranie danych o zyciu
-                                                                       prywatnym
-*/
-
 
 --------HAVING---------
 
 -- ilosc instytutow znajduajcych sie w tym samym miescie (min 2)
 SELECT INS_Lokalizacja, COUNT(INS_Lokalizacja) AS Ilosc FROM bd1_INSTYTUTY GROUP BY INS_Lokalizacja HAVING COUNT(INS_Lokalizacja)>1;
-/*Lokalizacja instytut      ILOSC
--------------------- ----------
-Warszawa                      2*/
 
 -- ilosc osob o tym samym nazwisku w bazie danych (min 2)
 COLUMN a HEADING 'Ilosc osob o takim samym nazwisku'
 SELECT OSO_Nazwisko, COUNT(OSO_Nazwisko) AS a FROM bd1_OSOBY GROUP BY OSO_Nazwisko HAVING COUNT(OSO_Nazwisko)>1 ORDER BY OSO_Nazwisko DESC;
-/*Nazwisko             Ilosc osob o takim samym nazwisku
--------------------- ---------------------------------
-Nowak                                                4
-Kowalski                                             2 */
+
 -- stanowiska swiadkow zdarzen w bazie danych zeznane po dacie 2020-01-01 ustawione w kolejnosci malejacej (od najnowszych do najstarszych)
 SELECT STA_SW_Rodzaj,STA_SW_Data  FROM bd1_STANOWISKO_SWIADKA GROUP BY STA_SW_Data,STA_SW_Rodzaj HAVING MAX(STA_SW_Data) > '2020-01-01' ORDER BY STA_SW_Data DESC;
-/*Rodzaj stanowiska sw Data skladanai stano
--------------------- --------------------
-Swiadek zdarzenia    2021-10-09
-Swiadek zdarzenia    2021-08-21
-Swiadek zdarzenia    2021-06-09
-Swiadek zdarzenia    2021-05-10 */
 
 COLUMN pracownik HEADING 'Imie i nazwisko pracownika' FORMAT A26 
 SELECT pra.PRA_ID, his.HIS_Data_Zatrudnienia, oso.OSO_Imie||' '|| oso.OSO_Nazwisko AS pracownik, sta.STA_Rodzaj, sta.STA_Zarobki FROM  bd1_HISTORIA_ZATRUDNIENIA his 
@@ -1394,11 +1300,6 @@ INNER JOIN bd1_PRACOWNICY pra ON his.PRA_ID=pra.PRA_ID
 INNER JOIN bd1_OSOBY oso ON pra.OSO_ID=oso.OSO_ID 
 INNER JOIN bd1_STANOWISKO sta ON his.STA_ID=sta.STA_ID
 WHERE sta.STA_Zarobki BETWEEN (SELECT AVG(STA_Zarobki) FROM bd1_STANOWISKO) AND (SELECT MAX(STA_Zarobki) FROM bd1_STANOWISKO); 
-/*ID_Pracownika Data Zatrudnienia    Imie i nazwisko pracownika Rodzaj stanowiska    Stanowisko zarobki
-------------- -------------------- -------------------------- -------------------- ------------------
-            2 2019-02-11           Kamil Nowak                Prokurator                         7500
-            3 2019-01-15           Artur Nowak                Prokurator                         7500
-            4 2019-09-06           Julia Kowalski             Sedzia Sadowy                     16000	*/
 
 COLUMN pracownik HEADING 'Imie i nazwisko pracownika' FORMAT A26 
 SELECT pra.PRA_ID, his.HIS_Data_Zatrudnienia, oso.OSO_Imie||' '|| oso.OSO_Nazwisko AS pracownik,ins.INS_Lokalizacja, sta.STA_Rodzaj, sta.STA_Zarobki  FROM  bd1_HISTORIA_ZATRUDNIENIA his 
@@ -1408,12 +1309,6 @@ INNER JOIN bd1_STANOWISKO sta ON his.STA_ID=sta.STA_ID
 INNER JOIN bd1_STANOWISKO sta ON his.STA_ID=sta.STA_ID
 INNER JOIN bd1_INSTYTUTY ins ON his.INS_ID=ins.INS_ID
 WHERE sta.STA_Rodzaj IN(SELECT sta.STA_Rodzaj FROM bd1_STANOWISKO WHERE sta.STA_Rodzaj LIKE 'Prokurator'); 
-/*
-ID_Pracownika Data Zatrudnienia    Imie i nazwisko pracownika Lokalizacja instytut Rodzaj stanowiska    Stanowisko zarobki
-------------- -------------------- -------------------------- -------------------- -------------------- ------------------
-            2 2019-02-11           Kamil Nowak                Bochnia              Prokurator                         7500
-            3 2019-01-15           Artur Nowak                Nowy Sacz            Prokurator                         7500 */
-
 
 CREATE OR REPLACE VIEW Informacje_o_pracowniku(ID_Pracownika, Zatrudnienia, Imie_i_nazwisko_pracownika, Rodzaj_stanowiska, Stanowisko_zarobki)
 AS SELECT pra.PRA_ID, his.HIS_Data_Zatrudnienia, oso.OSO_Imie||' '|| oso.OSO_Nazwisko AS pracownik, sta.STA_Rodzaj, sta.STA_Zarobki FROM  bd1_HISTORIA_ZATRUDNIENIA his 
@@ -1423,34 +1318,6 @@ INNER JOIN bd1_STANOWISKO sta ON his.STA_ID=sta.STA_ID
 WHERE sta.STA_Zarobki BETWEEN (SELECT AVG(STA_Zarobki) FROM bd1_STANOWISKO) AND (SELECT MAX(STA_Zarobki) FROM bd1_STANOWISKO); 
 
 describe Informacje_o_pracowniku;
-/* 
- Name                                                                                                                                     Null?    Type
- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------------------------------------------------------------------
- ID_PRACOWNIKA                                                                                                                            NOT NULL NUMBER(8)
- ZATRUDNIENIA                                                                                                                             NOT NULL VARCHAR2(64)
- IMIE_I_NAZWISKO_PRACOWNIKA                                                                                                                VARCHAR2(65)
- RODZAJ_STANOWISKA                                                                                                                        NOT NULL VARCHAR2(64)
- STANOWISKO_ZAROBKI                                                                                                                        NUMBER(8)
-
-
-ALTER TABLE bd1_HISTORIA_ZATRUDNIENIA DISABLE CONSTRAINT FK1_bd1_HISTORIA_ZATRUDNIENIA;
-ALTER TABLE bd1_HISTORIA_ZATRUDNIENIA DISABLE CONSTRAINT FK3_bd1_HISTORIA_ZATRUDNIENIA;
-ALTER TABLE bd1_PRACOWNICY DISABLE CONSTRAINT FK1_bd1_PRACOWNICY;
-
-UPDATE Informacje_o_pracowniku SET Stanowisko_zarobki='8800' WHERE Rodzaj_stanowiska LIKE 'Prokurator';
- 
-ERROR at line 1:
-ORA-01779: cannot modify a column which maps to a non key-preserved table 
-
-INSERT INTO Informacje_o_pracowniku(ID_Pracownika, Zatrudnienia, Imie_i_nazwisko_pracownika, Rodzaj_stanowiska, Stanowisko_zarobki)
-values ('5','2022-01-09','Kamil Czesak','Komornik','2600');
-
-ERROR at line 1:
-ORA-01779: cannot modify a column which maps to a non key-preserved table 
-
-DELETE FROM Informacje_o_pracowniku WHERE Imie_i_nazwisko_pracownika LIKE 'Kamil Nowak';   
-
-1 row deleted. */
 
 CREATE OR REPLACE VIEW Informacje_o_prokuratorach(ID_Pracownika, Zatrudnienia, Imie_i_nazwisko_pracownika, Lokalizacja_instytut, Rodzaj_stanowiska, Stanowisko_zarobki)
 AS SELECT pra.PRA_ID, his.HIS_Data_Zatrudnienia, oso.OSO_Imie||' '|| oso.OSO_Nazwisko AS pracownik,ins.INS_Lokalizacja, sta.STA_Rodzaj, sta.STA_Zarobki  FROM  bd1_HISTORIA_ZATRUDNIENIA his 
@@ -1463,39 +1330,7 @@ WHERE sta.STA_Rodzaj IN(SELECT sta.STA_Rodzaj FROM bd1_STANOWISKO WHERE sta.STA_
 
 describe Informacje_o_prokuratorach;
 
-/* Name                  Null?    Type
- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------------------------------------------------------------------
- ID_PRACOWNIKA             		NOT NULL NUMBER(8)
- ZATRUDNIENIA              		NOT NULL VARCHAR2(64)
- IMIE_I_NAZWISKO_PRACOWNIKA 	VARCHAR2(65)
- LOKALIZACJA_INSTYTUT       	NOT NULL VARCHAR2(64)
- RODZAJ_STANOWISKA 				NOT NULL VARCHAR2(64)
- STANOWISKO_ZAROBKI         	NUMBER(8) 
- 
-ALTER TABLE bd1_HISTORIA_ZATRUDNIENIA DISABLE CONSTRAINT FK1_bd1_HISTORIA_ZATRUDNIENIA;
-ALTER TABLE bd1_HISTORIA_ZATRUDNIENIA DISABLE CONSTRAINT FK3_bd1_HISTORIA_ZATRUDNIENIA;
-ALTER TABLE bd1_HISTORIA_ZATRUDNIENIA DISABLE CONSTRAINT FK2_bd1_HISTORIA_ZATRUDNIENIA;
-ALTER TABLE bd1_PRACOWNICY DISABLE CONSTRAINT FK1_bd1_PRACOWNICY;
-
-UPDATE Informacje_o_prokuratorach SET Lokalizacja_instytut='Bochnia' WHERE Lokalizacja_instytut LIKE 'Nowy Sacz';
-
-ERROR at line 1:
-ORA-01779: cannot modify a column which maps to a non key-preserved table 
-
-INSERT INTO Informacje_o_prokuratorach(ID_Pracownika, Zatrudnienia, Imie_i_nazwisko_pracownika, Lokalizacja_instytut, Rodzaj_stanowiska, Stanowisko_zarobki)
-values ('10','2022-01-01','Filip Nowak','Krakow','Adwokat','4200');
-
-ERROR at line 1:
-ORA-01779: cannot modify a column which maps to a non key-preserved table 
-
-DELETE FROM Informacje_o_prokuratorach WHERE Lokalizacja_instytut LIKE 'Nowy Sacz';
- 
-1 row deleted. */
-
-
----------------------------	---------------------------
------------ INDEX MONITORING	
---------------------------- ---------------------------	
+---------------------------	INDEX MONITORING ---------------------------	
 
 	column INDEX_NAME HEADING 'NAME' for A32
     column INDEX_TYPE HEADING 'TYPE' for A10
@@ -1508,126 +1343,22 @@ DELETE FROM Informacje_o_prokuratorach WHERE Lokalizacja_instytut LIKE 'Nowy Sac
             INITIAL_EXTENT/1024||'[kB]' IE 
     FROM USER_INDEXES;  
 	
-/*	NAME                             TYPE       TABLE                PCT_FREE                                    1oEXTENT
--------------------------------- ---------- -------------------- ------------------------------------------- --------------------------------------------
-BD1_IX_STA_SW_RODZAJ             NORMAL     BD1_STANOWISKO_SWIAD 10[%]                                       64[kB]
-                                            KA
-
-BD1_IX_KAR_WYROK                 NORMAL     BD1_KARY             10[%]                                       64[kB]
-BD1_PRZESTEPSTWA                 NORMAL     BD1_PRZESTEPSTWA     1[%]                                        64[kB]
-BD1_PRACOWNICY                   NORMAL     BD1_PRACOWNICY       1[%]                                        64[kB]
-BD1_STANOWISKO                   NORMAL     BD1_STANOWISKO       1[%]                                        64[kB]
-BD1_HISTORIA_ZATRUDNIENIA        NORMAL     BD1_HISTORIA_ZATRUDN 1[%]                                        64[kB]
-                                            IENIA
-
-BD1_SPRAWY_SADOWE                NORMAL     BD1_SPRAWY_SADOWE    1[%]                                        64[kB]
-BD1_IX_OSO_NAZWISKO              NORMAL     BD1_OSOBY            10[%]                                       64[kB]
-BD1_USLUGI                       NORMAL     BD1_USLUGI           1[%]                                        64[kB]
-BD1_IX_OSO_ID                    NORMAL     BD1_PRACOWNICY       10[%]                                       64[kB]
-BD1_INSTYTUTY                    NORMAL     BD1_INSTYTUTY        1[%]                                        64[kB]
-BD1_IX_DOW_RODZAJ                NORMAL     BD1_DOWODY           10[%]                                       64[kB]
-BD1_IX_ZEZ_OPIS                  NORMAL     BD1_ZEZNANIA         10[%]                                       64[kB]
-BD1_IX_KAR_DATA_ROZPOCZECIA      NORMAL     BD1_KARY             10[%]                                       64[kB]
-BD1_IX_OSK_RODZAJ                NORMAL     BD1_OSKARZENIA       10[%]                                       64[kB]
-BD1_OSKARZENIA                   NORMAL     BD1_OSKARZENIA       1[%]                                        64[kB]
-BD1_IX_HIS_DATA_ZATRUDNIENIA     NORMAL     BD1_HISTORIA_ZATRUDN 10[%]                                       64[kB]
-                                            IENIA
-
-BD1_KARY                         NORMAL     BD1_KARY             1[%]                                        64[kB]
-BD1_OSOBY                        NORMAL     BD1_OSOBY            1[%]                                        64[kB]
-BD1_IX_OSO_ADRES_ZAMIESZKANIA    NORMAL     BD1_OSOBY            10[%]                                       64[kB]
-BD1_IX_INS_LOKALIZACJA           NORMAL     BD1_INSTYTUTY        10[%]                                       64[kB]
-BD1_IX_STA_SW_DATA               NORMAL     BD1_STANOWISKO_SWIAD 10[%]                                       64[kB]
-                                            KA
-
-BD1_IX_KAR_DATA_ZAKONCZENIA      NORMAL     BD1_KARY             10[%]                                       64[kB]
-BD1_IX_ZEZ_TYP                   NORMAL     BD1_ZEZNANIA         10[%]                                       64[kB]
-BD1_IX_PRZ_RODZAJ                NORMAL     BD1_PRZESTEPSTWA     10[%]                                       64[kB]
-BD1_STANOWISKO_SWIADKA           NORMAL     BD1_STANOWISKO_SWIAD 1[%]                                        64[kB]
-                                            KA
-
-BD1_IX_OSO_IMIE                  NORMAL     BD1_OSOBY            10[%]                                       64[kB]
-BD1_ZEZNANIA                     NORMAL     BD1_ZEZNANIA         1[%]                                        64[kB]
-BD1_IX_HIS_HIS_DATA_ZWOLNIENIA   NORMAL     BD1_HISTORIA_ZATRUDN 10[%]                                       64[kB]
-                                            IENIA
-
-BD1_DOWODY                       NORMAL     BD1_DOWODY           1[%]                                        64[kB]
-BD1_IX_DOW_OPIS                  NORMAL     BD1_DOWODY           10[%]                                       64[kB]
-BD1_IX_KLI_ID                    NORMAL     BD1_USLUGI           10[%]                                       64[kB]
-BD1_IX_PRA_ID                    NORMAL     BD1_USLUGI           10[%]                                       64[kB]
-BD1_KLIENCI                      NORMAL     BD1_KLIENCI          1[%]                                        64[kB]
-BD1_IX_STA_RODZAJ                NORMAL     BD1_STANOWISKO       10[%]                                       64[kB]
-BD1_SLEDZTWA                     NORMAL     BD1_SLEDZTWA         1[%]                                        64[kB]
-BD1_IX_SLE_DATA                  NORMAL     BD1_SLEDZTWA         10[%]                                       64[kB]
-
-37 rows selected.	*/
-
 Commit;
 
 select ROWID, OSO_ID, OSO_IMIE, OSO_NAZWISKO, OSO_Adres_Zamieszkania from bd1_OSOBY;
-
-/*
-ROWID              ID_Osoby Imie                 Nazwisko             Adres Zamieszkania
------------------- -------- -------------------- -------------------- --------------------
-AALwOaABZAAAEYdAAA        1 Jakub                Kowalski             Nowy Sacz
-AALwOaABZAAAEYdAAB        2 Kamil                Nowak                Krakow
-AALwOaABZAAAEYdAAC        3 Dominik              Filipek              Bochnia
-AALwOaABZAAAEYdAAD        4 Natalia              Nowak                Krakow
-AALwOaABZAAAEYdAAE        5 Artur                Nowak                Krakow
-AALwOaABZAAAEYdAAF        6 Julia                Kowalski             Nowy Sacz
-AALwOaABZAAAEYdAAG        7 Pawel                Ciula                Mszalnica
-AALwOaABZAAAEYdAAH        8 Kamila               Nowak                Limanowa */
 
 insert into bd1_OSOBY (OSO_Imie,OSO_Nazwisko,OSO_Plec,OSO_Adres_Zamieszkania,OSO_Kod_Pocztowy,OSO_Telefon)
 	values ('Piotr','Kasparow','Mezczyzna','Limanowa','34-600','123-456-789');
 	
 select ROWID, OSO_ID, OSO_IMIE, OSO_NAZWISKO, OSO_Adres_Zamieszkania from bd1_OSOBY;
 
-/*
-ROWID              ID_Osoby Imie                 Nazwisko             Adres Zamieszkania
------------------- -------- -------------------- -------------------- --------------------
-AALwcwABZAAAEYdAAA        1 Jakub                Kowalski             Nowy Sacz
-AALwcwABZAAAEYdAAB        2 Kamil                Nowak                Krakow
-AALwcwABZAAAEYdAAC        3 Dominik              Filipek              Bochnia
-AALwcwABZAAAEYdAAD        4 Natalia              Nowak                Krakow
-AALwcwABZAAAEYdAAE        5 Artur                Nowak                Krakow
-AALwcwABZAAAEYdAAF        6 Julia                Kowalski             Nowy Sacz
-AALwcwABZAAAEYdAAG        7 Pawel                Ciula                Mszalnica
-AALwcwABZAAAEYdAAH        8 Kamila               Nowak                Limanowa
-AALwcwABZAAAEYdAAI        9 Piotr                Kasparow             Limanowa */
-
 rollback;
 
 select ROWID, OSO_ID, OSO_IMIE, OSO_NAZWISKO, OSO_Adres_Zamieszkania from bd1_OSOBY;
 
-/*
-ROWID              ID_Osoby Imie                 Nazwisko             Adres Zamieszkania
------------------- -------- -------------------- -------------------- --------------------
-AALwh2ABZAAAEYdAAA        1 Jakub                Kowalski             Nowy Sacz
-AALwh2ABZAAAEYdAAB        2 Kamil                Nowak                Krakow
-AALwh2ABZAAAEYdAAC        3 Dominik              Filipek              Bochnia
-AALwh2ABZAAAEYdAAD        4 Natalia              Nowak                Krakow
-AALwh2ABZAAAEYdAAE        5 Artur                Nowak                Krakow
-AALwh2ABZAAAEYdAAF        6 Julia                Kowalski             Nowy Sacz
-AALwh2ABZAAAEYdAAG        7 Pawel                Ciula                Mszalnica
-AALwh2ABZAAAEYdAAH        8 Kamila               Nowak                Limanowa */
-
 UPDATE bd1_OSOBY SET OSO_Adres_Zamieszkania = 'Warszawa' WHERE OSO_ID = 8;
 
 select ROWID, OSO_ID, OSO_IMIE, OSO_NAZWISKO, OSO_Adres_Zamieszkania from bd1_OSOBY;
-
-/*
-ROWID              ID_Osoby Imie                 Nazwisko             Adres Zamieszkania
------------------- -------- -------------------- -------------------- --------------------
-AALwh2ABZAAAEYdAAA        1 Jakub                Kowalski             Nowy Sacz
-AALwh2ABZAAAEYdAAB        2 Kamil                Nowak                Krakow
-AALwh2ABZAAAEYdAAC        3 Dominik              Filipek              Bochnia
-AALwh2ABZAAAEYdAAD        4 Natalia              Nowak                Krakow
-AALwh2ABZAAAEYdAAE        5 Artur                Nowak                Krakow
-AALwh2ABZAAAEYdAAF        6 Julia                Kowalski             Nowy Sacz
-AALwh2ABZAAAEYdAAG        7 Pawel                Ciula                Mszalnica
-AALwh2ABZAAAEYdAAH        8 Kamila               Nowak                Warszawa
-*/
 
 SAVEPOINT trs_BeforeDelete;
 
@@ -1635,39 +1366,14 @@ DELETE FROM bd1_OSOBY WHERE OSO_NAZWISKO LIKE 'Ciula';
 
 select ROWID, OSO_ID, OSO_IMIE, OSO_NAZWISKO, OSO_Adres_Zamieszkania from bd1_OSOBY;
 
-/*
-ROWID              ID_Osoby Imie                 Nazwisko             Adres Zamieszkania
------------------- -------- -------------------- -------------------- --------------------
-AALwh2ABZAAAEYdAAA        1 Jakub                Kowalski             Nowy Sacz
-AALwh2ABZAAAEYdAAB        2 Kamil                Nowak                Krakow
-AALwh2ABZAAAEYdAAC        3 Dominik              Filipek              Bochnia
-AALwh2ABZAAAEYdAAD        4 Natalia              Nowak                Krakow
-AALwh2ABZAAAEYdAAE        5 Artur                Nowak                Krakow
-AALwh2ABZAAAEYdAAF        6 Julia                Kowalski             Nowy Sacz
-AALwh2ABZAAAEYdAAH        8 Kamila               Nowak                Warszawa
-*/
-
 ROLLBACK TO SAVEPOINT trs_BeforeDelete;
 
 select ROWID, OSO_ID, OSO_IMIE, OSO_NAZWISKO, OSO_Adres_Zamieszkania from bd1_OSOBY;
 
-/*
-ROWID              ID_Osoby Imie                 Nazwisko             Adres Zamieszkania
------------------- -------- -------------------- -------------------- --------------------
-AALwktABZAAAEYdAAA        1 Jakub                Kowalski             Nowy Sacz
-AALwktABZAAAEYdAAB        2 Kamil                Nowak                Krakow
-AALwktABZAAAEYdAAC        3 Dominik              Filipek              Bochnia
-AALwktABZAAAEYdAAD        4 Natalia              Nowak                Krakow
-AALwktABZAAAEYdAAE        5 Artur                Nowak                Krakow
-AALwktABZAAAEYdAAF        6 Julia                Kowalski             Nowy Sacz
-AALwktABZAAAEYdAAG        7 Pawel                Ciula                Mszalnica
-AALwktABZAAAEYdAAH        8 Kamila               Nowak                Warszawa
-*/
 commit work;
 	
----------------------------
---  PROCEDURE bd1_pINSERT_Dowody
----------------------------
+---------------------------  PROCEDURE bd1_pINSERT_Dowody ---------------------------
+
 CREATE OR REPLACE PROCEDURE bd1_pINSERT_Dowody(
 						inDOW_Opis IN bd1_DOWODY.DOW_Opis%TYPE,
 						inDOW_Rodzaj IN bd1_DOWODY.DOW_Rodzaj%TYPE,
@@ -1694,56 +1400,10 @@ END;
 /
 
 Select * from bd1_DOWODY;
-/* ID_Dowodu Opis dowodu                         Rodzaj dowodu             ID_Sledztwa
---------- ----------------------------------- ------------------------- -----------
-        1 Dowod zebrany z miejsca zbrodni     Bron                                1
-        2 Dowod zabezpieczony w domu oskazone Przedmiot kradiezy                  2
-          go
-
-        3                                     Przedmiot kradiezy                  1 */
 
 	exec bd1_pINSERT_Dowody('Dowod znaleziony przy oskazonym nr ','Kradziez przedmiot','2',10,5);
 	
 Select * from bd1_DOWODY;
-
-/*
-Procedure created.
-
-Dodano nowy wiersz do bd1_DOWODY - DOW_ID=4
-Dodano nowy wiersz do bd1_DOWODY - DOW_ID=5
-Dodano nowy wiersz do bd1_DOWODY - DOW_ID=6
-Dodano nowy wiersz do bd1_DOWODY - DOW_ID=7
-Dodano nowy wiersz do bd1_DOWODY - DOW_ID=8
-
-PL/SQL procedure successfully completed.
-
-
-ID_Dowodu Opis dowodu                         Rodzaj dowodu             ID_Sledztwa
---------- ----------------------------------- ------------------------- -----------
-        1 Dowod zebrany z miejsca zbrodni     Bron                                1
-        2 Dowod zabezpieczony w domu oskazone Przedmiot kradiezy                  2
-          go
-
-        3                                     Przedmiot kradiezy                  1
-        4 Dowod znaleziony przy oskazonym nr  Kradziez przedmiot                  2
-          61
-
-        5 Dowod znaleziony przy oskazonym nr  Kradziez przedmiot                  2
-          62
-
-        6 Dowod znaleziony przy oskazonym nr  Kradziez przedmiot                  2
-          63
-
-        7 Dowod znaleziony przy oskazonym nr  Kradziez przedmiot                  2
-          64
-
-        8 Dowod znaleziony przy oskazonym nr  Kradziez przedmiot                  2
-          65
-
-
-8 rows selected.
-*/
-
 
 CREATE OR REPLACE FUNCTION bd1_fINSERT_Dowody(
 					inDOW_Opis IN bd1_DOWODY.DOW_Opis%TYPE,
@@ -1779,92 +1439,15 @@ END;
 
 Select * from bd1_DOWODY;
 
-/*
-ID_Dowodu Opis dowodu                         Rodzaj dowodu             ID_Sledztwa
---------- ----------------------------------- ------------------------- -----------
-        1 Dowod zebrany z miejsca zbrodni     Bron                                1
-        2 Dowod zabezpieczony w domu oskazone Przedmiot kradiezy                  2
-          go
-
-        3                                     Przedmiot kradiezy                  1
-        4 Dowod znaleziony przy oskazonym nr  Kradziez przedmiot                  2
-          61
-
-        5 Dowod znaleziony przy oskazonym nr  Kradziez przedmiot                  2
-          62
-
-        6 Dowod znaleziony przy oskazonym nr  Kradziez przedmiot                  2
-          63
-
-        7 Dowod znaleziony przy oskazonym nr  Kradziez przedmiot                  2
-          64
-
-        8 Dowod znaleziony przy oskazonym nr  Kradziez przedmiot                  2
-          65
-
-
-8 rows selected.
-*/
-
 	BEGIN
 		DBMS_OUTPUT.PUT_LINE(bd1_fINSERT_Dowody('Dowod znaleziony przy oskazonym nr ','Kradziez przedmiot','2',10,5));
 	END;
 	/
 
 Select * from bd1_DOWODY;
-/*
-Dodano nowy wiersz do bd1_DOWODY - DOW_ID=9
-Dodano nowy wiersz do bd1_DOWODY - DOW_ID=10
-Dodano nowy wiersz do bd1_DOWODY - DOW_ID=11
-Dodano nowy wiersz do bd1_DOWODY - DOW_ID=12
-Dodano nowy wiersz do bd1_DOWODY - DOW_ID=13
-Dodano 5 wierszy
 
-PL/SQL procedure successfully completed.
+---------------------------  VIEW bd1_V_Postepowanie_w_sprawie ---------------------------
 
-
-ID_Dowodu Opis dowodu                         Rodzaj dowodu             ID_Sledztwa
---------- ----------------------------------- ------------------------- -----------
-        1 Dowod zebrany z miejsca zbrodni     Bron                                1
-        2 Dowod zabezpieczony w domu oskazone Przedmiot kradiezy                  2
-          go
-
-        3                                     Przedmiot kradiezy                  1
-        4 Dowod znaleziony przy oskazonym nr  Kradziez przedmiot                  2
-          61
-
-        5 Dowod znaleziony przy oskazonym nr  Kradziez przedmiot                  2
-          62
-
-        6 Dowod znaleziony przy oskazonym nr  Kradziez przedmiot                  2
-          63
-
-        7 Dowod znaleziony przy oskazonym nr  Kradziez przedmiot                  2
-          64
-
-        8 Dowod znaleziony przy oskazonym nr  Kradziez przedmiot                  2
-          65
-
-        9 Dowod znaleziony przy oskazonym nr  Kradziez przedmiot                  2
-          12
-
-       10 Dowod znaleziony przy oskazonym nr  Kradziez przedmiot                  2
-          13
-
-       11 Dowod znaleziony przy oskazonym nr  Kradziez przedmiot                  2
-          14
-
-       12 Dowod znaleziony przy oskazonym nr  Kradziez przedmiot                  2
-          15
-
-       13 Dowod znaleziony przy oskazonym nr  Kradziez przedmiot                  2
-          16
-
-
-13 rows selected.	*/
-	
-
-	--  VIEW bd1_V_Postepowanie_w_sprawie ---------------------------	
 	CREATE OR REPLACE VIEW bd1_V_Postepowanie_w_sprawie 
 	AS
 	select o.OSK_ID,o.OSK_Data,o.OSK_Rodzaj,
@@ -1874,19 +1457,8 @@ ID_Dowodu Opis dowodu                         Rodzaj dowodu             ID_Sledz
 
 		select * from bd1_V_Postepowanie_w_sprawie order by OSK_ID;
 
-/*View created.
+---------------------------  PROCEDURE bd1_p_INSERT_zez_swi ---------------------------
 
-
-ID_Oskarzenia Data oskarzenia                Rodzaj oskarzenia              ID_Kary Wyrok                          Data rozpoczecia kary     Data zakonczenia kary
-------------- ------------------------------ ------------------------------ ------- ------------------------------ ------------------------- -------------------------
-            1 2021-10-02                     Przestepstwo drogowe                 2 Wyrok w zawieszeniu            2021-10-15                2022-11-15
-            2 2020-05-11                     Oszustwo                             1 Wiezienie                      2021-11-29                2025-11-21
-*/
-
-
----------------------------
---  PROCEDURE bd1_p_INSERT_zez_swi
----------------------------		
 CREATE OR REPLACE VIEW bd1_V_zez_swi 
 	AS
 	select z.ZEZ_ID,s.STA_SW_OPIS, s.STA_SW_Data, z.ZEZ_Typ, z.ZEZ_Opis
@@ -1948,14 +1520,6 @@ exec bd1_p_zez_swi('Zeznanie na korzysc oskazonego','2022-01-25','Przechodzen','
 
 select * from bd1_V_zez_swi;
 
-/*
-ID_Zeznan Opis stanowiska swiadka          Data skladania stanowiska        Typ zeznania                        Opis zeznania
---------- -------------------------------- -------------------------------- ----------------------------------- -----------------------------------
-        1 Zeznanie swojej wersje zdarzen   2021-10-09                       Opinia bieglego                     Brak mozliwosc wykorzystania zeznan
-        2 Zeznanie swojej wersje zdarzen   2019-11-09                       Opinia bieglego                     Mozna wykorzystac zeznan
-        3 Zeznanie swojej wersje zdarzen   2022-01-25                       Opinia bieglego                     mozna wykorzystac
-*/
-
 CREATE OR REPLACE Procedure bd1_pr_zez_swi(
 	inSTA_SW_Zeznania IN bd1_STANOWISKO_SWIADKA.STA_SW_Zeznania%TYPE,
 	inSTA_SW_Data IN bd1_STANOWISKO_SWIADKA.STA_SW_Data%TYPE,
@@ -2002,20 +1566,8 @@ END;
 /
 
 exec bd1_pr_zez_swi('Zeznanie na niekorzysc oskazonego','2022-01-28','Przechodzen','Policjant','Zeznal swoja wersje zdarzen','Opinia bieglego','nie mozna wykorzystac',2,3,2);
-/*
-Dodano nowy wiersz do bd1_STANOWISKO_SWIADKA - STA_SW_ID=7
-Dodano nowy wiersz do bd1_ZEZNANIA - ZEZ_ID=4
-*/
 
 select * from bd1_V_zez_swi;
-
-/*
-ID_Zeznan Opis stanowiska swiadka          Data skladania stanowiska        Typ zeznania                        Opis zeznania
---------- -------------------------------- -------------------------------- ----------------------------------- -----------------------------------
-        1 Zeznanie swojej wersje zdarzen   2021-10-09                       Opinia bieglego                     Brak mozliwosc wykorzystania zeznan
-        2 Zeznanie swojej wersje zdarzen   2019-11-09                       Opinia bieglego                     Mozna wykorzystac zeznan
-        3 Zeznanie swojej wersje zdarzen   2019-11-09                       Opinia bieglego                     mozna wykorzystac
-        4 Zeznanie swojej wersje zdarzen   2022-01-28                       Opinia bieglego                     nie mozna wykorzystac 					*/
 
 CREATE OR REPLACE VIEW bd1_V_kli_oso 
 	AS
@@ -2088,24 +1640,7 @@ END;
 
 exec bd1_P_kli_oso('Limanowa','34-600');
 
-/*
-Procedure created.
-
-bd1_p_Set_OSO_Kod_Pocztowy: COMMIT :)
-
-PL/SQL procedure successfully completed.
-*/
-
 select * from bd1_V_kli_oso;
-/*
-ID_Klienta ID_Osoby Imie                 Nazwisko             Plec                 Adres Zamieszkania   Kod Pocztowy         Numer Telefonu
----------- -------- -------------------- -------------------- -------------------- -------------------- -------------------- --------------------
-         1        3 Dominik              Filipek              Mezczyzna            Bochnia              33-500               123-987-456
-         2        4 Natalia              Nowak                Kobieta              Krakow               33-661               987-654-321
-         3        7 Pawel                Ciula                Mezczyzna            Limanowa             34-600
-         4        8 Kamila               Nowak                Kobieta              Krakow
-         5        9 Szymon               Karambol             Mezczyzna            Limanowa             34-600 
-*/
 
 
 	CREATE OR REPLACE VIEW bd1_V_prz_sle 
@@ -2115,16 +1650,8 @@ ID_Klienta ID_Osoby Imie                 Nazwisko             Plec              
 		INNER JOIN bd1_SLEDZTWA s on s.PRZ_ID=p.PRZ_ID;
 		
 		
-		select * from bd1_V_prz_sle;
-/*
-ID_Przestepstwa Data przestepstwa    Rodzaj przestepstwa                 Uwagi           ID_Sledztwa Data sledztwa
---------------- -------------------- ----------------------------------- --------------- ----------- --------------------
-              2 2021-10-21           Bezprawne zbieranie danych o zyciu                            1 2021-11-15
-                                     prywatnym
+	select * from bd1_V_prz_sle;
 
-              1 2021-11-27           Drogowe                                                       2 2019-11-15
-*/			  
-	
 	
 	CREATE OR REPLACE PROCEDURE bd1_P_prz_sle (
 	inPRZ_Rodzaj IN bd1_PRZESTEPSTWA.PRZ_Rodzaj%TYPE,
@@ -2186,25 +1713,8 @@ BEGIN
 END;
 /
 
-/*Procedure created.
-
-bd1_p_Set_PRZ_Uwagi: COMMIT :)
-
-PL/SQL procedure successfully completed.
-*/
 exec bd1_P_prz_sle('Drogowe','Zostala dokonana kontrola trzezwosci');
 
 select * from bd1_V_prz_sle;
-
-/*
-ID_Przestepstwa Data przestepstwa    Rodzaj przestepstwa                 Uwagi                     ID_Sledztwa Data sledztwa
---------------- -------------------- ----------------------------------- ------------------------- ----------- --------------------
-              2 2021-10-21           Bezprawne zbieranie danych o zyciu                                      1 2021-11-15
-                                     prywatnym
-
-              1 2021-11-27           Drogowe                             Zostala dokonana kontrola           2 2019-11-15
-                                                                          trzezwosci
-
-*/
 
 SPOOL OFF
