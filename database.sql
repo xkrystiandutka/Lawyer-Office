@@ -77,72 +77,11 @@ TABLESPACE STUDENT_DATA;
 	TABLESPACE STUDENT_INDEX 
 	NOLOGGING;
 	------------------------
-	-- SEQUENCE
-	------------------------		
-	drop sequence SEQ_bd1_STANOWISKO;
-	
-	CREATE SEQUENCE SEQ_bd1_STANOWISKO 
-	INCREMENT BY 1 START WITH 1 MINVALUE 1;
-	
-	------------------------
-	-- TRIGGER
-	------------------------
-	CREATE OR REPLACE TRIGGER T_BI_bd1_STANOWISKO
-	BEFORE INSERT ON bd1_STANOWISKO
-	FOR EACH ROW
-	BEGIN
-		IF :NEW.STA_ID IS NULL THEN
-			SELECT SEQ_bd1_STANOWISKO.NEXTVAL 
-				INTO :NEW.STA_ID FROM DUAL;
-		END IF;
-		--
-		DBMS_OUTPUT.PUT_LINE('Dodano nowy wiersz do bd1_STANOWISKO - STA_ID='||:NEW.STA_ID);
-		--
-	END;
-	/
-	------------------------
 	-- INDEXy
 	------------------------	
 	CREATE INDEX bd1_IX_STA_Rodzaj 
 	ON bd1_STANOWISKO (STA_Rodzaj)
 	TABLESPACE STUDENT_INDEX NOLOGGING;	
-		
-	------------------------
-	-- DML bd1_STANOWISKO
-	------------------------
-	insert into bd1_STANOWISKO (STA_Rodzaj,STA_OPIS,STA_Zarobki)
-	values ('Prawnik','Obrona klienta','4000');
-
-	insert into bd1_STANOWISKO (STA_Rodzaj,STA_OPIS,STA_Zarobki)
-	values ('Prokurator','Oskazanie oskazonego','7500');
-	
-	insert into bd1_STANOWISKO (STA_Rodzaj,STA_OPIS,STA_Zarobki)
-	values ('Sedzia Sadowy','Prowadzenie rozpraw','16000');
-	
-	insert into bd1_STANOWISKO (STA_Rodzaj,STA_OPIS,STA_Zarobki)
-	values ('Komornik','','2500');
-	
-	insert into bd1_STANOWISKO (STA_Rodzaj,STA_OPIS,STA_Zarobki)
-	values ('Radca Prawny','','5500');
-	
-	insert into bd1_STANOWISKO (STA_Rodzaj,STA_OPIS,STA_Zarobki)
-	values ('Rzecznik patentowy','','4500');
-	
-	insert into bd1_STANOWISKO (STA_Rodzaj,STA_OPIS,STA_Zarobki)
-	values ('Asystent sedziego','','3500');
-	
-	insert into bd1_STANOWISKO (STA_Rodzaj,STA_OPIS,STA_Zarobki)
-	values ('Doradca prawny','','3500');
-
-	column STA_ID HEADING 'ID' for 999999
-	column STA_Rodzaj HEADING 'Rodzaj stanowiska' for A35
-	column STA_OPIS HEADING 'Opis stanowiska' for A35
-	column STA_Zarobki HEADING 'Stanowisko zarobki' for 999999
-
-
-	select * from bd1_STANOWISKO;	
-
----------------------------
 
 ---------------------------
 PROMPT   table bd1_INSTYTUTY
@@ -167,69 +106,12 @@ TABLESPACE STUDENT_DATA;
 	PCTFREE 1
 	TABLESPACE STUDENT_INDEX 
 	NOLOGGING;		
-	------------------------	
-	-- SEQUENCE
-	------------------------		
-	drop sequence SEQ_bd1_INSTYTUTY;
-	
-	CREATE SEQUENCE SEQ_bd1_INSTYTUTY 
-	INCREMENT BY 1 START WITH 1 MINVALUE 1;
-	
-	------------------------
-	-- TRIGGER
-	------------------------
-	CREATE OR REPLACE TRIGGER T_BI_bd1_INSTYTUTY
-	BEFORE INSERT ON bd1_INSTYTUTY
-	FOR EACH ROW
-	BEGIN
-		IF :NEW.INS_ID IS NULL THEN
-			SELECT SEQ_bd1_INSTYTUTY.NEXTVAL 
-				INTO :NEW.INS_ID FROM DUAL;
-		END IF;
-		--
-		DBMS_OUTPUT.PUT_LINE('Dodano nowy wiersz do bd1_INSTYTUTY - INS_ID='||:NEW.INS_ID);
-		--
-	END;
-	/
-
 	------------------------
 	-- INDEXy
 	------------------------	
 	CREATE INDEX bd1_IX_INS_Lokalizacja 
 	ON bd1_INSTYTUTY (INS_Lokalizacja)
 	TABLESPACE STUDENT_INDEX NOLOGGING;		
-		
-	------------------------
-	-- DML bd1_INSTYTUTY
-	------------------------
-	insert into bd1_INSTYTUTY (INS_Lokalizacja)
-	values ('Krakow');
-
-	insert into bd1_INSTYTUTY (INS_Lokalizacja)
-	values ('Warszawa');
-
-	insert into bd1_INSTYTUTY (INS_Lokalizacja)
-	values ('Bochnia');
-	
-	insert into bd1_INSTYTUTY (INS_Lokalizacja)
-	values ('Nowy Sacz');
-	
-	insert into bd1_INSTYTUTY (INS_Lokalizacja)
-	values ('Limanowa');
-	
-	insert into bd1_INSTYTUTY (INS_Lokalizacja)
-	values ('Mszalnica');
-	
-	insert into bd1_INSTYTUTY (INS_Lokalizacja)
-	values ('Warszawa');
-	
-	insert into bd1_INSTYTUTY (INS_Lokalizacja)
-	values ('Opole');
-	
-	column INS_ID HEADING 'ID' for 999999
-	column INS_Lokalizacja HEADING 'Lokalizacja instytutu' for A20
-
-	select * from bd1_INSTYTUTY;	
 
 ---------------------------
 PROMPT   table bd1_OSOBY
@@ -259,28 +141,6 @@ TABLESPACE STUDENT_DATA;
 	PCTFREE 1
 	TABLESPACE STUDENT_INDEX 
 	NOLOGGING		;
-	-- SEQUENCE
-	------------------------		
-	drop sequence SEQ_bd1_OSOBY;
-	CREATE SEQUENCE SEQ_bd1_OSOBY 
-	INCREMENT BY 1 START WITH 1 MINVALUE 1;
-	
-	------------------------
-	-- TRIGGER
-	------------------------
-	CREATE OR REPLACE TRIGGER T_BI_bd1_OSOBY
-	BEFORE INSERT ON bd1_OSOBY
-	FOR EACH ROW
-	BEGIN
-		IF :NEW.OSO_ID IS NULL THEN
-			SELECT SEQ_bd1_OSOBY.NEXTVAL 
-				INTO :NEW.OSO_ID FROM DUAL;
-		END IF;
-		--
-		DBMS_OUTPUT.PUT_LINE('Dodano nowy wiersz do bd1_OSOBY - OSO_ID='||:NEW.OSO_ID);
-		--
-	END;
-	/	
 	------------------------
 	-- INDEXy
 	------------------------	
@@ -295,49 +155,8 @@ TABLESPACE STUDENT_DATA;
 	CREATE INDEX bd1_IX_OSO_Adres_Zamieszkania 
 	ON bd1_OSOBY (OSO_Adres_Zamieszkania)
 	TABLESPACE STUDENT_INDEX NOLOGGING;	
-		
-	------------------------
-	-- DML bd1_OSOBY
-	------------------------
-	insert into bd1_OSOBY (OSO_Imie,OSO_Nazwisko,OSO_Plec,OSO_Adres_Zamieszkania,OSO_Kod_Pocztowy,OSO_Telefon)
-	values ('Jakub','Kowalski','Mezczyzna','Nowy Sacz','33-300','123-456-789');
-	
-	insert into bd1_OSOBY (OSO_Imie,OSO_Nazwisko,OSO_Plec,OSO_Adres_Zamieszkania,OSO_Kod_Pocztowy,OSO_Telefon)
-	values ('Kamil','Nowak','Mezczyzna','Krakow','34-600','987-654-321');
-	
-	insert into bd1_OSOBY (OSO_Imie,OSO_Nazwisko,OSO_Plec,OSO_Adres_Zamieszkania,OSO_Kod_Pocztowy,OSO_Telefon)
-	values ('Dominik','Filipek','Mezczyzna','Bochnia','33-500','123-987-456');
-	
-	insert into bd1_OSOBY (OSO_Imie,OSO_Nazwisko,OSO_Plec,OSO_Adres_Zamieszkania,OSO_Kod_Pocztowy,OSO_Telefon)
-	values ('Natalia','Nowak','Kobieta','Krakow','33-661','987-654-321');
-	
-	insert into bd1_OSOBY (OSO_Imie,OSO_Nazwisko,OSO_Plec,OSO_Adres_Zamieszkania,OSO_Kod_Pocztowy,OSO_Telefon)
-	values ('Artur','Nowak','Mezczyzna','Krakow','33-661',NULL);
-	
-	insert into bd1_OSOBY (OSO_Imie,OSO_Nazwisko,OSO_Plec,OSO_Adres_Zamieszkania,OSO_Kod_Pocztowy,OSO_Telefon)
-	values ('Julia','Kowalski','Kobieta','Nowy Sacz','33-300',NULL);
-	
-	insert into bd1_OSOBY (OSO_Imie,OSO_Nazwisko,OSO_Plec,OSO_Adres_Zamieszkania,OSO_Kod_Pocztowy,OSO_Telefon)
-	values ('Pawel','Ciula','Mezczyzna','Limanowa',NULL,NULL);
-	
-	insert into bd1_OSOBY (OSO_Imie,OSO_Nazwisko,OSO_Plec,OSO_Adres_Zamieszkania,OSO_Kod_Pocztowy,OSO_Telefon)
-	values ('Kamila','Nowak','Kobieta','Krakow',NULL,NULL);
-	
-	insert into bd1_OSOBY (OSO_Imie,OSO_Nazwisko,OSO_Plec,OSO_Adres_Zamieszkania,OSO_Kod_Pocztowy,OSO_Telefon)
-	values ('Szymon','Karambol','Mezczyzna','Limanowa',NULL,NULL);
-	
-	column OSO_ID HEADING 'ID' for 999999
-	column OSO_Imie HEADING 'Imie' for A20
-	column OSO_Nazwisko HEADING 'Nazwisko' for A20
-	column OSO_Plec HEADING 'Plec' for A20
-	column OSO_Adres_Zamieszkania HEADING 'Adres Zamieszkania' for A20
-	column OSO_Kod_Pocztowy HEADING 'Kod Pocztowy' for A20
-	column OSO_Telefon HEADING 'Numer Telefonu' for A20
-
-	select * from bd1_OSOBY;	
 
 ---------------------------
-
 PROMPT   table bd1_PRACOWNICY
 ---------------------------	
 create table bd1_PRACOWNICY (
@@ -366,28 +185,6 @@ TABLESPACE STUDENT_DATA;
 		ADD CONSTRAINT FK1_bd1_PRACOWNICY
 		FOREIGN KEY(OSO_ID) 
 		REFERENCES bd1_OSOBY(OSO_ID) ENABLE;
-	-- SEQUENCE
-	------------------------		
-	drop sequence SEQ_bd1_PRACOWNICY;
-	CREATE SEQUENCE SEQ_bd1_PRACOWNICY 
-	INCREMENT BY 1 START WITH 1 MINVALUE 1;
-	
-	------------------------
-	-- TRIGGER
-	------------------------
-	CREATE OR REPLACE TRIGGER T_BI_bd1_PRACOWNICY
-	BEFORE INSERT ON bd1_PRACOWNICY
-	FOR EACH ROW
-	BEGIN
-		IF :NEW.PRA_ID IS NULL THEN
-			SELECT SEQ_bd1_PRACOWNICY.NEXTVAL 
-				INTO :NEW.PRA_ID FROM DUAL;
-		END IF;
-		--
-		DBMS_OUTPUT.PUT_LINE('Dodano nowy wiersz do bd1_PRACOWNICY - PRA_ID='||:NEW.PRA_ID);
-		--
-	END;
-	/	
 	------------------------
 	-- INDEXy
 	------------------------	
@@ -395,28 +192,7 @@ TABLESPACE STUDENT_DATA;
 	ON bd1_PRACOWNICY (OSO_ID)
 	TABLESPACE STUDENT_INDEX NOLOGGING;
 
-		
-	------------------------
-	-- DML bd1_PRACOWNICY
-	------------------------
-	insert into bd1_PRACOWNICY (OSO_ID)
-	values ('1');
-	
-	insert into bd1_PRACOWNICY (OSO_ID)
-	values ('2');
-	
-	insert into bd1_PRACOWNICY (OSO_ID)
-	values ('5');
-	
-	insert into bd1_PRACOWNICY (OSO_ID)
-	values ('6');
-	
-	column PRA_ID HEADING 'ID_Pracownika' for 999999
-	column OSO_ID HEADING 'ID_Osoby' for 99999
-
-	select * from bd1_PRACOWNICY;
 ---------------------------
-
 PROMPT   table bd1_HISTORIA_ZATRUDNIENIA
 ---------------------------	
 create table bd1_HISTORIA_ZATRUDNIENIA (
@@ -460,29 +236,6 @@ TABLESPACE STUDENT_DATA;
 		ADD CONSTRAINT FK3_bd1_HISTORIA_ZATRUDNIENIA
 		FOREIGN KEY(PRA_ID) 
 		REFERENCES bd1_PRACOWNICY(PRA_ID) ENABLE;
-	
-	-- SEQUENCE
-	------------------------		
-	drop sequence SEQ_bd1_HISTORIA_ZATRUDNIENIA;
-	CREATE SEQUENCE SEQ_bd1_HISTORIA_ZATRUDNIENIA 
-	INCREMENT BY 1 START WITH 1 MINVALUE 1;
-	
-	------------------------
-	-- TRIGGER
-	------------------------
-	CREATE OR REPLACE TRIGGER T_BI_bd1_HISTORIA_ZATRUDNIENIA
-	BEFORE INSERT ON bd1_HISTORIA_ZATRUDNIENIA
-	FOR EACH ROW
-	BEGIN
-		IF :NEW.HIS_Pracownika_ID IS NULL THEN
-			SELECT SEQ_bd1_HISTORIA_ZATRUDNIENIA.NEXTVAL 
-				INTO :NEW.HIS_Pracownika_ID FROM DUAL;
-		END IF;
-		--
-		DBMS_OUTPUT.PUT_LINE('Dodano nowy wiersz do bd1_HISTORIA_ZATRUDNIENIA - HIS_Pracownika_ID='||:NEW.HIS_Pracownika_ID);
-		--
-	END;
-	/
 	------------------------
 	-- INDEXy
 	------------------------	
@@ -494,27 +247,7 @@ TABLESPACE STUDENT_DATA;
 	ON bd1_HISTORIA_ZATRUDNIENIA (HIS_Data_Zwolnienia)
 	TABLESPACE STUDENT_INDEX NOLOGGING;
 	
-	------------------------
-	-- DML bd1_HISTORIA_ZATRUDNIENIA
-	------------------------
-	insert into bd1_HISTORIA_ZATRUDNIENIA (HIS_Data_Zatrudnienia,HIS_Data_Zwolnienia,STA_ID,INS_ID,PRA_ID)
-	values ('2021-03-21','','1','3','1');
-	insert into bd1_HISTORIA_ZATRUDNIENIA (HIS_Data_Zatrudnienia,HIS_Data_Zwolnienia,STA_ID,INS_ID,PRA_ID)
-	values ('2019-02-11','','2','3','2');
-	insert into bd1_HISTORIA_ZATRUDNIENIA (HIS_Data_Zatrudnienia,HIS_Data_Zwolnienia,STA_ID,INS_ID,PRA_ID)
-	values ('2019-01-15','2021-09-11','2','4','3');
-	insert into bd1_HISTORIA_ZATRUDNIENIA (HIS_Data_Zatrudnienia,HIS_Data_Zwolnienia,STA_ID,INS_ID,PRA_ID)
-	values ('2019-09-06','','3','4','4');
-	column HIS_Pracownika_ID HEADING 'ID Histori Pracownika' for 999999
-	column HIS_Data_Zatrudnienia HEADING 'Data Zatrudnienia' for A20
-	column HIS_Data_Zwolnienia HEADING 'Data Zwolnienia' for A20
-	column STA_ID HEADING 'Stanowisko ID' for 999999
-	column INS_ID HEADING 'Instytut ID' for 999999
-	column PRA_ID HEADING 'Pracownik ID' for 999999
-	
-	select * from bd1_HISTORIA_ZATRUDNIENIA;	
 ---------------------------
-
 PROMPT   table bd1_KLIENCI
 ---------------------------	
 create table bd1_KLIENCI (
@@ -543,54 +276,8 @@ TABLESPACE STUDENT_DATA;
 		ADD CONSTRAINT FK1_bd1_KLIENCI
 		FOREIGN KEY(KLI_ID) 
 		REFERENCES bd1_OSOBY(OSO_ID) ENABLE;
-	-- SEQUENCE
-	------------------------		
-	drop sequence SEQ_bd1_KLIENCI;
-	CREATE SEQUENCE SEQ_bd1_KLIENCI 
-	INCREMENT BY 1 START WITH 1 MINVALUE 1;
-	
-	------------------------
-	-- TRIGGER
-	------------------------
-	CREATE OR REPLACE TRIGGER T_BI_bd1_KLIENCI
-	BEFORE INSERT ON bd1_KLIENCI
-	FOR EACH ROW
-	BEGIN
-		IF :NEW.KLI_ID IS NULL THEN
-			SELECT SEQ_bd1_KLIENCI.NEXTVAL 
-				INTO :NEW.KLI_ID FROM DUAL;
-		END IF;
-		--
-		DBMS_OUTPUT.PUT_LINE('Dodano nowy wiersz do bd1_KLIENCI - KLI_ID='||:NEW.KLI_ID);
-		--
-	END;
-	/	
-	
 
-	------------------------
-	-- DML bd1_KLIENCI
-	------------------------
-	insert into bd1_KLIENCI (OSO_ID)
-	values ('3');
-	
-	insert into bd1_KLIENCI (OSO_ID)
-	values ('4');
-	
-	insert into bd1_KLIENCI (OSO_ID)
-	values ('7');
-	
-	insert into bd1_KLIENCI (OSO_ID)
-	values ('8');
-	
-	insert into bd1_KLIENCI (OSO_ID)
-	values ('9');
-
-	column KLI_ID HEADING 'ID_Klienta' for 999999
-	column OSO_ID HEADING 'ID_Osoby' for 99999
-
-	select * from bd1_KLIENCI;
 ---------------------------
-
 PROMPT   table bd1_USLUGI
 ---------------------------	
 create table bd1_USLUGI (
@@ -624,29 +311,6 @@ TABLESPACE STUDENT_DATA;
 		ADD CONSTRAINT FK2_bd1_USLUGI
 		FOREIGN KEY(KLI_ID) 
 		REFERENCES bd1_KLIENCI(KLI_ID) ENABLE;
-	-- SEQUENCE
-	------------------------		
-	drop sequence SEQ_bd1_USLUGI;
-	CREATE SEQUENCE SEQ_bd1_USLUGI
-	INCREMENT BY 1 START WITH 1 MINVALUE 1;
-	
-	------------------------
-	-- TRIGGER
-	------------------------
-	CREATE OR REPLACE TRIGGER T_BI_bd1_USLUGI
-	BEFORE INSERT ON bd1_USLUGI
-	FOR EACH ROW
-	BEGIN
-		IF :NEW.USL_ID IS NULL THEN
-			SELECT SEQ_bd1_USLUGI.NEXTVAL 
-				INTO :NEW.USL_ID FROM DUAL;
-		END IF;
-		--
-		DBMS_OUTPUT.PUT_LINE('Dodano nowy wiersz do bd1_USLUGI - USL_ID='||:NEW.USL_ID);
-		--
-	END;
-	/	
-
 	------------------------
 	-- INDEXy
 	------------------------	
@@ -657,33 +321,7 @@ TABLESPACE STUDENT_DATA;
 	CREATE INDEX bd1_IX_KLI_ID
 	ON bd1_USLUGI (KLI_ID)
 	TABLESPACE STUDENT_INDEX NOLOGGING;
-		
-	------------------------
-	-- DML bd1_USLUGI
-	------------------------
-	insert into bd1_USLUGI (PRA_ID,KLI_ID)
-	values ('2','1');
 	
-	insert into bd1_USLUGI (PRA_ID,KLI_ID)
-	values ('2','2');
-	
-	insert into bd1_USLUGI (PRA_ID,KLI_ID)
-	values ('2','3');
-	
-	insert into bd1_USLUGI (PRA_ID,KLI_ID)
-	values ('2','2');
-
-	insert into bd1_USLUGI (PRA_ID,KLI_ID)
-	values ('4','3');
-	
-	insert into bd1_USLUGI (PRA_ID,KLI_ID)
-	values ('4','3');
-
-	column USL_ID HEADING 'ID_Uslugi' for 999999
-	column PRA_ID HEADING 'ID_Pracownika' for 99999
-	column KLI_ID HEADING 'ID_Klienta' for 99999
-
-	select * from bd1_USLUGI;
 ---------------------------
 PROMPT   table bd1_OSKARZENIA
 ---------------------------	
@@ -708,29 +346,6 @@ TABLESPACE STUDENT_DATA;
 	PCTFREE 1
 	TABLESPACE STUDENT_INDEX 
 	NOLOGGING		;
-	-- SEQUENCE
-	------------------------		
-	drop sequence SEQ_bd1_OSKARZENIA;
-	CREATE SEQUENCE SEQ_bd1_OSKARZENIA
-	INCREMENT BY 1 START WITH 1 MINVALUE 1;
-	
-	------------------------
-	-- TRIGGER
-	------------------------
-	CREATE OR REPLACE TRIGGER T_BI_bd1_OSKARZENIA
-	BEFORE INSERT ON bd1_OSKARZENIA
-	FOR EACH ROW
-	BEGIN
-		IF :NEW.OSK_ID IS NULL THEN
-			SELECT SEQ_bd1_OSKARZENIA.NEXTVAL 
-				INTO :NEW.OSK_ID FROM DUAL;
-		END IF;
-		--
-		DBMS_OUTPUT.PUT_LINE('Dodano nowy wiersz do bd1_OSKARZENIA - OSK_ID='||:NEW.OSK_ID);
-		--
-	END;
-	/		
-	
 	------------------------
 	-- INDEXy
 	------------------------	
@@ -738,24 +353,6 @@ TABLESPACE STUDENT_DATA;
 	ON bd1_OSKARZENIA (OSK_Rodzaj)
 	TABLESPACE STUDENT_INDEX NOLOGGING;	
 		
-	------------------------
-	-- DML bd1_OSKARZENIA
-	------------------------
-	insert into bd1_OSKARZENIA (OSK_Data,OSK_Rodzaj)
-	values ('2021-10-02','Przestepstwo drogowe');
-	
-
-	insert into bd1_OSKARZENIA (OSK_Data,OSK_Rodzaj)
-	values ('2020-05-11','Oszustwo');
-
-	insert into bd1_OSKARZENIA (OSK_Data,OSK_Rodzaj)
-	values ('2019-10-03','Kradziez');
-
-	column OSK_ID HEADING 'ID_Oskarzenia' for 999999
-	column OSK_Data HEADING 'Data oskarzenia' for A20
-	column OSK_Rodzaj HEADING 'Rodzaj oskarzenia' for A30
-
-	select * from bd1_OSKARZENIA;
 ---------------------------
 PROMPT   table bd1_KARY
 ---------------------------	
@@ -788,29 +385,6 @@ TABLESPACE STUDENT_DATA;
 		ADD CONSTRAINT FK1_bd1_KARY
 		FOREIGN KEY(OSK_ID) 
 		REFERENCES bd1_OSKARZENIA(OSK_ID) ENABLE;
-	-- SEQUENCE
-	------------------------		
-	drop sequence SEQ_bd1_KARY;
-	CREATE SEQUENCE SEQ_bd1_KARY
-	INCREMENT BY 1 START WITH 1 MINVALUE 1;
-	
-	------------------------
-	-- TRIGGER
-	------------------------
-	CREATE OR REPLACE TRIGGER T_BI_bd1_KARY
-	BEFORE INSERT ON bd1_KARY
-	FOR EACH ROW
-	BEGIN
-		IF :NEW.KAR_ID IS NULL THEN
-			SELECT SEQ_bd1_KARY.NEXTVAL 
-				INTO :NEW.KAR_ID FROM DUAL;
-		END IF;
-		--
-		DBMS_OUTPUT.PUT_LINE('Dodano nowy wiersz do bd1_KARY - KAR_ID='||:NEW.KAR_ID);
-		--
-	END;
-	/	
-
 	------------------------
 	-- INDEXy
 	------------------------	
@@ -826,24 +400,6 @@ TABLESPACE STUDENT_DATA;
 	ON bd1_KARY (KAR_Data_Zakonczenia)
 	TABLESPACE STUDENT_INDEX NOLOGGING;		
 
-		
-	------------------------
-	-- DML bd1_KARY
-	------------------------
-	insert into bd1_KARY (KAR_Wyrok,KAR_Data_Rozpoczecia,KAR_Data_Zakonczenia,OSK_ID)
-	values ('Wiezienie','2021-11-29','2025-11-21','2');
-	
-	insert into bd1_KARY (KAR_Wyrok,KAR_Data_Rozpoczecia,KAR_Data_Zakonczenia,OSK_ID)
-	values ('Wyrok w zawieszeniu','2021-10-15','2022-11-15','1');
-	
-
-	column KAR_ID HEADING 'ID_Kary' for 999999
-	column KAR_Wyrok HEADING 'Wyrok' for A30
-	column KAR_Data_Rozpoczecia HEADING 'Data rozpoczecia kary' for A25
-	column KAR_Data_Zakonczenia HEADING 'Data zakonczenia kary' for A25
-	column OSK_ID HEADING 'ID_Oskarzenia' for 99999
-
-	select * from bd1_KARY;
 ---------------------------
 PROMPT   table bd1_PRZESTEPSTWA;
 ---------------------------	
@@ -868,30 +424,7 @@ TABLESPACE STUDENT_DATA;
 		USING INDEX
 	PCTFREE 1
 	TABLESPACE STUDENT_INDEX 
-	NOLOGGING		;
-	-- SEQUENCE
-	------------------------		
-	drop sequence SEQ_bd1_PRZESTEPSTWA;
-	CREATE SEQUENCE SEQ_bd1_PRZESTEPSTWA
-	INCREMENT BY 1 START WITH 1 MINVALUE 1;
-	
-	------------------------
-	-- TRIGGER
-	------------------------
-	CREATE OR REPLACE TRIGGER T_BI_bd1_PRZESTEPSTWA
-	BEFORE INSERT ON bd1_PRZESTEPSTWA
-	FOR EACH ROW
-	BEGIN
-		IF :NEW.PRZ_ID IS NULL THEN
-			SELECT SEQ_bd1_PRZESTEPSTWA.NEXTVAL 
-				INTO :NEW.PRZ_ID FROM DUAL;
-		END IF;
-		--
-		DBMS_OUTPUT.PUT_LINE('Dodano nowy wiersz do bd1_PRZESTEPSTWA - PRZ_ID='||:NEW.PRZ_ID);
-		--
-	END;
-	/		
-	
+	NOLOGGING;
 	------------------------
 	-- INDEXy
 	------------------------	
@@ -899,21 +432,6 @@ TABLESPACE STUDENT_DATA;
 	ON bd1_PRZESTEPSTWA (PRZ_Rodzaj)
 	TABLESPACE STUDENT_INDEX NOLOGGING;
 	
-	------------------------
-	-- DML bd1_PRZESTEPSTWA
-	------------------------
-	insert into bd1_PRZESTEPSTWA (PRZ_Data,PRZ_Rodzaj)
-	values ('2021-11-27','Drogowe');
-	
-	insert into bd1_PRZESTEPSTWA (PRZ_Data,PRZ_Rodzaj)
-	values ('2021-10-21','Bezprawne zbieranie danych o zyciu prywatnym');
-
-	column PRZ_ID HEADING 'ID_Przestepstwa' for 999999
-	column PRZ_Data HEADING 'Data przestepstwa' for A20
-	column PRZ_Rodzaj HEADING 'Rodzaj przestepstwa' for A35
-	column PRZ_Uwagi HEADING 'Uwagi' for A25
-
-	select * from bd1_PRZESTEPSTWA;
 ---------------------------
 PROMPT   table bd1_SLEDZTWA
 ---------------------------	
@@ -944,51 +462,12 @@ TABLESPACE STUDENT_DATA;
 		ADD CONSTRAINT FK1_bd1_SLEDZTWA 
 		FOREIGN KEY(PRZ_ID) 
 		REFERENCES bd1_PRZESTEPSTWA(PRZ_ID) ENABLE;
-	-- SEQUENCE
-	------------------------		
-	drop sequence SEQ_bd1_SLEDZTWA;
-	CREATE SEQUENCE SEQ_bd1_SLEDZTWA
-	INCREMENT BY 1 START WITH 1 MINVALUE 1;
-	
-	------------------------
-	-- TRIGGER
-	------------------------
-	CREATE OR REPLACE TRIGGER T_BI_bd1_SLEDZTWA
-	BEFORE INSERT ON bd1_SLEDZTWA
-	FOR EACH ROW
-	BEGIN
-		IF :NEW.SLE_ID IS NULL THEN
-			SELECT SEQ_bd1_SLEDZTWA.NEXTVAL 
-				INTO :NEW.SLE_ID FROM DUAL;
-		END IF;
-		--
-		DBMS_OUTPUT.PUT_LINE('Dodano nowy wiersz do bd1_SLEDZTWA - SLE_ID='||:NEW.SLE_ID);
-		--
-	END;
-	/	
-
 	------------------------
 	-- INDEXy
 	------------------------	
 	CREATE INDEX bd1_IX_SLE_Data
 	ON bd1_SLEDZTWA (SLE_Data)
 	TABLESPACE STUDENT_INDEX NOLOGGING;	
-		
-	------------------------
-	-- DML bd1_SLEDZTWA
-	------------------------
-	insert into bd1_SLEDZTWA (SLE_Data,PRZ_ID)
-	values ('2021-11-15','2');
-	
-	insert into bd1_SLEDZTWA (SLE_Data,PRZ_ID)
-	values ('2019-11-15','1');
-
-
-	column SLE_ID HEADING 'ID_Przestepstwa' for 999999
-	column SLE_Data HEADING 'Data sledztwa' for A20
-	column PRZ_ID HEADING 'ID_Przestepstwa' for 99999
-
-	select * from bd1_SLEDZTWA;		
 
 ---------------------------
 PROMPT   table bd1_DOWODY;
@@ -1021,29 +500,6 @@ TABLESPACE STUDENT_DATA;
 		ADD CONSTRAINT FK1_bd1_DOWODY 
 		FOREIGN KEY(SLE_ID) 
 		REFERENCES bd1_SLEDZTWA(SLE_ID) ENABLE;
-	-- SEQUENCE
-	------------------------		
-	drop sequence SEQ_bd1_DOWODY;
-	CREATE SEQUENCE SEQ_bd1_DOWODY
-	INCREMENT BY 1 START WITH 1 MINVALUE 1;
-	
-	------------------------
-	-- TRIGGER
-	------------------------
-	CREATE OR REPLACE TRIGGER T_BI_bd1_DOWODY
-	BEFORE INSERT ON bd1_DOWODY
-	FOR EACH ROW
-	BEGIN
-		IF :NEW.DOW_ID IS NULL THEN
-			SELECT SEQ_bd1_DOWODY.NEXTVAL 
-				INTO :NEW.DOW_ID FROM DUAL;
-		END IF;
-		--
-		DBMS_OUTPUT.PUT_LINE('Dodano nowy wiersz do bd1_DOWODY - DOW_ID='||:NEW.DOW_ID);
-		--
-	END;
-	/	
-
 	------------------------
 	-- INDEXy
 	------------------------	
@@ -1055,25 +511,6 @@ TABLESPACE STUDENT_DATA;
 	ON bd1_DOWODY (DOW_Rodzaj)
 	TABLESPACE STUDENT_INDEX NOLOGGING;	
 		
-	------------------------
-	-- DML bd1_DOWODY
-	------------------------
-	insert into bd1_DOWODY (DOW_Opis,DOW_Rodzaj,SLE_ID)
-	values ('Dowod zebrany z miejsca zbrodni','Bron','1');
-	
-	insert into bd1_DOWODY (DOW_Opis,DOW_Rodzaj,SLE_ID)
-	values ('Dowod zabezpieczony w domu oskazonego','Przedmiot kradiezy','2');
-	
-	insert into bd1_DOWODY (DOW_Opis,DOW_Rodzaj,SLE_ID)
-	values (NULL,'Przedmiot kradiezy','1');
-
-
-	column DOW_ID HEADING 'ID_Dowodu' for 999999
-	column DOW_Opis HEADING 'Opis dowodu' for A40
-	column DOW_Rodzaj HEADING 'Rodzaj dowodu' for A25
-	column SLE_ID HEADING 'ID_Sledztwa' for 99999
-
-	select * from bd1_DOWODY;
 ---------------------------
 PROMPT   table bd1_STANOWISKO_SWIADKA
 ---------------------------	
@@ -1101,29 +538,6 @@ TABLESPACE STUDENT_DATA;
 	PCTFREE 1
 	TABLESPACE STUDENT_INDEX 
 	NOLOGGING		;
-	-- SEQUENCE
-	------------------------		
-	drop sequence SEQ_bd1_STANOWISKO_SWIADKA;
-	CREATE SEQUENCE SEQ_bd1_STANOWISKO_SWIADKA
-	INCREMENT BY 1 START WITH 1 MINVALUE 1;
-	
-	------------------------
-	-- TRIGGER
-	------------------------
-	CREATE OR REPLACE TRIGGER T_BI_bd1_STANOWISKO_SWIADKA
-	BEFORE INSERT ON bd1_STANOWISKO_SWIADKA
-	FOR EACH ROW
-	BEGIN
-		IF :NEW.STA_SW_ID IS NULL THEN
-			SELECT SEQ_bd1_STANOWISKO_SWIADKA.NEXTVAL 
-				INTO :NEW.STA_SW_ID FROM DUAL;
-		END IF;
-		--
-		DBMS_OUTPUT.PUT_LINE('Dodano nowy wiersz do bd1_STANOWISKO_SWIADKA - STA_SW_ID='||:NEW.STA_SW_ID);
-		--
-	END;
-	/		
-	
 	------------------------
 	-- INDEXy
 	------------------------	
@@ -1134,34 +548,6 @@ TABLESPACE STUDENT_DATA;
 	CREATE INDEX bd1_IX_STA_SW_Data
 	ON bd1_STANOWISKO_SWIADKA (STA_SW_Data)
 	TABLESPACE STUDENT_INDEX NOLOGGING;
-	
-	------------------------
-	-- DML bd1_STANOWISKO_SWIADKA
-	------------------------
-	insert into bd1_STANOWISKO_SWIADKA (STA_SW_Zeznania,STA_SW_Data,STA_SW_Rodzaj,STA_SW_Typ_Swiadka,STA_SW_Opis)
-	values ('Zeznanie na korzysc oskazonego','2021-10-09','Swiadek zdarzenia','Brat Oskazonego','Zeznanie swojej wersje zdarzen');
-	
-	insert into bd1_STANOWISKO_SWIADKA (STA_SW_Zeznania,STA_SW_Data,STA_SW_Rodzaj,STA_SW_Typ_Swiadka,STA_SW_Opis)
-	values ('Zeznanie na niekorzysc oskazonego','2019-11-09','Swiadek zdarzenia','Przypadkowa osoba','Zeznanie swojej wersje zdarzen');
-	
-	insert into bd1_STANOWISKO_SWIADKA (STA_SW_Zeznania,STA_SW_Data,STA_SW_Rodzaj,STA_SW_Typ_Swiadka,STA_SW_Opis)
-	values ('Zeznanie na niekorzysc oskazonego','2021-06-09','Swiadek zdarzenia','Ojciec ofiary','Zeznanie swojej wersje zdarzen');
-	
-	insert into bd1_STANOWISKO_SWIADKA (STA_SW_Zeznania,STA_SW_Data,STA_SW_Rodzaj,STA_SW_Typ_Swiadka,STA_SW_Opis)
-	values ('Zeznanie na korzysc oskazonego','2021-05-10','Swiadek zdarzenia','Siostra oskazonego','Zeznanie swojej wersje zdarzen');
-	
-	insert into bd1_STANOWISKO_SWIADKA (STA_SW_Zeznania,STA_SW_Data,STA_SW_Rodzaj,STA_SW_Typ_Swiadka,STA_SW_Opis)
-	values ('Zeznanie na niekorzysc oskazonego','2021-08-21','Swiadek zdarzenia','Matka ofiary','Zeznanie swojej wersje zdarzen');
-	
-	column STA_SW_ID HEADING 'ID_Stanowiska_Swiadka' for 999999
-	column STA_SW_Zeznania HEADING 'Stanowisko swiadka zeznania' for A35
-	column STA_SW_Data HEADING 'Data skladania stanowiska' for A32
-	column STA_SW_Rodzaj HEADING 'Rodzaj stanowiska swiadka' for A30
-	column STA_SW_Typ_Swiadka HEADING 'Typ swiadka' for A25
-	column STA_SW_Opis HEADING 'Opis stanowiska swiadka' for A32
-
-	select * from bd1_STANOWISKO_SWIADKA;		
----------------------------
 ---------------------------
 PROMPT   table bd1_ZEZNANIA
 ---------------------------	
@@ -1203,29 +589,6 @@ TABLESPACE STUDENT_DATA;
 		ADD CONSTRAINT FK3_bd1_ZEZNANIA 
 		FOREIGN KEY(OSK_ID) 
 		REFERENCES bd1_OSKARZENIA(OSK_ID) ENABLE;
-	-- SEQUENCE
-	------------------------		
-	drop sequence SEQ_bd1_ZEZNANIA;
-	CREATE SEQUENCE SEQ_bd1_ZEZNANIA
-	INCREMENT BY 1 START WITH 1 MINVALUE 1;
-	
-	------------------------
-	-- TRIGGER
-	------------------------
-	CREATE OR REPLACE TRIGGER T_BI_bd1_ZEZNANIA
-	BEFORE INSERT ON bd1_ZEZNANIA
-	FOR EACH ROW
-	BEGIN
-		IF :NEW.ZEZ_ID IS NULL THEN
-			SELECT SEQ_bd1_ZEZNANIA.NEXTVAL 
-				INTO :NEW.ZEZ_ID FROM DUAL;
-		END IF;
-		--
-		DBMS_OUTPUT.PUT_LINE('Dodano nowy wiersz do bd1_ZEZNANIA - ZEZ_ID='||:NEW.ZEZ_ID);
-		--
-	END;
-	/		
-	
 	------------------------
 	-- INDEXy
 	------------------------	
@@ -1236,25 +599,6 @@ TABLESPACE STUDENT_DATA;
 	CREATE INDEX bd1_IX_ZEZ_Opis
 	ON bd1_ZEZNANIA (ZEZ_Opis)
 	TABLESPACE STUDENT_INDEX NOLOGGING;
-		
-	------------------------
-	-- DML bd1_ZEZNANIA
-	------------------------
-	insert into bd1_ZEZNANIA (ZEZ_Typ,ZEZ_Opis,DOW_ID,STA_SW_ID,OSK_ID)
-	values ('Opinia bieglego','Brak mozliwosc wykorzystania zeznan','2','1','3');
-	insert into bd1_ZEZNANIA (ZEZ_Typ,ZEZ_Opis,DOW_ID,STA_SW_ID,OSK_ID)
-	values ('Opinia bieglego','Mozna wykorzystac zeznan','2','2','3');
-	
-	column ZEZ_ID HEADING 'ID_Zeznan' for 999999
-	column ZEZ_Typ HEADING 'Typ zeznania' for A35
-	column ZEZ_Opis HEADING 'Opis zeznania' for A35
-	column DOW_ID HEADING 'ID_Dowodu' for 99999
-	column STA_SW_ID HEADING 'ID_Stanowiska_Swiadka' for 99999
-	column OSK_ID HEADING 'ID_Oskarzenia' for 99999
-
-	select * from bd1_ZEZNANIA;
-
----------------------------
 
 ---------------------------
 PROMPT   table bd1_SPRAWY_SADOWE;
@@ -1290,15 +634,247 @@ TABLESPACE STUDENT_DATA;
 		ADD CONSTRAINT FK2_bd1_SPRAWY_SADOWE 
 		FOREIGN KEY(USL_ID) 
 		REFERENCES bd1_USLUGI(USL_ID) ENABLE;
-	-- SEQUENCE
-	------------------------		
+
+PROMPT ;
+PROMPT----------------------------------------;
+PROMPT Sequence;
+PROMPT----------------------------------------; 
+PROMPT ;
+
+	drop sequence SEQ_bd1_STANOWISKO;
+	drop sequence SEQ_bd1_INSTYTUTY;
+	drop sequence SEQ_bd1_OSOBY;
+	drop sequence SEQ_bd1_PRACOWNICY;
+	drop sequence SEQ_bd1_HISTORIA_ZATRUDNIENIA;
+	drop sequence SEQ_bd1_KLIENCI;
+	drop sequence SEQ_bd1_USLUGI;
+	drop sequence SEQ_bd1_OSKARZENIA;
+	drop sequence SEQ_bd1_KARY;
+	drop sequence SEQ_bd1_PRZESTEPSTWA;
+	drop sequence SEQ_bd1_SLEDZTWA;
+	drop sequence SEQ_bd1_DOWODY;
+	drop sequence SEQ_bd1_STANOWISKO_SWIADKA;
+	drop sequence SEQ_bd1_ZEZNANIA;
 	drop sequence SEQ_bd1_SPRAWY_SADOWE;
-	CREATE SEQUENCE SEQ_bd1_SPRAWY_SADOWE
-	INCREMENT BY 1 START WITH 1 MINVALUE 1;
+
+CREATE SEQUENCE SEQ_bd1_STANOWISKO 				INCREMENT BY 1 START WITH 1 MINVALUE 1;
+CREATE SEQUENCE SEQ_bd1_INSTYTUTY 				INCREMENT BY 1 START WITH 1 MINVALUE 1;
+CREATE SEQUENCE SEQ_bd1_OSOBY					INCREMENT BY 1 START WITH 1 MINVALUE 1;
+CREATE SEQUENCE SEQ_bd1_PRACOWNICY 				INCREMENT BY 1 START WITH 1 MINVALUE 1;
+CREATE SEQUENCE SEQ_bd1_HISTORIA_ZATRUDNIENIA 	INCREMENT BY 1 START WITH 1 MINVALUE 1;
+CREATE SEQUENCE SEQ_bd1_KLIENCI 				INCREMENT BY 1 START WITH 1 MINVALUE 1;
+CREATE SEQUENCE SEQ_bd1_USLUGI					INCREMENT BY 1 START WITH 1 MINVALUE 1;
+CREATE SEQUENCE SEQ_bd1_OSKARZENIA				INCREMENT BY 1 START WITH 1 MINVALUE 1;
+CREATE SEQUENCE SEQ_bd1_KARY 					INCREMENT BY 1 START WITH 1 MINVALUE 1;
+CREATE SEQUENCE SEQ_bd1_PRZESTEPSTWA 			INCREMENT BY 1 START WITH 1 MINVALUE 1;
+CREATE SEQUENCE SEQ_bd1_SLEDZTWA				INCREMENT BY 1 START WITH 1 MINVALUE 1;
+CREATE SEQUENCE SEQ_bd1_DOWODY					INCREMENT BY 1 START WITH 1 MINVALUE 1;
+CREATE SEQUENCE SEQ_bd1_STANOWISKO_SWIADKA 		INCREMENT BY 1 START WITH 1 MINVALUE 1;
+CREATE SEQUENCE SEQ_bd1_ZEZNANIA				INCREMENT BY 1 START WITH 1 MINVALUE 1;
+CREATE SEQUENCE SEQ_bd1_SPRAWY_SADOWE			INCREMENT BY 1 START WITH 1 MINVALUE 1;
+
+PROMPT ;
+PROMPT----------------------------------------;
+PROMPT Trigger;
+PROMPT----------------------------------------; 
+PROMPT ;
+
+	CREATE OR REPLACE TRIGGER T_BI_bd1_STANOWISKO
+	BEFORE INSERT ON bd1_STANOWISKO
+	FOR EACH ROW
+	BEGIN
+		IF :NEW.STA_ID IS NULL THEN
+			SELECT SEQ_bd1_STANOWISKO.NEXTVAL 
+				INTO :NEW.STA_ID FROM DUAL;
+		END IF;
+		--
+		DBMS_OUTPUT.PUT_LINE('Dodano nowy wiersz do bd1_STANOWISKO - STA_ID='||:NEW.STA_ID);
+		--
+	END;
+	/
+
+	CREATE OR REPLACE TRIGGER T_BI_bd1_INSTYTUTY
+	BEFORE INSERT ON bd1_INSTYTUTY
+	FOR EACH ROW
+	BEGIN
+		IF :NEW.INS_ID IS NULL THEN
+			SELECT SEQ_bd1_INSTYTUTY.NEXTVAL 
+				INTO :NEW.INS_ID FROM DUAL;
+		END IF;
+		--
+		DBMS_OUTPUT.PUT_LINE('Dodano nowy wiersz do bd1_INSTYTUTY - INS_ID='||:NEW.INS_ID);
+		--
+	END;
+	/
+
+	CREATE OR REPLACE TRIGGER T_BI_bd1_OSOBY
+	BEFORE INSERT ON bd1_OSOBY
+	FOR EACH ROW
+	BEGIN
+		IF :NEW.OSO_ID IS NULL THEN
+			SELECT SEQ_bd1_OSOBY.NEXTVAL 
+				INTO :NEW.OSO_ID FROM DUAL;
+		END IF;
+		--
+		DBMS_OUTPUT.PUT_LINE('Dodano nowy wiersz do bd1_OSOBY - OSO_ID='||:NEW.OSO_ID);
+		--
+	END;
+	/
+
+	CREATE OR REPLACE TRIGGER T_BI_bd1_PRACOWNICY
+	BEFORE INSERT ON bd1_PRACOWNICY
+	FOR EACH ROW
+	BEGIN
+		IF :NEW.PRA_ID IS NULL THEN
+			SELECT SEQ_bd1_PRACOWNICY.NEXTVAL 
+				INTO :NEW.PRA_ID FROM DUAL;
+		END IF;
+		--
+		DBMS_OUTPUT.PUT_LINE('Dodano nowy wiersz do bd1_PRACOWNICY - PRA_ID='||:NEW.PRA_ID);
+		--
+	END;
+	/
+
+	CREATE OR REPLACE TRIGGER T_BI_bd1_HISTORIA_ZATRUDNIENIA
+	BEFORE INSERT ON bd1_HISTORIA_ZATRUDNIENIA
+	FOR EACH ROW
+	BEGIN
+		IF :NEW.HIS_Pracownika_ID IS NULL THEN
+			SELECT SEQ_bd1_HISTORIA_ZATRUDNIENIA.NEXTVAL 
+				INTO :NEW.HIS_Pracownika_ID FROM DUAL;
+		END IF;
+		--
+		DBMS_OUTPUT.PUT_LINE('Dodano nowy wiersz do bd1_HISTORIA_ZATRUDNIENIA - HIS_Pracownika_ID='||:NEW.HIS_Pracownika_ID);
+		--
+	END;
+	/
+
+	CREATE OR REPLACE TRIGGER T_BI_bd1_KLIENCI
+	BEFORE INSERT ON bd1_KLIENCI
+	FOR EACH ROW
+	BEGIN
+		IF :NEW.KLI_ID IS NULL THEN
+			SELECT SEQ_bd1_KLIENCI.NEXTVAL 
+				INTO :NEW.KLI_ID FROM DUAL;
+		END IF;
+		--
+		DBMS_OUTPUT.PUT_LINE('Dodano nowy wiersz do bd1_KLIENCI - KLI_ID='||:NEW.KLI_ID);
+		--
+	END;
+	/
+
+	CREATE OR REPLACE TRIGGER T_BI_bd1_USLUGI
+	BEFORE INSERT ON bd1_USLUGI
+	FOR EACH ROW
+	BEGIN
+		IF :NEW.USL_ID IS NULL THEN
+			SELECT SEQ_bd1_USLUGI.NEXTVAL 
+				INTO :NEW.USL_ID FROM DUAL;
+		END IF;
+		--
+		DBMS_OUTPUT.PUT_LINE('Dodano nowy wiersz do bd1_USLUGI - USL_ID='||:NEW.USL_ID);
+		--
+	END;
+	/
+
+	CREATE OR REPLACE TRIGGER T_BI_bd1_OSKARZENIA
+	BEFORE INSERT ON bd1_OSKARZENIA
+	FOR EACH ROW
+	BEGIN
+		IF :NEW.OSK_ID IS NULL THEN
+			SELECT SEQ_bd1_OSKARZENIA.NEXTVAL 
+				INTO :NEW.OSK_ID FROM DUAL;
+		END IF;
+		--
+		DBMS_OUTPUT.PUT_LINE('Dodano nowy wiersz do bd1_OSKARZENIA - OSK_ID='||:NEW.OSK_ID);
+		--
+	END;
+	/	
 	
-	------------------------
-	-- TRIGGER
-	------------------------
+	CREATE OR REPLACE TRIGGER T_BI_bd1_KARY
+	BEFORE INSERT ON bd1_KARY
+	FOR EACH ROW
+	BEGIN
+		IF :NEW.KAR_ID IS NULL THEN
+			SELECT SEQ_bd1_KARY.NEXTVAL 
+				INTO :NEW.KAR_ID FROM DUAL;
+		END IF;
+		--
+		DBMS_OUTPUT.PUT_LINE('Dodano nowy wiersz do bd1_KARY - KAR_ID='||:NEW.KAR_ID);
+		--
+	END;
+	/
+
+	CREATE OR REPLACE TRIGGER T_BI_bd1_PRZESTEPSTWA
+	BEFORE INSERT ON bd1_PRZESTEPSTWA
+	FOR EACH ROW
+	BEGIN
+		IF :NEW.PRZ_ID IS NULL THEN
+			SELECT SEQ_bd1_PRZESTEPSTWA.NEXTVAL 
+				INTO :NEW.PRZ_ID FROM DUAL;
+		END IF;
+		--
+		DBMS_OUTPUT.PUT_LINE('Dodano nowy wiersz do bd1_PRZESTEPSTWA - PRZ_ID='||:NEW.PRZ_ID);
+		--
+	END;
+	/	
+
+	CREATE OR REPLACE TRIGGER T_BI_bd1_SLEDZTWA
+	BEFORE INSERT ON bd1_SLEDZTWA
+	FOR EACH ROW
+	BEGIN
+		IF :NEW.SLE_ID IS NULL THEN
+			SELECT SEQ_bd1_SLEDZTWA.NEXTVAL 
+				INTO :NEW.SLE_ID FROM DUAL;
+		END IF;
+		--
+		DBMS_OUTPUT.PUT_LINE('Dodano nowy wiersz do bd1_SLEDZTWA - SLE_ID='||:NEW.SLE_ID);
+		--
+	END;
+	/
+
+	CREATE OR REPLACE TRIGGER T_BI_bd1_DOWODY
+	BEFORE INSERT ON bd1_DOWODY
+	FOR EACH ROW
+	BEGIN
+		IF :NEW.DOW_ID IS NULL THEN
+			SELECT SEQ_bd1_DOWODY.NEXTVAL 
+				INTO :NEW.DOW_ID FROM DUAL;
+		END IF;
+		--
+		DBMS_OUTPUT.PUT_LINE('Dodano nowy wiersz do bd1_DOWODY - DOW_ID='||:NEW.DOW_ID);
+		--
+	END;
+	/	
+
+	CREATE OR REPLACE TRIGGER T_BI_bd1_STANOWISKO_SWIADKA
+	BEFORE INSERT ON bd1_STANOWISKO_SWIADKA
+	FOR EACH ROW
+	BEGIN
+		IF :NEW.STA_SW_ID IS NULL THEN
+			SELECT SEQ_bd1_STANOWISKO_SWIADKA.NEXTVAL 
+				INTO :NEW.STA_SW_ID FROM DUAL;
+		END IF;
+		--
+		DBMS_OUTPUT.PUT_LINE('Dodano nowy wiersz do bd1_STANOWISKO_SWIADKA - STA_SW_ID='||:NEW.STA_SW_ID);
+		--
+	END;
+	/		
+
+	CREATE OR REPLACE TRIGGER T_BI_bd1_ZEZNANIA
+	BEFORE INSERT ON bd1_ZEZNANIA
+	FOR EACH ROW
+	BEGIN
+		IF :NEW.ZEZ_ID IS NULL THEN
+			SELECT SEQ_bd1_ZEZNANIA.NEXTVAL 
+				INTO :NEW.ZEZ_ID FROM DUAL;
+		END IF;
+		--
+		DBMS_OUTPUT.PUT_LINE('Dodano nowy wiersz do bd1_ZEZNANIA - ZEZ_ID='||:NEW.ZEZ_ID);
+		--
+	END;
+	/		
+
 	CREATE OR REPLACE TRIGGER T_BI_bd1_SPRAWY_SADOWE
 	BEFORE INSERT ON bd1_SPRAWY_SADOWE
 	FOR EACH ROW
@@ -1311,25 +887,350 @@ TABLESPACE STUDENT_DATA;
 		DBMS_OUTPUT.PUT_LINE('Dodano nowy wiersz do bd1_SPRAWY_SADOWE - SPR_ID='||:NEW.SPR_ID);
 		--
 	END;
-	/		
-		
-	------------------------
-	-- DML bd1_SPRAWY_SADOWE
-	------------------------
+	/	
+	
+PROMPT ;
+PROMPT----------------------------------------;
+PROMPT WSTAWIANIE WIERSZY;
+PROMPT----------------------------------------; 
+PROMPT ;
+
+------------------------ DML bd1_STANOWISKO	------------------------
+	insert into bd1_STANOWISKO (STA_Rodzaj,STA_OPIS,STA_Zarobki)
+	values ('Prawnik','Obrona klienta','4000');
+	
+	insert into bd1_STANOWISKO (STA_Rodzaj,STA_OPIS,STA_Zarobki)
+	values ('Prokurator','Oskazanie oskazonego','7500');
+	
+	insert into bd1_STANOWISKO (STA_Rodzaj,STA_OPIS,STA_Zarobki)
+	values ('Sedzia Sadowy','Prowadzenie rozpraw','16000');
+	
+	insert into bd1_STANOWISKO (STA_Rodzaj,STA_OPIS,STA_Zarobki)
+	values ('Komornik','','2500');
+	
+	insert into bd1_STANOWISKO (STA_Rodzaj,STA_OPIS,STA_Zarobki)
+	values ('Radca Prawny','','5500');
+	
+	insert into bd1_STANOWISKO (STA_Rodzaj,STA_OPIS,STA_Zarobki)
+	values ('Rzecznik patentowy','','4500');
+	
+	insert into bd1_STANOWISKO (STA_Rodzaj,STA_OPIS,STA_Zarobki)
+	values ('Asystent sedziego','','3500');
+	
+	insert into bd1_STANOWISKO (STA_Rodzaj,STA_OPIS,STA_Zarobki)
+	values ('Doradca prawny','','3500');
+
+------------------------ DML bd1_INSTYTUTY	------------------------
+
+	insert into bd1_INSTYTUTY (INS_Lokalizacja)
+	values ('Krakow');
+
+	insert into bd1_INSTYTUTY (INS_Lokalizacja)
+	values ('Warszawa');
+
+	insert into bd1_INSTYTUTY (INS_Lokalizacja)
+	values ('Bochnia');
+	
+	insert into bd1_INSTYTUTY (INS_Lokalizacja)
+	values ('Nowy Sacz');
+	
+	insert into bd1_INSTYTUTY (INS_Lokalizacja)
+	values ('Limanowa');
+	
+	insert into bd1_INSTYTUTY (INS_Lokalizacja)
+	values ('Mszalnica');
+	
+	insert into bd1_INSTYTUTY (INS_Lokalizacja)
+	values ('Warszawa');
+	
+	insert into bd1_INSTYTUTY (INS_Lokalizacja)
+	values ('Opole');
+
+------------------------ DML bd1_OSOBY	------------------------
+
+	insert into bd1_OSOBY (OSO_Imie,OSO_Nazwisko,OSO_Plec,OSO_Adres_Zamieszkania,OSO_Kod_Pocztowy,OSO_Telefon)
+	values ('Jakub','Kowalski','Mezczyzna','Nowy Sacz','33-300','123-456-789');
+	
+	insert into bd1_OSOBY (OSO_Imie,OSO_Nazwisko,OSO_Plec,OSO_Adres_Zamieszkania,OSO_Kod_Pocztowy,OSO_Telefon)
+	values ('Kamil','Nowak','Mezczyzna','Krakow','34-600','987-654-321');
+	
+	insert into bd1_OSOBY (OSO_Imie,OSO_Nazwisko,OSO_Plec,OSO_Adres_Zamieszkania,OSO_Kod_Pocztowy,OSO_Telefon)
+	values ('Dominik','Filipek','Mezczyzna','Bochnia','33-500','123-987-456');
+	
+	insert into bd1_OSOBY (OSO_Imie,OSO_Nazwisko,OSO_Plec,OSO_Adres_Zamieszkania,OSO_Kod_Pocztowy,OSO_Telefon)
+	values ('Natalia','Nowak','Kobieta','Krakow','33-661','987-654-321');
+	
+	insert into bd1_OSOBY (OSO_Imie,OSO_Nazwisko,OSO_Plec,OSO_Adres_Zamieszkania,OSO_Kod_Pocztowy,OSO_Telefon)
+	values ('Artur','Nowak','Mezczyzna','Krakow','33-661',NULL);
+	
+	insert into bd1_OSOBY (OSO_Imie,OSO_Nazwisko,OSO_Plec,OSO_Adres_Zamieszkania,OSO_Kod_Pocztowy,OSO_Telefon)
+	values ('Julia','Kowalski','Kobieta','Nowy Sacz','33-300',NULL);
+	
+	insert into bd1_OSOBY (OSO_Imie,OSO_Nazwisko,OSO_Plec,OSO_Adres_Zamieszkania,OSO_Kod_Pocztowy,OSO_Telefon)
+	values ('Pawel','Ciula','Mezczyzna','Limanowa',NULL,NULL);
+	
+	insert into bd1_OSOBY (OSO_Imie,OSO_Nazwisko,OSO_Plec,OSO_Adres_Zamieszkania,OSO_Kod_Pocztowy,OSO_Telefon)
+	values ('Kamila','Nowak','Kobieta','Krakow',NULL,NULL);
+	
+	insert into bd1_OSOBY (OSO_Imie,OSO_Nazwisko,OSO_Plec,OSO_Adres_Zamieszkania,OSO_Kod_Pocztowy,OSO_Telefon)
+	values ('Szymon','Karambol','Mezczyzna','Limanowa',NULL,NULL);
+
+------------------------ DML bd1_PRACOWNICY	------------------------
+
+	insert into bd1_PRACOWNICY (OSO_ID)
+	values ('1');
+	
+	insert into bd1_PRACOWNICY (OSO_ID)
+	values ('2');
+	
+	insert into bd1_PRACOWNICY (OSO_ID)
+	values ('5');
+	
+	insert into bd1_PRACOWNICY (OSO_ID)
+	values ('6');
+
+------------------------ DML bd1_HISTORIA_ZATRUDNIENIA	------------------------
+
+	insert into bd1_HISTORIA_ZATRUDNIENIA (HIS_Data_Zatrudnienia,HIS_Data_Zwolnienia,STA_ID,INS_ID,PRA_ID)
+	values ('2021-03-21','','1','3','1');
+	insert into bd1_HISTORIA_ZATRUDNIENIA (HIS_Data_Zatrudnienia,HIS_Data_Zwolnienia,STA_ID,INS_ID,PRA_ID)
+	values ('2019-02-11','','2','3','2');
+	insert into bd1_HISTORIA_ZATRUDNIENIA (HIS_Data_Zatrudnienia,HIS_Data_Zwolnienia,STA_ID,INS_ID,PRA_ID)
+	values ('2019-01-15','2021-09-11','2','4','3');
+	insert into bd1_HISTORIA_ZATRUDNIENIA (HIS_Data_Zatrudnienia,HIS_Data_Zwolnienia,STA_ID,INS_ID,PRA_ID)
+	values ('2019-09-06','','3','4','4');
+
+------------------------ DML bd1_KLIENCI ------------------------
+
+	insert into bd1_KLIENCI (OSO_ID)
+	values ('3');
+	
+	insert into bd1_KLIENCI (OSO_ID)
+	values ('4');
+	
+	insert into bd1_KLIENCI (OSO_ID)
+	values ('7');
+	
+	insert into bd1_KLIENCI (OSO_ID)
+	values ('8');
+	
+	insert into bd1_KLIENCI (OSO_ID)
+	values ('9');
+
+------------------------ DML bd1_USLUGI	------------------------
+	
+	insert into bd1_USLUGI (PRA_ID,KLI_ID)
+	values ('2','1');
+	
+	insert into bd1_USLUGI (PRA_ID,KLI_ID)
+	values ('2','2');
+	
+	insert into bd1_USLUGI (PRA_ID,KLI_ID)
+	values ('2','3');
+	
+	insert into bd1_USLUGI (PRA_ID,KLI_ID)
+	values ('2','2');
+
+	insert into bd1_USLUGI (PRA_ID,KLI_ID)
+	values ('4','3');
+	
+	insert into bd1_USLUGI (PRA_ID,KLI_ID)
+	values ('4','3');
+
+------------------------ DML bd1_OSKARZENIA	------------------------
+
+	insert into bd1_OSKARZENIA (OSK_Data,OSK_Rodzaj)
+	values ('2021-10-02','Przestepstwo drogowe');
+	
+
+	insert into bd1_OSKARZENIA (OSK_Data,OSK_Rodzaj)
+	values ('2020-05-11','Oszustwo');
+
+	insert into bd1_OSKARZENIA (OSK_Data,OSK_Rodzaj)
+	values ('2019-10-03','Kradziez');
+
+------------------------ DML bd1_KARY ------------------------
+
+	insert into bd1_KARY (KAR_Wyrok,KAR_Data_Rozpoczecia,KAR_Data_Zakonczenia,OSK_ID)
+	values ('Wiezienie','2021-11-29','2025-11-21','2');
+	
+	insert into bd1_KARY (KAR_Wyrok,KAR_Data_Rozpoczecia,KAR_Data_Zakonczenia,OSK_ID)
+	values ('Wyrok w zawieszeniu','2021-10-15','2022-11-15','1');
+
+------------------------ DML bd1_PRZESTEPSTWA ------------------------
+
+	insert into bd1_PRZESTEPSTWA (PRZ_Data,PRZ_Rodzaj)
+	values ('2021-11-27','Drogowe');
+	
+	insert into bd1_PRZESTEPSTWA (PRZ_Data,PRZ_Rodzaj)
+	values ('2021-10-21','Bezprawne zbieranie danych o zyciu prywatnym');
+
+------------------------ DML bd1_SLEDZTWA ------------------------
+
+	insert into bd1_SLEDZTWA (SLE_Data,PRZ_ID)
+	values ('2021-11-15','2');
+	
+	insert into bd1_SLEDZTWA (SLE_Data,PRZ_ID)
+	values ('2019-11-15','1');
+
+------------------------ DML bd1_DOWODY ------------------------
+
+	insert into bd1_DOWODY (DOW_Opis,DOW_Rodzaj,SLE_ID)
+	values ('Dowod zebrany z miejsca zbrodni','Bron','1');
+	
+	insert into bd1_DOWODY (DOW_Opis,DOW_Rodzaj,SLE_ID)
+	values ('Dowod zabezpieczony w domu oskazonego','Przedmiot kradiezy','2');
+	
+	insert into bd1_DOWODY (DOW_Opis,DOW_Rodzaj,SLE_ID)
+	values (NULL,'Przedmiot kradiezy','1');
+
+------------------------ DML bd1_STANOWISKO_SWIADKA	------------------------
+
+	insert into bd1_STANOWISKO_SWIADKA (STA_SW_Zeznania,STA_SW_Data,STA_SW_Rodzaj,STA_SW_Typ_Swiadka,STA_SW_Opis)
+	values ('Zeznanie na korzysc oskazonego','2021-10-09','Swiadek zdarzenia','Brat Oskazonego','Zeznanie swojej wersje zdarzen');
+	
+	insert into bd1_STANOWISKO_SWIADKA (STA_SW_Zeznania,STA_SW_Data,STA_SW_Rodzaj,STA_SW_Typ_Swiadka,STA_SW_Opis)
+	values ('Zeznanie na niekorzysc oskazonego','2019-11-09','Swiadek zdarzenia','Przypadkowa osoba','Zeznanie swojej wersje zdarzen');
+	
+	insert into bd1_STANOWISKO_SWIADKA (STA_SW_Zeznania,STA_SW_Data,STA_SW_Rodzaj,STA_SW_Typ_Swiadka,STA_SW_Opis)
+	values ('Zeznanie na niekorzysc oskazonego','2021-06-09','Swiadek zdarzenia','Ojciec ofiary','Zeznanie swojej wersje zdarzen');
+	
+	insert into bd1_STANOWISKO_SWIADKA (STA_SW_Zeznania,STA_SW_Data,STA_SW_Rodzaj,STA_SW_Typ_Swiadka,STA_SW_Opis)
+	values ('Zeznanie na korzysc oskazonego','2021-05-10','Swiadek zdarzenia','Siostra oskazonego','Zeznanie swojej wersje zdarzen');
+	
+	insert into bd1_STANOWISKO_SWIADKA (STA_SW_Zeznania,STA_SW_Data,STA_SW_Rodzaj,STA_SW_Typ_Swiadka,STA_SW_Opis)
+	values ('Zeznanie na niekorzysc oskazonego','2021-08-21','Swiadek zdarzenia','Matka ofiary','Zeznanie swojej wersje zdarzen');
+
+------------------------ DML bd1_ZEZNANIA ------------------------
+
+	insert into bd1_ZEZNANIA (ZEZ_Typ,ZEZ_Opis,DOW_ID,STA_SW_ID,OSK_ID)
+	values ('Opinia bieglego','Brak mozliwosc wykorzystania zeznan','2','1','3');
+	insert into bd1_ZEZNANIA (ZEZ_Typ,ZEZ_Opis,DOW_ID,STA_SW_ID,OSK_ID)
+	values ('Opinia bieglego','Mozna wykorzystac zeznan','2','2','3');
+
+------------------------ DML bd1_SPRAWY_SADOWE ------------------------
+
 	insert into bd1_SPRAWY_SADOWE (PRZ_ID,USL_ID)
 	values ('1','1');
 	insert into bd1_SPRAWY_SADOWE (PRZ_ID,USL_ID)
 	values ('2','2');
+
+PROMPT ;
+PROMPT----------------------------------------;
+PROMPT SELECTY;
+PROMPT----------------------------------------; 
+PROMPT ;
+
+	column STA_ID HEADING 'ID' for 999999
+	column STA_Rodzaj HEADING 'Rodzaj stanowiska' for A35
+	column STA_OPIS HEADING 'Opis stanowiska' for A35
+	column STA_Zarobki HEADING 'Stanowisko zarobki' for 999999
+
+	select * from bd1_STANOWISKO;	
+
+	column INS_ID HEADING 'ID' for 999999
+	column INS_Lokalizacja HEADING 'Lokalizacja instytutu' for A20
+
+	select * from bd1_INSTYTUTY;
+
+	column OSO_ID HEADING 'ID' for 999999
+	column OSO_Imie HEADING 'Imie' for A20
+	column OSO_Nazwisko HEADING 'Nazwisko' for A20
+	column OSO_Plec HEADING 'Plec' for A20
+	column OSO_Adres_Zamieszkania HEADING 'Adres Zamieszkania' for A20
+	column OSO_Kod_Pocztowy HEADING 'Kod Pocztowy' for A20
+	column OSO_Telefon HEADING 'Numer Telefonu' for A20
+
+	select * from bd1_OSOBY;
+
+	column PRA_ID HEADING 'ID_Pracownika' for 999999
+	column OSO_ID HEADING 'ID_Osoby' for 99999
+
+	select * from bd1_PRACOWNICY;
+
+	column HIS_Pracownika_ID HEADING 'ID Histori Pracownika' for 999999
+	column HIS_Data_Zatrudnienia HEADING 'Data Zatrudnienia' for A20
+	column HIS_Data_Zwolnienia HEADING 'Data Zwolnienia' for A20
+	column STA_ID HEADING 'Stanowisko ID' for 999999
+	column INS_ID HEADING 'Instytut ID' for 999999
+	column PRA_ID HEADING 'Pracownik ID' for 999999
 	
+	select * from bd1_HISTORIA_ZATRUDNIENIA;	
+
+	column KLI_ID HEADING 'ID_Klienta' for 999999
+	column OSO_ID HEADING 'ID_Osoby' for 99999
+
+	select * from bd1_KLIENCI;
+
+	column USL_ID HEADING 'ID_Uslugi' for 999999
+	column PRA_ID HEADING 'ID_Pracownika' for 99999
+	column KLI_ID HEADING 'ID_Klienta' for 99999
+
+	select * from bd1_USLUGI;
+
+	column OSK_ID HEADING 'ID_Oskarzenia' for 999999
+	column OSK_Data HEADING 'Data oskarzenia' for A20
+	column OSK_Rodzaj HEADING 'Rodzaj oskarzenia' for A30
+
+	select * from bd1_OSKARZENIA;
+
+	column KAR_ID HEADING 'ID_Kary' for 999999
+	column KAR_Wyrok HEADING 'Wyrok' for A30
+	column KAR_Data_Rozpoczecia HEADING 'Data rozpoczecia kary' for A25
+	column KAR_Data_Zakonczenia HEADING 'Data zakonczenia kary' for A25
+	column OSK_ID HEADING 'ID_Oskarzenia' for 99999
+
+	select * from bd1_KARY;
+
+	column PRZ_ID HEADING 'ID_Przestepstwa' for 999999
+	column PRZ_Data HEADING 'Data przestepstwa' for A20
+	column PRZ_Rodzaj HEADING 'Rodzaj przestepstwa' for A35
+	column PRZ_Uwagi HEADING 'Uwagi' for A25
+
+	select * from bd1_PRZESTEPSTWA;
+
+	column SLE_ID HEADING 'ID_Przestepstwa' for 999999
+	column SLE_Data HEADING 'Data sledztwa' for A20
+	column PRZ_ID HEADING 'ID_Przestepstwa' for 99999
+
+	select * from bd1_SLEDZTWA;		
+
+	column DOW_ID HEADING 'ID_Dowodu' for 999999
+	column DOW_Opis HEADING 'Opis dowodu' for A40
+	column DOW_Rodzaj HEADING 'Rodzaj dowodu' for A25
+	column SLE_ID HEADING 'ID_Sledztwa' for 99999
+
+	select * from bd1_DOWODY;
+
+	column STA_SW_ID HEADING 'ID_Stanowiska_Swiadka' for 999999
+	column STA_SW_Zeznania HEADING 'Stanowisko swiadka zeznania' for A35
+	column STA_SW_Data HEADING 'Data skladania stanowiska' for A32
+	column STA_SW_Rodzaj HEADING 'Rodzaj stanowiska swiadka' for A30
+	column STA_SW_Typ_Swiadka HEADING 'Typ swiadka' for A25
+	column STA_SW_Opis HEADING 'Opis stanowiska swiadka' for A32
+
+	select * from bd1_STANOWISKO_SWIADKA;	
+
+	column ZEZ_ID HEADING 'ID_Zeznan' for 999999
+	column ZEZ_Typ HEADING 'Typ zeznania' for A35
+	column ZEZ_Opis HEADING 'Opis zeznania' for A35
+	column DOW_ID HEADING 'ID_Dowodu' for 99999
+	column STA_SW_ID HEADING 'ID_Stanowiska_Swiadka' for 99999
+	column OSK_ID HEADING 'ID_Oskarzenia' for 99999
+
+	select * from bd1_ZEZNANIA;
+
 	column SPR_ID HEADING 'ID_Sprawy_Sadowej' for 999999
 	column PRZ_ID HEADING 'ID_Przestepstwa' for 99999
 	column USL_ID HEADING 'ID_Uslugi' for 99999
 	
 	select * from bd1_SPRAWY_SADOWE;
 
- ---------------------------
-PROMPT   PODSUMOWANIA
----------------------------	
+PROMPT ;
+PROMPT----------------------------------------;
+PROMPT PODSUMOWANIE;
+PROMPT----------------------------------------; 
+PROMPT ;
 
 -- describe USER_TABLES
 	column TABLE_NAME HEADING 'NAME' for A32
@@ -2304,6 +2205,6 @@ ID_Przestepstwa Data przestepstwa    Rodzaj przestepstwa                 Uwagi  
               1 2021-11-27           Drogowe                             Zostala dokonana kontrola           2 2019-11-15
                                                                           trzezwosci
 
-*/		
+*/
 		
 SPOOL OFF
