@@ -5,15 +5,16 @@
 
 https://user-images.githubusercontent.com/89588699/152355781-1a702647-2829-4ebe-8008-9d5c8f226adf.mp4
 
-* Create a SQL script that generates a full logical database structure,
-* Add sequences and triggers with test data sample,
-* SELECT to select data from tables using different operators in WHERE (UPDATE & NVL test),
-* Add group by & having select,
-* Subquestions and perspectives,
-* Indexes and TCS - Transactions,
-* Insert into loop, 
-* Implicit cursors,
-* Explicit cursors.
+- Created a SQL script that generates a full logicaldatabase structure
+- Added sequences and triggers with sample test data
+- Created SELECT query to select data from tablesusing different operators in WHERE (UPDATE & NVLtest)
++ Added: 
+  - group by & having select
+  - subqueries and perspectives
+  - Indexes and TCS (Transaction Control System) - Transactions
+  - INSERT INTO loop
+  - Implicit cursors
+  - Explicit cursors
 
 For the purposes of the project, names of tables, data, descriptions, etc. are in Polish
 ## License
